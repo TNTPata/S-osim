@@ -1,0 +1,3 @@
+Den här veckan har relativt få framsteg gjorts. Jag har startat skapa projektet i Visual Studio, och läst på grunderna i ramverket MonoGame som jag kommer att koda i. Jag har även lagt till grafik för tända och släckta lampor. 
+
+Nästa vecka ska jag försöka utöka kravspecifikationen på de variabler som en växel måste innehålla, och sedan börja koda lite försiktigt. Parallellt så skriver jag i slutrapporten. 
