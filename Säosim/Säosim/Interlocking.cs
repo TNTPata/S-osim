@@ -4,21 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Säosim
-{
-	class Switch {
-
-	}
-
-	class Derail {
-
-	}
-
-	class RemoteControlled {
-
-	}
-
+namespace Säosim {
 	class Interlocking {
-
 	}
 }
