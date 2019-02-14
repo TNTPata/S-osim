@@ -17,3 +17,5 @@ C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.csproj.
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.csproj.CopyComplete
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.exe
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.pdb
+C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\lampLit.xnb
+C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\lampUnlit.xnb

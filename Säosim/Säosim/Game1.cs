@@ -12,8 +12,14 @@ namespace Säosim
     /// This is the main type for your game.
     /// </summary>
     public class Game1 : Game {
-        GraphicsDeviceManager graphics;
+		Texture2D textureLampLit;
+		Texture2D textureLampUnlit;
+
+		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+		//Create interlocking class
+		Interlocking interlocking;
         
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -40,7 +46,9 @@ namespace Säosim
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+			// TODO: use this.Content to load your game content here
+			textureLampLit = Content.Load<Texture2D>("lampLit");
+			textureLampUnlit = Content.Load<Texture2D>("lampUnlit");
         }
 
         /// <summary>
@@ -60,8 +68,7 @@ namespace Säosim
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
+			// TODO: Add your update logic here
             base.Update(gameTime);
         }
 
@@ -72,7 +79,11 @@ namespace Säosim
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+			// TODO: Add your drawing code here
+			spriteBatch.Begin();
+			spriteBatch.Draw(textureLampLit, new Vector2(0, 0), Color.White);
+			spriteBatch.Draw(textureLampUnlit, new Vector2(128, 128), Color.White);
+			spriteBatch.End();
 
             base.Draw(gameTime);
         }
