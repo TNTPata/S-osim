@@ -10,11 +10,11 @@ namespace Säosim
 	class Switch {
 		public bool isStraightTrack = true;
 		public bool isCurvedTrack = false;
-		public bool isMoving = false;
+		bool isMoving = false;
 		public bool isLocked = false;
-		public bool isOccupied = false;
+		bool isOccupied = false;
 
-		public void straightSwitch() {
+		public void StraightSwitch() {
 			if ((isLocked || isOccupied) == false) {
 					isMoving = true;
 					isCurvedTrack = false;
@@ -24,7 +24,7 @@ namespace Säosim
 			}
 		}
 
-		public void curveSwitch() {
+		public void CurveSwitch() {
 			if ((isLocked || isOccupied) == false) {
 				isMoving = true;
 				isStraightTrack = false;
@@ -34,13 +34,13 @@ namespace Säosim
 			}
 		}
 
-		public void lockSwitch() {
+		public void LockSwitch() {
 			if ((isLocked == false) && (isMoving == false)) {
 				isLocked = true;
 			}
 		}
 
-		public void unlockSwitch() {
+		public void UnlockSwitch() {
 			if (isOccupied == false) {
 				isLocked = false;
 			}
@@ -53,7 +53,7 @@ namespace Säosim
 		bool moving = false;
 		bool locked = false;
 
-		public void lower() {
+		public void Lower() {
 			if (locked == false) {
 				moving = true;
 				raised = false;
@@ -63,7 +63,7 @@ namespace Säosim
 			}
 		}
 
-		public void raise() {
+		public void Raise() {
 			if (locked == false) {
 				moving = true;
 				lowered = false;
@@ -73,13 +73,13 @@ namespace Säosim
 			}
 		}
 
-		public void lockDerail() {
+		public void LockDerail() {
 			if ((locked == false) && (moving == false)) {
 				locked = true;
 			}
 		}
 
-		public void unlockDerail() {
+		public void UnlockDerail() {
 			locked = false;
 		}
 	}
