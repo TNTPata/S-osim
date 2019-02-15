@@ -12,7 +12,16 @@ namespace Säosim {
 		}
 
 		class Route {
-			enum includedSwitches {/*Fill with the switches (and signals?) a train will pass in a specific route*/};
+			List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches (and signals?) a train will pass in a specific route
+			List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
+			Route(Switch iSwitch) {
+				includedSwitches.Add(iSwitch);
+			}
+			Route(Switch pSwitch) {
+
+			}
+
+
 		}
 
 		#region objectInit
@@ -50,7 +59,7 @@ namespace Säosim {
 		#endregion
 		#region routeInit
 		//Create routes
-		Route route_a1 = new Route();
+		Route route_a1 = new Route(switch1);
 		Route route_a2 = new Route();
 		Route route_a3 = new Route();
 		Route route_b1 = new Route();
