@@ -17,9 +17,6 @@ namespace Säosim
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-		//Create interlocking object (The interlocking plant for all intents and purposes)
-		Interlocking interlocking = new Interlocking();
         
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -49,7 +46,10 @@ namespace Säosim
 			// TODO: use this.Content to load your game content here
 			textureLampLit = Content.Load<Texture2D>("lampLit");
 			textureLampUnlit = Content.Load<Texture2D>("lampUnlit");
-        }
+
+			//Create interlocking object (The interlocking plant for all intents and purposes)
+			Interlocking interlocking = new Interlocking(); //DOES NOT WORK YET, DON'T KNOW WHY
+		}
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -70,6 +70,7 @@ namespace Säosim
 
 			// TODO: Add your update logic here
             base.Update(gameTime);
+			
         }
 
         /// <summary>
