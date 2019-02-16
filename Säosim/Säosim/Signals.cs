@@ -5,30 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Säosim {
-	public class Signal {
-		int signalState = 0;
-		//0 = Stop, 1 = Clear
+	class Signal {
+		public int signalState = 0;
+		//0 = Stop
 
+		void SetToStop() {
+			signalState = 0;
+		}
+	}
+
+	class EntrySignal : Signal{
+		void SetToClear() {
+			signalState = 1;
+		}
+	}
+
+	class Exitsignal : Signal{
 
 	}
 
-	public class Entrysignal {
+	class Distsignal {
+		Distsignal(Signal referenceSignal) {
+			
+		}
+		Signal referanceSignal = new Signal();
+	}
+
+	class Roadsignal {
 
 	}
 
-	public class Exitsignal {
-
-	}
-
-	public class Distsignal {
-
-	}
-
-	public class Roadsignal {
-
-	}
-
-	public class Distroadsignal {
+	class Distroadsignal {
 
 	}
 }
