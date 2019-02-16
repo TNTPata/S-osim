@@ -7,7 +7,40 @@ using System.Threading.Tasks;
 namespace Säosim {
 	public class Interlocking {
 
-		Interlocking() {
+		//Constructor
+		public Interlocking() {
+			#region objectInit
+			//Create the 6 switches and 2 derails
+			Switch switch1 = new Switch();
+			Switch switch2 = new Switch();
+			Switch switch3 = new Switch();
+			Switch switch4 = new Switch();
+			Switch switch5 = new Switch();
+			Switch switch6 = new Switch();
+
+			Derail derail1 = new Derail();
+			Derail derail2 = new Derail();
+
+			//Create 3 exit signals
+			ExitSignal D = new ExitSignal();
+			ExitSignal E = new ExitSignal();
+			ExitSignal F = new ExitSignal();
+
+			//Create 3 entry signals
+			EntrySignal A = new EntrySignal(E);
+			EntrySignal B = new EntrySignal(D);
+			EntrySignal C = new EntrySignal();
+
+			//Create distant signal
+			DistSignal AFsi = new DistSignal(A);
+
+			//Create road signal
+			RoadSignal V1 = new RoadSignal();
+
+			//Create road distant signal(s. There are actually two, but since they display the same aspect at all times, it is counted as one for simplicity)
+			DistroadSignal V1Fsi = new DistroadSignal();
+
+			#endregion
 			#region routeInit
 			//Create routes
 			//Create arrival routes
@@ -39,40 +72,8 @@ namespace Säosim {
 			//Create unmonitored route
 			Route route_o1 = new Route(A, B, D, E, switch1, switch2, switch6, C, F, derail2, V1Fsi, V1);
 			#endregion
+
 		}
-
-		#region objectInit
-		//Create the 6 switches and 2 derails
-		Switch switch1 = new Switch();
-		Switch switch2 = new Switch();
-		Switch switch3 = new Switch();
-		Switch switch4 = new Switch();
-		Switch switch5 = new Switch();
-		Switch switch6 = new Switch();
-
-		Derail derail1 = new Derail();
-		Derail derail2 = new Derail();
-
-		//Create 3 entry signals
-		Signal A = new Signal();
-		Signal B = new Signal();
-		Signal C = new Signal();
-
-		//Create 3 exit signals
-		Signal D = new Signal();
-		Signal E = new Signal();
-		Signal F = new Signal();
-
-		//Create distant signal
-		Signal AFsi = new Signal();
-
-		//Create road signal
-		Signal V1 = new Signal();
-
-		//Create road distant signal(s. There are actually two, but since they display the same aspect at all times, it is counted as one for simplicity)
-		Signal V1Fsi = new Signal();
-
-		#endregion
 
 		class TrackCircuit {
 			int occupationState = 0;
