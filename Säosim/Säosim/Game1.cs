@@ -18,14 +18,14 @@ namespace Säosim
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-		//Create interlocking class
-		Interlocking interlocking;
+		//Create interlocking object (The interlocking plant for all intents and purposes)
+		Interlocking interlocking = new Interlocking();
         
         public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-
+		
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
