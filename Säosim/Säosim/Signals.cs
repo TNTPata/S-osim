@@ -8,30 +8,36 @@ namespace Säosim {
 	class Signal {
 		public bool isProtected = false;
 		public int signalState = 0;
-		//0 = Stop, 1 = Clear - Next Signal clear, 2 = Caution, 3 = Caution - Short route.
+		//0 = Stop, 1 = Clear, 2 = Caution, 3 = Caution - Short route.
 
-		void SetToStop() {
+		public void SetStop() {
 			signalState = 0;
 		}
 	}
 
 	class EntrySignal : Signal {
 
+		#region Constructors
 		public EntrySignal() { }
-		EntrySignal(Signal nextSignal) {
-			//nextSignal = ??? Fill with the signal that
+
+		public EntrySignal(ExitSignal nextSignal) {
+			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 		}
+		#endregion
+
 		public void SetClear() {
 			if (isProtected == false) {
 				signalState = 1;
 			}
 		}
+
 		public void SetCaution() {
 			if (isProtected == false) {
 				signalState = 2;
 			}
 		}
-		public void SetCautionS() {
+
+		public void SetCautionShort() {
 			if (isProtected == false) {
 				signalState = 3;
 			}
@@ -39,18 +45,32 @@ namespace Säosim {
 	}
 
 	class ExitSignal : Signal {
-
+		public void SetClear() {
+			if (isProtected == false) {
+				signalState = 1;
+			}
+		}
 	}
 
 	class DistSignal : Signal {
+		public DistSignal(EntrySignal nextSignal) {
+			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
+		}
 
 	}
 
 	class RoadSignal : Signal {
-
+		public void SetClear() {
+			if (/*CrossingIsClear == true*/true) {
+				signalState = 1;
+			}
+		}
 	}
 
 	class DistroadSignal : Signal {
+		public DistroadSignal(RoadSignal referenceSignal) {
 
+		}
+		//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 	}
 }
