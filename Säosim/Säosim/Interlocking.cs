@@ -275,15 +275,40 @@ namespace Säosim {
 
 			#endregion
 
-			public bool isLocked = false;
-			public List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
-			public List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches and signals a train will pass in a specific route
-			public List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
-			public List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
-			public List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
+			//The goal is to make all of these private, and only have public methods that are used to manipulate/interate through these lists
+			bool isLocked = false;
+			List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
+			List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches and signals a train will pass in a specific route
+			List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
+			List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
+			List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
+
+			bool LockRoute() {
+				//Could probably be removed
+				//int numberOfIncludedSignals = includedSignals.Count;
+				//int numberOfIncludedSwitches = includedSwitches.Count;
+				//int numberOfProtectedSignals = protectedSignals.Count;
+				//int numberOfProtectedSwitches = protectedSwitches.Count;
+				//int numberOfProtectedDerails = protectedDerails.Count;
+
+				//A signal which is to be passed must not be protected and must be set to stop
+				foreach (Signal includedSignal in includedSignals) {
+					if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
+						foreach (Switch includedSwitch in includedSwitches) {
+
+
+						}
+					}
+					else {
+						/*Route could not be set*/
+					}
+				}
+				return false;
+			}
+			
 		}
 
-		public class Routesetter {
+		public class Routecheck {
 
 		}
 	}
