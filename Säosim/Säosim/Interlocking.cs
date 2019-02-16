@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Säosim {
 	public class Interlocking {
-
 		#region objectCreation
 		//Not sure if everything should be static, but it works that way
 		//Create the 6 switches and 2 derails
@@ -285,9 +284,7 @@ namespace Säosim {
 		}
 
 		public class Routesetter {
-			void Test() {
 
-			}
 		}
 	}
 }
