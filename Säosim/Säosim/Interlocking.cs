@@ -41,6 +41,39 @@ namespace Säosim {
 			#endregion
 		}
 
+		#region objectInit
+		//Create the 6 switches and 2 derails
+		Switch switch1 = new Switch();
+		Switch switch2 = new Switch();
+		Switch switch3 = new Switch();
+		Switch switch4 = new Switch();
+		Switch switch5 = new Switch();
+		Switch switch6 = new Switch();
+
+		Derail derail1 = new Derail();
+		Derail derail2 = new Derail();
+
+		//Create 3 entry signals
+		Signal A = new Signal();
+		Signal B = new Signal();
+		Signal C = new Signal();
+
+		//Create 3 exit signals
+		Signal D = new Signal();
+		Signal E = new Signal();
+		Signal F = new Signal();
+
+		//Create distant signal
+		Signal AFsi = new Signal();
+
+		//Create road signal
+		Signal V1 = new Signal();
+
+		//Create road distant signal(s. There are actually two, but since they display the same aspect at all times, it is counted as one for simplicity)
+		Signal V1Fsi = new Signal();
+
+		#endregion
+
 		class TrackCircuit {
 			int occupationState = 0;
 			//0 = Unoccupied, 1 = Reserved, 2 = Occupied
@@ -50,15 +83,7 @@ namespace Säosim {
 
 		}
 
-		class Route {
-			List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
-			List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches and signals a train will pass in a specific route
-			List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
-			List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
-			List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
-
-			bool routeLocked = false;
-
+		class Route { 
 			#region Constructors
 			//Overload for a1. 1 distant signal, 1 entry signal, 1 switch, 1 protected switch, 2 protected signals
 			public Route(Signal includedDistSignal, Signal includedEntrySignal, Switch includeSwitch, Switch protectedSwitch, Signal protectedSignal1, Signal protectedSignal2) {
@@ -189,39 +214,15 @@ namespace Säosim {
 			}
 
 			#endregion
+
+			bool routeLocked = false;
+			List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
+			List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches and signals a train will pass in a specific route
+			List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
+			List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
+			List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
 		}
-		#region objectInit
-		//Create the 6 switches and 2 derails
-		Switch switch1 = new Switch();
-		Switch switch2 = new Switch();
-		Switch switch3 = new Switch();
-		Switch switch4 = new Switch();
-		Switch switch5 = new Switch();
-		Switch switch6 = new Switch();
-
-		Derail derail1 = new Derail();
-		Derail derail2 = new Derail();
-
-		//Create 3 entry signals
-		Signal A = new Signal();
-		Signal B = new Signal();
-		Signal C = new Signal();
-
-		//Create 3 exit signals
-		Signal D = new Signal();
-		Signal E = new Signal();
-		Signal F = new Signal();
-
-		//Create distant signal
-		Signal AFsi = new Signal();
-
-		//Create road signal
-		Signal V1 = new Signal();
-
-		//Create road distant signal(s. There are actually two, but since they display the same aspect at all times, it is counted as one for simplicity)
-		Signal V1Fsi = new Signal();
-
-		#endregion
+		
 		
 	}
 }
