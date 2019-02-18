@@ -8,6 +8,11 @@ using System.Threading;
 namespace Säosim
 {
 	class Switch {
+		public Switch(string displayName) {
+			this.displayName = displayName;
+		}
+
+		public string displayName;
 		public bool isStraightTrack = true;
 		public bool isCurvedTrack = false;
 		bool isMoving = false;
@@ -48,6 +53,11 @@ namespace Säosim
 	}
 
 	class Derail {
+		public Derail(string displayName) {
+			this.displayName = displayName;
+		}
+
+		public string displayName;
 		bool lowered = true;
 		bool raised = false;
 		bool moving = false;

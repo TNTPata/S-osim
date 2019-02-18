@@ -73,15 +73,15 @@ namespace Säosim {
 		public Interlocking() {
 			#region objectInit
 			//Init 6 switches and 2 derails
-			switch1 = new Switch();
-			switch2 = new Switch();
-			switch3 = new Switch();
-			switch4 = new Switch();
-			switch5 = new Switch();
-			switch6 = new Switch();
+			switch1 = new Switch("Växel 1");
+			switch2 = new Switch("Växel 2");
+			switch3 = new Switch("Växel 3");
+			switch4 = new Switch("Växel 4");
+			switch5 = new Switch("Växel 5");
+			switch6 = new Switch("Växel 6");
 
-			derail1 = new Derail();
-			derail2 = new Derail();
+			derail1 = new Derail("Spårspärr I");
+			derail2 = new Derail("Spårspärr II");
 
 			//Init 3 exit signals
 			D = new ExitSignal();
