@@ -147,98 +147,15 @@ namespace Säosim {
 
 		//Call to lock route
 		public bool LockRoute(string route) {
-			//Could probably be removed
-			//int numberOfIncludedSignals = includedSignals.Count;
-			//int numberOfIncludedSwitches = includedSwitches.Count;
-			//int numberOfProtectedSignals = protectedSignals.Count;
-			//int numberOfProtectedSwitches = protectedSwitches.Count;
-			//int numberOfProtectedDerails = protectedDerails.Count;
-
-			//switch to determine positions of switches, signals, and derails in a route. Route is picked by entering the "route-id"
-			//Don't do this for now
-			//			|
-			//			|
-			//			V
-			switch (route) {
-				case "a1": {
-						A.signalstate = 0;
-						
-						break;
-					}
-				case "a2": {
-						break;
-					}
-				case "a3": {
-						break;
-					}
-				case "b1": {
-						break;
-					}
-				case "b2": {
-						break;
-					}
-				case "b3": {
-						break;
-					}
-				case "c1": {
-						break;
-					}
-				case "c2": {
-						break;
-					}
-				case "a2k": {
-						break;
-					}
-				case "a3k": {
-						break;
-					}
-				case "c1k": {
-						break;
-					}
-				case "c2k": {
-						break;
-					}
-				case "d1": {
-						break;
-					}
-				case "d2": {
-						break;
-					}
-				case "d3": {
-						break;
-					}
-				case "e1": {
-						break;
-					}
-				case "e2": {
-						break;
-					}
-				case "e3": {
-						break;
-					}
-				case "f1": {
-						break;
-					}
-				case "f2": {
-						break;
-					}
-				case "o1": {
-						break;
-					}
-				default: { return false; }
-			}
-		
-
-			//A signal which is to be passed must not be protected and must be set to stop
+			//===============IMPORTANT===============
+			//THESE LOOPS SHOULD NOT BE NESTED, THIS IS PROABLY RETARDED, FIX LATER
+			//===============IMPORTANT===============
 			foreach (Signal includedSignal in includedSignals) {
+				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
 					foreach (Signal protectedSignal in protectedSignals) {
-						if (protectedSignal.signalState != 0) {
-							//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
-							//Err: Signal som inte står i stopp hindrar tågvägslåsning
-							return false;
-
-						} else if (true) {
+						//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
+						if (protectedSignal.SetProtected()) {
 							foreach (Switch includedSwitch in includedSwitches) {
 								foreach (Switch protectedSwitch in protectedSwitches) {
 									foreach (Derail protectedDerail in protectedDerails) {
@@ -246,12 +163,15 @@ namespace Säosim {
 									}
 								}
 							}
+						} else {
+							//Err: Signal som inte står i stopp hindrar tågvägslåsning
+							return false;
 						}
 
 
 					}
 				} else {
-					/*Route could not be set*/
+					//Route could not be set
 					//Err: Signal som är låst i stopp hindrar tågvägslåsning
 				}
 			}
