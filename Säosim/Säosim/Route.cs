@@ -137,23 +137,26 @@ namespace Säosim {
 
 		#endregion
 
-		//The goal is to make all of these private, and only have public methods that are used to manipulate/interate through these lists
 		bool isLocked = false;
-		List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
-		List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches a train will pass in a specific route
-		List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
-		List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
-		List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
+		private List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
+		private List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches a train will pass in a specific route
+		private List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
+		private List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
+		private List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
 
 		//Call to lock route
 		public bool LockRoute() {
+			///Two first loops check if all relevant signals and signalstates are correct
+			///Second two loops check if all relevant switches are in correct position
+			///Last loop checks if all relevant derails are in correct position
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
 					
 				} else {
 					//Route could not be set
-					//Err: Signal som är låst i stopp hindrar tågvägslåsning
+					//Err: Signal som är förreglad i stopp eller står i kör hindrar tågvägslåsning
+					return false;
 				}
 			}
 			foreach (Signal protectedSignal in protectedSignals) {
@@ -165,17 +168,32 @@ namespace Säosim {
 					//Err: Signal som inte står i stopp hindrar tågvägslåsning
 					return false;
 				}
-
-
 			}
 			foreach (Switch includedSwitch in includedSwitches) {
+				if (/*gibberish*/true) {
 
+				} else {
+					//Err: xxx
+					return false;
+				}
 			}
 			foreach (Switch protectedSwitch in protectedSwitches) {
+				if (/*gibberish*/true) {
 
+				}
+				else {
+					//Err: xxx
+					return false;
+				}
 			}
 			foreach (Derail protectedDerail in protectedDerails) {
+				if (/*gibberish*/true) {
 
+				}
+				else {
+					//Err: xxx
+					return false;
+				}
 			}
 			return true;
 		}
