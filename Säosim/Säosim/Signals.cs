@@ -13,6 +13,13 @@ namespace Säosim {
 		public void SetStop() {
 			signalState = 0;
 		}
+
+		public bool SetProtected() {
+			if (signalState == 0) {
+				isProtected = true;
+				return true;
+			} else { return false; }
+		}
 	}
 
 	class EntrySignal : Signal {
