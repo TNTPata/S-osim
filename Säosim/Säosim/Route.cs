@@ -146,36 +146,38 @@ namespace Säosim {
 		List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
 
 		//Call to lock route
-		public bool LockRoute(string route) {
-			//===============IMPORTANT===============
-			//THESE LOOPS SHOULD NOT BE NESTED, THIS IS PROABLY RETARDED, FIX LATER
-			//===============IMPORTANT===============
+		public bool LockRoute() {
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
-					foreach (Signal protectedSignal in protectedSignals) {
-						//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
-						if (protectedSignal.SetProtected()) {
-							foreach (Switch includedSwitch in includedSwitches) {
-								foreach (Switch protectedSwitch in protectedSwitches) {
-									foreach (Derail protectedDerail in protectedDerails) {
-
-									}
-								}
-							}
-						} else {
-							//Err: Signal som inte står i stopp hindrar tågvägslåsning
-							return false;
-						}
-
-
-					}
+					
 				} else {
 					//Route could not be set
 					//Err: Signal som är låst i stopp hindrar tågvägslåsning
 				}
 			}
-			return false;
+			foreach (Signal protectedSignal in protectedSignals) {
+				//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
+				if (protectedSignal.SetProtected()) {
+					
+				}
+				else {
+					//Err: Signal som inte står i stopp hindrar tågvägslåsning
+					return false;
+				}
+
+
+			}
+			foreach (Switch includedSwitch in includedSwitches) {
+
+			}
+			foreach (Switch protectedSwitch in protectedSwitches) {
+
+			}
+			foreach (Derail protectedDerail in protectedDerails) {
+
+			}
+			return true;
 		}
 
 	}
