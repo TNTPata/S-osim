@@ -140,13 +140,13 @@ namespace Säosim {
 		//The goal is to make all of these private, and only have public methods that are used to manipulate/interate through these lists
 		bool isLocked = false;
 		List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
-		List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches and signals a train will pass in a specific route
+		List<Switch> includedSwitches = new List<Switch>(); //Fill with the switches a train will pass in a specific route
 		List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
 		List<Switch> protectedSwitches = new List<Switch>(); //Fill with the switches that need to be locked but are not passed by a train
 		List<Derail> protectedDerails = new List<Derail>(); //Fill with the derails that need to be locked in a specific route
 
 		//Call to lock route
-		bool LockRoute() {
+		public bool LockRoute(string route) {
 			//Could probably be removed
 			//int numberOfIncludedSignals = includedSignals.Count;
 			//int numberOfIncludedSwitches = includedSwitches.Count;
@@ -154,16 +154,105 @@ namespace Säosim {
 			//int numberOfProtectedSwitches = protectedSwitches.Count;
 			//int numberOfProtectedDerails = protectedDerails.Count;
 
+			//switch to determine positions of switches, signals, and derails in a route. Route is picked by entering the "route-id"
+			//Don't do this for now
+			//			|
+			//			|
+			//			V
+			switch (route) {
+				case "a1": {
+						A.signalstate = 0;
+						
+						break;
+					}
+				case "a2": {
+						break;
+					}
+				case "a3": {
+						break;
+					}
+				case "b1": {
+						break;
+					}
+				case "b2": {
+						break;
+					}
+				case "b3": {
+						break;
+					}
+				case "c1": {
+						break;
+					}
+				case "c2": {
+						break;
+					}
+				case "a2k": {
+						break;
+					}
+				case "a3k": {
+						break;
+					}
+				case "c1k": {
+						break;
+					}
+				case "c2k": {
+						break;
+					}
+				case "d1": {
+						break;
+					}
+				case "d2": {
+						break;
+					}
+				case "d3": {
+						break;
+					}
+				case "e1": {
+						break;
+					}
+				case "e2": {
+						break;
+					}
+				case "e3": {
+						break;
+					}
+				case "f1": {
+						break;
+					}
+				case "f2": {
+						break;
+					}
+				case "o1": {
+						break;
+					}
+				default: { return false; }
+			}
+		
+
 			//A signal which is to be passed must not be protected and must be set to stop
 			foreach (Signal includedSignal in includedSignals) {
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
-					foreach (Switch includedSwitch in includedSwitches) {
+					foreach (Signal protectedSignal in protectedSignals) {
+						if (protectedSignal.signalState != 0) {
+							//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
+							//Err: Signal som inte står i stopp hindrar tågvägslåsning
+							return false;
+
+						} else if (true) {
+							foreach (Switch includedSwitch in includedSwitches) {
+								foreach (Switch protectedSwitch in protectedSwitches) {
+									foreach (Derail protectedDerail in protectedDerails) {
+
+									}
+								}
+							}
+						}
 
 
 					}
-				}
-				else {
+				} else {
 					/*Route could not be set*/
+					//Err: Signal som är låst i stopp hindrar tågvägslåsning
 				}
 			}
 			return false;

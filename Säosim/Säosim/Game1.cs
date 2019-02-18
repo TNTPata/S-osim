@@ -17,8 +17,11 @@ namespace Säosim
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        public Game1() {
+
+		//Create interlocking object (The interlocking plant for all intents and purposes)
+		Interlocking interlocking = new Interlocking(); //DOES NOT WORK YET, DON'T KNOW WHY
+
+		public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -46,9 +49,6 @@ namespace Säosim
 			// TODO: use this.Content to load your game content here
 			textureLampLit = Content.Load<Texture2D>("lampLit");
 			textureLampUnlit = Content.Load<Texture2D>("lampUnlit");
-
-			//Create interlocking object (The interlocking plant for all intents and purposes)
-			Interlocking interlocking = new Interlocking(); //DOES NOT WORK YET, DON'T KNOW WHY
 		}
 
         /// <summary>
