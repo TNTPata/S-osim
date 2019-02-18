@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Säosim {
 	class Signal {
+
 		public bool isProtected = false;
 		public int signalState = 0;
 		//0 = Stop, 1 = Clear, 2 = Caution, 3 = Caution - Short route.
@@ -19,6 +20,10 @@ namespace Säosim {
 				isProtected = true;
 				return true;
 			} else { return false; }
+		}
+
+		public void Unprotect() {
+			isProtected = false;
 		}
 	}
 
