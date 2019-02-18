@@ -9,64 +9,64 @@ namespace Säosim {
 		#region objectCreation
 		//Not sure if everything should be static, but it works that way
 		//Create the 6 switches and 2 derails
-		static Switch switch1;
-		static Switch switch2;
-		static Switch switch3;
-		static Switch switch4;
-		static Switch switch5;
-		static Switch switch6;
+		Switch switch1;
+		Switch switch2;
+		Switch switch3;
+		Switch switch4;
+		Switch switch5;
+		Switch switch6;
 
-		static Derail derail1;
-		static Derail derail2;
+		Derail derail1;
+		Derail derail2;
 
 		//Create 3 entry signals
-		static EntrySignal A;
-		static EntrySignal B;
-		static EntrySignal C;
+		EntrySignal A;
+		EntrySignal B;
+		EntrySignal C;
 
 		//Create 3 exit signals
-		static ExitSignal D;
-		static ExitSignal E;
-		static ExitSignal F;
+		ExitSignal D;
+		ExitSignal E;
+		ExitSignal F;
 
 		//Create distant signal
-		static DistSignal AFsi;
+		DistSignal AFsi;
 
 		//Create road signal
-		static RoadSignal V1;
+		RoadSignal V1;
 
 		//Create road distant signal
-		static DistroadSignal V1Fsi;
+		DistroadSignal V1Fsi;
 		#endregion
 		#region routeCreation
 		//Create arrival routes
-		static Route route_a1;
-		static Route route_a2;
-		static Route route_a3;
-		static Route route_b1;
-		static Route route_b2;
-		static Route route_b3;
-		static Route route_c1;
-		static Route route_c2;
+		Route route_a1;
+		Route route_a2;
+		Route route_a3;
+		Route route_b1;
+		Route route_b2;
+		Route route_b3;
+		Route route_c1;
+		Route route_c2;
 
 		//Create short arrival routes
-		static Route route_a2k;
-		static Route route_a3k;
-		static Route route_c1k;
-		static Route route_c2k;
+		Route route_a2k;
+		Route route_a3k;
+		Route route_c1k;
+		Route route_c2k;
 
 		//Create departure routes
-		static Route route_d1;
-		static Route route_d2;
-		static Route route_d3;
-		static Route route_e1;
-		static Route route_e2;
-		static Route route_e3;
-		static Route route_f1;
-		static Route route_f2;
+		Route route_d1;
+		Route route_d2;
+		Route route_d3;
+		Route route_e1;
+		Route route_e2;
+		Route route_e3;
+		Route route_f1;
+		Route route_f2;
 
 		//Create unmonitored route
-		static Route route_o1;
+		Route route_o1;
 		#endregion
 
 		//Constructor
