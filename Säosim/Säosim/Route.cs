@@ -146,14 +146,15 @@ namespace Säosim {
 
 		//Call to lock route
 		public bool LockRoute() {
-			///Two first loops check if all relevant signals and signalstates are correct
+			///First two loops check if all relevant signals and signalstates are correct
 			///Second two loops check if all relevant switches are in correct position
 			///Last loop checks if all relevant derails are in correct position
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
 					
-				} else {
+				}
+				else {
 					//Route could not be set
 					//Err: Signal som är förreglad i stopp eller står i kör hindrar tågvägslåsning
 					return false;
@@ -172,7 +173,8 @@ namespace Säosim {
 			foreach (Switch includedSwitch in includedSwitches) {
 				if (/*gibberish*/true) {
 
-				} else {
+				}
+				else {
 					//Err: xxx
 					return false;
 				}
