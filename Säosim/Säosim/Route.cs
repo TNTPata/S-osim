@@ -250,67 +250,81 @@ namespace Säosim {
 		private List<Derail> loweredDerails = new List<Derail>(); //Fill with the derails that need to be locked lowered for a route
 
 		//Call to lock route
+		//REMINDER: THIS METHOD IS ONLY FOR LOCKING OBJECTS, NO "MOVE" METHODS ARE TO BE CALLED FROM HERE
 		public bool LockRoute() {
 			///First two loops check if all relevant signals and signalstates are correct
 			///Second two loops check if all relevant switches are in correct position
 			///Last two loops checks if all relevant derails are in correct position
+			///
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
 					
 				}
 				else {
-					//Route could not be set
-					//Err: Signal som är förreglad i stopp eller står i kör hindrar tågvägslåsning
+					Debug.WriteLine("Signal som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
 					return false;
 				}
 			}
 			foreach (Signal protectedSignal in protectedSignals) {
 				//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
 				if (protectedSignal.SetProtected()) {
-					protectedSignal.SetProtected();
+
 				}
 				else {
-					//Err: Signal som inte står i stopp hindrar tågvägslåsning
+					Debug.WriteLine("Signal som inte står i stopp hindrar tågvägslåsning.");
 					return false;
 				}
 			}
 			foreach (Switch straightSwitch in straightSwitches) {
-				if (true) {
-					
+				if (straightSwitch.isStraightTrack) {
+					if (straightSwitch.LockSwitch()) {
+						//This means that the switch is straight and LockSwitch has been returned successfully
+					} else { Debug.WriteLine(straightSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
-				else {
-					//Err: xxx
+				else
+				{
+					Debug.WriteLine(straightSwitch.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
 			foreach (Switch curveSwitch in curvedSwitches) {
-				if (/*gibberish*/true) {
-
+				if (curveSwitch.isCurvedTrack) {
+					if (curveSwitch.LockSwitch()) {
+						//This means that the switch is curved and LockSwitch has been returned successfully
+					}
+					else { Debug.WriteLine(curveSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
 				else {
-					//Err: xxx
+					Debug.WriteLine(curveSwitch.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
 			foreach (Derail raisedDerail in raisedDerails) {
-				if (/*gibberish*/true) {
-
+				if (raisedDerail.isRaised) {
+					if (raisedDerail.LockDerail()) {
+						//This means that the derail is raised and LockDerail has been returned successfully
+					}
+					else { Debug.WriteLine(raisedDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
 				else {
-					//Err: xxx
+					Debug.WriteLine(raisedDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
 			foreach (Derail loweredDerail in loweredDerails) {
-				if (/*gibberish*/true) {
-
+				if (loweredDerail.isRaised) {
+					if (loweredDerail.LockDerail()) {
+						//This means that the derail is lowered and LockDerail has been returned successfully
+					}
+					else { Debug.WriteLine(loweredDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
 				else {
-					//Err: xxx
+					Debug.WriteLine(loweredDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
+			//All objects are locked in their correct positions
 			return true;
 		}
 	}
