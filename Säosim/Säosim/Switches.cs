@@ -26,7 +26,7 @@ namespace Säosim
 			if ((isLocked || isOccupied) == false) {
 					isMoving = true;
 					isCurvedTrack = false;
-					Thread.Sleep(2500);
+					Thread.Sleep(1000);
 					isStraightTrack = true;
 					isMoving = false;
 				return true;
@@ -37,7 +37,7 @@ namespace Säosim
 			if ((isLocked || isOccupied) == false) {
 				isMoving = true;
 				isStraightTrack = false;
-				Thread.Sleep(2500);
+				Thread.Sleep(1000);
 				isCurvedTrack = true;
 				isMoving = false;
 				return true;
@@ -66,41 +66,42 @@ namespace Säosim
 		}
 
 		public string displayName;
-		public bool lowered = true;
-		public bool raised = false;
-		bool moving = false;
-		bool locked = false;
+		public bool isLowered = true;
+		public bool isRaised = false;
+		bool isMoving = false;
+		bool isLocked = false;
 
 		public bool Lower() {
-			if (locked == false) {
-				moving = true;
-				raised = false;
+			if (isLocked == false) {
+				isMoving = true;
+				isRaised = false;
 				Thread.Sleep(2500);
-				lowered = true;
-				moving = false;
+				isLowered = true;
+				isMoving = false;
 				return true;
 			} else { return false; }
 		}
 
 		public bool Raise() {
-			if (locked == false) {
-				moving = true;
-				lowered = false;
+			if (isLocked == false) {
+				isMoving = true;
+				isLowered = false;
 				Thread.Sleep(2500);
-				raised = true;
-				moving = false;
+				isRaised = true;
+				isMoving = false;
 				return true;
 			} else { return false; }
 		}
 
-		public void LockDerail() {
-			if ((locked == false) && (moving == false)) {
-				locked = true;
-			}
+		public bool LockDerail() {
+			if ((isLocked == false) && (isMoving == false)) {
+				isLocked = true;
+				return true;
+			} else { return false; }
 		}
 
 		public void UnlockDerail() {
-			locked = false;
+			isLocked = false;
 		}
 	}
 

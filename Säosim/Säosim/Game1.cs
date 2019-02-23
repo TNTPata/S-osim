@@ -20,7 +20,7 @@ namespace Säosim
         SpriteBatch spriteBatch;
 
 		//Create interlocking object (The interlocking plant for all intents and purposes)
-		Interlocking interlocking; //DOES NOT WORK YET, DON'T KNOW WHY
+		Interlocking interlocking;
 
 		public Game1() {
             graphics = new GraphicsDeviceManager(this);
