@@ -253,7 +253,7 @@ namespace Säosim {
 		public bool LockRoute() {
 			///First two loops check if all relevant signals and signalstates are correct
 			///Second two loops check if all relevant switches are in correct position
-			///Last loop checks if all relevant derails are in correct position
+			///Last two loops checks if all relevant derails are in correct position
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
@@ -276,7 +276,7 @@ namespace Säosim {
 				}
 			}
 			foreach (Switch straightSwitch in straightSwitches) {
-				if (/*gibberish*/true) {
+				if (true) {
 					
 				}
 				else {

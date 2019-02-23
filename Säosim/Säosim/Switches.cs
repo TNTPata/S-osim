@@ -9,6 +9,8 @@ using System.Threading;
 namespace Säosim
 {
 	public class Switch {
+
+		//Takes in a name to display for debugging/user experience purposes
 		public Switch(string displayName) {
 			this.displayName = displayName;
 		}
@@ -20,30 +22,33 @@ namespace Säosim
 		public bool isLocked = false;
 		bool isOccupied = false;
 
-		public void StraightSwitch() {
+		public bool StraightSwitch() {
 			if ((isLocked || isOccupied) == false) {
 					isMoving = true;
 					isCurvedTrack = false;
 					Thread.Sleep(2500);
 					isStraightTrack = true;
 					isMoving = false;
-			}
+				return true;
+			} else { return false; }
 		}
 
-		public void CurveSwitch() {
+		public bool CurveSwitch() {
 			if ((isLocked || isOccupied) == false) {
 				isMoving = true;
 				isStraightTrack = false;
 				Thread.Sleep(2500);
 				isCurvedTrack = true;
 				isMoving = false;
-			}
+				return true;
+			} else { return false; }
 		}
 
-		public void LockSwitch() {
+		public bool LockSwitch() {
 			if ((isLocked == false) && (isMoving == false)) {
 				isLocked = true;
-			}
+				return true;
+			} else { return false; }
 		}
 
 		public void UnlockSwitch() {
@@ -54,34 +59,38 @@ namespace Säosim
 	}
 
 	public class Derail {
+
+		//Takes in a name to display for debugging/user experience purposes
 		public Derail(string displayName) {
 			this.displayName = displayName;
 		}
 
 		public string displayName;
-		bool lowered = true;
-		bool raised = false;
+		public bool lowered = true;
+		public bool raised = false;
 		bool moving = false;
 		bool locked = false;
 
-		public void Lower() {
+		public bool Lower() {
 			if (locked == false) {
 				moving = true;
 				raised = false;
 				Thread.Sleep(2500);
 				lowered = true;
 				moving = false;
-			}
+				return true;
+			} else { return false; }
 		}
 
-		public void Raise() {
+		public bool Raise() {
 			if (locked == false) {
 				moving = true;
 				lowered = false;
 				Thread.Sleep(2500);
 				raised = true;
 				moving = false;
-			}
+				return true;
+			} else { return false; }
 		}
 
 		public void LockDerail() {
