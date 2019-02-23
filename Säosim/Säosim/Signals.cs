@@ -23,7 +23,7 @@ namespace Säosim {
 			} else { return false; }
 		}
 
-		public void Unprotect() {
+		public void SetUnprotected() {
 			isProtected = false;
 		}
 	}
@@ -34,7 +34,28 @@ namespace Säosim {
 		public EntrySignal() { }
 
 		public EntrySignal(ExitSignal nextSignal) {
-			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
+			switch (nextSignal.signalState) {
+				case 0: {
+						//Grön blink
+						break;
+					}
+				case 1: {
+						//Vit blink
+						break;
+					}
+				case 2: {
+						//Två gröna blinkar
+						break;
+					}
+				case 3: {
+						//Två gröna blinkar
+						break;
+					}
+				default: {
+						//Grön blink
+						break;
+					}
+			}
 		}
 		#endregion
 
