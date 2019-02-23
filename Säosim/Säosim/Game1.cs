@@ -5,6 +5,7 @@ using MonoGame.OpenGL;
 using MonoGame.Utilities;
 using MonoGame.Utilities.Png;
 using System.IO;
+using System.Diagnostics;
 
 namespace Säosim
 {
@@ -19,12 +20,15 @@ namespace Säosim
         SpriteBatch spriteBatch;
 
 		//Create interlocking object (The interlocking plant for all intents and purposes)
-		Interlocking interlocking = new Interlocking(); //DOES NOT WORK YET, DON'T KNOW WHY
+		Interlocking interlocking; //DOES NOT WORK YET, DON'T KNOW WHY
 
 		public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-        }
+
+			interlocking = new Interlocking();
+			Debug.WriteLine("Created interlocking");
+		}
 		
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -33,8 +37,7 @@ namespace Säosim
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize() {
-            // TODO: Add your initialization logic here
-
+			// TODO: Add your initialization logic here
             base.Initialize();
         }
 
