@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Säosim {
-	class Signal {
+	public class Signal {
 
 		public bool isProtected = false;
 		public int signalState = 0;
@@ -28,7 +28,7 @@ namespace Säosim {
 		}
 	}
 
-	class EntrySignal : Signal {
+	public class EntrySignal : Signal {
 
 		#region Constructors
 		public EntrySignal() { }
@@ -57,7 +57,7 @@ namespace Säosim {
 		}
 	}
 
-	class ExitSignal : Signal {
+	public class ExitSignal : Signal {
 		public void SetClear() {
 			if (isProtected == false) {
 				signalState = 1;
@@ -65,14 +65,14 @@ namespace Säosim {
 		}
 	}
 
-	class DistSignal : Signal {
+	public class DistSignal : Signal {
 		public DistSignal(EntrySignal nextSignal) {
 			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 		}
 
 	}
 
-	class RoadSignal : Signal {
+	public class RoadSignal : Signal {
 		public void SetClear() {
 			if (/*CrossingIsClear == true*/true) {
 				signalState = 1;
@@ -80,7 +80,7 @@ namespace Säosim {
 		}
 	}
 
-	class DistroadSignal : Signal {
+	public class DistroadSignal : Signal {
 		public DistroadSignal(RoadSignal referenceSignal) {
 
 		}

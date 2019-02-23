@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Säosim
 {
-	class Switch {
+	public class Switch {
 		public Switch(string displayName) {
 			this.displayName = displayName;
 		}
@@ -53,7 +53,7 @@ namespace Säosim
 		}
 	}
 
-	class Derail {
+	public class Derail {
 		public Derail(string displayName) {
 			this.displayName = displayName;
 		}
