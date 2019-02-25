@@ -22,6 +22,39 @@ namespace Säosim
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
 
+		//Create buttons here, switch "Växel 3" is not remote controlled, therefore no button for it is created
+		Button switch1Straight;
+		Button switch1Curved;
+		Button switch2Straight;
+		Button switch2Curved;
+		Button switch4Straight;
+		Button switch4Curved;
+		Button switch5Straight;
+		Button switch5Curved;
+		Button switch6Straight;
+		Button switch6Curved;
+		Button raiseDerail2;
+		Button lowerDerail2;
+
+		//Create buttons for locking/unlocking routes to/from a certain signal
+		//Short routes are automaticly used if derails are raised, therefore those buttons will not be used
+		//Knapparna nedan är tågvägslås som ställer respektive signal i kör 
+		Button routeLock_a1_2_3;
+		Button routeLock_b1_2_3;
+		Button routeLock_c1_2;
+		Button routeLock_d1_2_3;
+		Button routeLock_e1_2_3;
+		Button routeLock_f1_2;
+		Button routeLock_o1;
+
+		//Create buttons for manuevering road protection
+		Button V1Raise;
+		Button V1Lower;
+
+		//Emergency Stop all signals
+		Button emergencyStop;
+
+
 		public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -59,8 +92,8 @@ namespace Säosim
         /// game-specific content.
         /// </summary>
         protected override void UnloadContent() {
-            // TODO: Unload any non ContentManager content here
-        }
+			// TODO: Unload any non ContentManager content here
+		}
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
