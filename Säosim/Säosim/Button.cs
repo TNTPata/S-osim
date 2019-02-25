@@ -11,7 +11,9 @@ using System.Threading.Tasks;
 
 namespace Säosim {
 	class Button {
-
+		/// <summary>
+		/// Don't touch anything
+		/// </summary>
 		public enum State {
 			None,
 			Pressed,
@@ -45,7 +47,7 @@ namespace Säosim {
 				}
 			}
 			else {
-			state = State.None;
+				state = State.None;
 			}
 		}
 
