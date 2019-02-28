@@ -8,66 +8,65 @@ using System.Threading.Tasks;
 namespace Säosim {
 	public class Interlocking {
 		#region objectCreation
-		//Not sure if everything should be static, but it works that way
 		//Create the 6 switches and 2 derails
-		Switch switch1;
-		Switch switch2;
-		Switch switch3;
-		Switch switch4;
-		Switch switch5;
-		Switch switch6;
+		public Switch switch1;
+		public Switch switch2;
+		public Switch switch3;
+		public Switch switch4;
+		public Switch switch5;
+		public Switch switch6;
 
-		Derail derail1;
-		Derail derail2;
+		public Derail derail1;
+		public Derail derail2;
 
 		//Create 3 entry signals
-		EntrySignal A;
-		EntrySignal B;
-		EntrySignal C;
+		public EntrySignal A;
+		public EntrySignal B;
+		public EntrySignal C;
 
 		//Create 3 exit signals
-		ExitSignal D;
-		ExitSignal E;
-		ExitSignal F;
+		public ExitSignal D;
+		public ExitSignal E;
+		public ExitSignal F;
 
 		//Create distant signal
-		DistSignal AFsi;
+		public DistSignal AFsi;
 
 		//Create road signal
-		RoadSignal V1;
+		public RoadSignal V1;
 
 		//Create road distant signal
-		DistroadSignal V1Fsi;
+		public DistroadSignal V1Fsi;
 		#endregion
 		#region routeCreation
 		//Create arrival routes
-		Route route_a1;
-		Route route_a2;
-		Route route_a3;
-		Route route_b1;
-		Route route_b2;
-		Route route_b3;
-		Route route_c1;
-		Route route_c2;
+		public Route route_a1;
+		public Route route_a2;
+		public Route route_a3;
+		public Route route_b1;
+		public Route route_b2;
+		public Route route_b3;
+		public Route route_c1;
+		public Route route_c2;
 
 		//Create short arrival routes
-		Route route_a2k;
-		Route route_a3k;
-		Route route_c1k;
-		Route route_c2k;
+		public Route route_a2k;
+		public Route route_a3k;
+		public Route route_c1k;
+		public Route route_c2k;
 
 		//Create departure routes
-		Route route_d1;
-		Route route_d2;
-		Route route_d3;
-		Route route_e1;
-		Route route_e2;
-		Route route_e3;
-		Route route_f1;
-		Route route_f2;
+		public Route route_d1;
+		public Route route_d2;
+		public Route route_d3;
+		public Route route_e1;
+		public Route route_e2;
+		public Route route_e3;
+		public Route route_f1;
+		public Route route_f2;
 
 		//Create unmonitored route
-		Route route_o1;
+		public Route route_o1;
 		#endregion
 
 		//Constructor
