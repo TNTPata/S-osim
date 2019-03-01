@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="Component.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interlocking.cs" />
