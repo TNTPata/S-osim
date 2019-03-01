@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Säosim {
 	public class Signal {
 
+
 		public bool isProtected = false;
 		public int signalState = 0;
 		//0 = Stop, 1 = Clear, 2 = Caution, 3 = Caution - Short route.

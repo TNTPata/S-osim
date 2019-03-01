@@ -68,8 +68,8 @@ namespace Säosim
 		public string displayName;
 		public bool isLowered = true;
 		public bool isRaised = false;
-		bool isMoving = false;
-		bool isLocked = false;
+		private bool isMoving = false;
+		public bool isLocked = false;
 
 		public bool Lower() {
 			if (isLocked == false) {
