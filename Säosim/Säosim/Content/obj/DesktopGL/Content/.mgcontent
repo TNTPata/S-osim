@@ -4,10 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/buttonPressed.png</File>
+    <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/buttonReleased.png</File>
     <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/lampLit.png</File>
     <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/lampUnlit.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
