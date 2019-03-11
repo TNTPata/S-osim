@@ -21,11 +21,14 @@ namespace Säosim
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-		private List<Component> _gameCompnoents;
+		private Color _backgroundColour = Color.CornflowerBlue;
+
+		private List<Component> _gameComponents;
 
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
 
+		#region buttonCreation
 		//Create buttons here, switch "Växel 3" is not remote controlled, therefore no button for it is created
 		Button switch1Straight;
 		Button switch1Curved;
@@ -57,7 +60,7 @@ namespace Säosim
 
 		//Emergency Stop all signals
 		Button emergencyStop;
-
+		#endregion
 
 		public Game1() {
             graphics = new GraphicsDeviceManager(this);
@@ -89,8 +92,26 @@ namespace Säosim
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// TODO: use this.Content to load your game content here
-			textureLampLit = Content.Load<Texture2D>("lampLit");
-			textureLampUnlit = Content.Load<Texture2D>("lampUnlit");
+			textureLampLit = Content.Load<Texture2D>("Textures/lampLit");
+			textureLampUnlit = Content.Load<Texture2D>("Textures/lampUnlit");
+
+			var randomButton = new Button(Content.Load<Texture2D>("Controls/buttonReleased"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(350, 200),
+				Text = "Random",
+			};
+
+			randomButton.Click += RandomButton_Click;
+
+			_gameComponents = new List<Component>()
+			{
+				randomButton
+			};
+		}
+
+		private void RandomButton_Click(object sender, EventArgs e) {
+			var random = new Random();
+
+			_backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
 		}
 
 		/// <summary>
@@ -110,7 +131,7 @@ namespace Säosim
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-			foreach (var component in _gameCompnoents) {
+			foreach (var component in _gameComponents) {
 				component.Update(gameTime);
 			}
 
@@ -123,14 +144,14 @@ namespace Säosim
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(_backgroundColour);
 
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 			spriteBatch.Draw(textureLampLit, new Vector2(0, 0), Color.White);
 			spriteBatch.Draw(textureLampUnlit, new Vector2(128, 128), Color.White);
 			
-			foreach (var component in _gameCompnoents) {
+			foreach (var component in _gameComponents) {
 				component.Draw(gameTime, spriteBatch);
 			}
 			spriteBatch.End();

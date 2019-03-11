@@ -15,27 +15,17 @@ using System.Threading.Tasks;
 namespace Säosim {
 	public class Button : Component {
 		#region Fields
-
 		private MouseState _currentMouse;
-
 		private SpriteFont _font;
-
 		private bool _isHovering;
-
 		private MouseState _previousMouse;
-
 		private Texture2D _texture;
-
 		#endregion
 
 		#region Properties
-
 		public event EventHandler Click;
-
 		public bool Clicked { get; private set; }
-
 		public Color PenColour { get; set; }
-
 		public Vector2 Position { get; set; }
 
 		public Rectangle Rectangle {
@@ -45,11 +35,9 @@ namespace Säosim {
 		}
 
 		public string Text { get; set; }
-
 		#endregion
 
 		#region Methods
-
 		public Button(Texture2D texture, SpriteFont font) {
 			_texture = texture;
 
@@ -90,7 +78,6 @@ namespace Säosim {
 				}
 			}
 		}
-
 		#endregion
 	}
 }
