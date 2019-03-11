@@ -6,8 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Säosim {
-	public class Signal {
-
+	public abstract class Signal {
 
 		public bool isProtected = false;
 		public int signalState = 0;
