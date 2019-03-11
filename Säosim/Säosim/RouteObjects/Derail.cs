@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Säosim {
-	class Derail {
+	public class Derail {
 
 		//Takes in a name to display for debugging/user experience purposes
 		public Derail(string displayName) {

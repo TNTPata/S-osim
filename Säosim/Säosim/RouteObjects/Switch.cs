@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Säosim {
-	class Switch {
+	public class Switch {
 		//Takes in a name to display for debugging/user experience purposes
 		public Switch(string displayName) {
 			this.displayName = displayName;
