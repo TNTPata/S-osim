@@ -4,8 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.OpenGL;
 using MonoGame.Utilities;
 using MonoGame.Utilities.Png;
+using System;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Säosim
 {
@@ -18,6 +20,8 @@ namespace Säosim
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+		private List<Component> _gameCompnoents;
 
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
@@ -61,6 +65,7 @@ namespace Säosim
 
 			interlocking = new Interlocking();
 			Debug.WriteLine("Created interlocking");
+			
 		}
 		
         /// <summary>
@@ -70,6 +75,7 @@ namespace Säosim
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize() {
+			IsMouseVisible = true;
 			// TODO: Add your initialization logic here
             base.Initialize();
         }
@@ -87,11 +93,11 @@ namespace Säosim
 			textureLampUnlit = Content.Load<Texture2D>("lampUnlit");
 		}
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent() {
+		/// <summary>
+		/// UnloadContent will be called once per game and is the place to unload
+		/// game-specific content.
+		/// </summary>
+		protected override void UnloadContent() {
 			// TODO: Unload any non ContentManager content here
 		}
 
@@ -104,9 +110,12 @@ namespace Säosim
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+			foreach (var component in _gameCompnoents) {
+				component.Update(gameTime);
+			}
+
 			// TODO: Add your update logic here
             base.Update(gameTime);
-			
         }
 
         /// <summary>
@@ -120,6 +129,10 @@ namespace Säosim
 			spriteBatch.Begin();
 			spriteBatch.Draw(textureLampLit, new Vector2(0, 0), Color.White);
 			spriteBatch.Draw(textureLampUnlit, new Vector2(128, 128), Color.White);
+			
+			foreach (var component in _gameCompnoents) {
+				component.Draw(gameTime, spriteBatch);
+			}
 			spriteBatch.End();
 
             base.Draw(gameTime);
