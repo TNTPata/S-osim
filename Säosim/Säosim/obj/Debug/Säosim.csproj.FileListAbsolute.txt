@@ -22,3 +22,4 @@ C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debu
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Textures\lampUnlit.xnb
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Controls\buttonPressed.xnb
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Controls\buttonReleased.xnb
+C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Controls\buttonReleased48px.xnb

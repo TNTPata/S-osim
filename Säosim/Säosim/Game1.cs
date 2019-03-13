@@ -95,7 +95,7 @@ namespace Säosim
 			textureLampLit = Content.Load<Texture2D>("Textures/lampLit");
 			textureLampUnlit = Content.Load<Texture2D>("Textures/lampUnlit");
 
-			var randomButton = new Button(Content.Load<Texture2D>("Controls/buttonReleased"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var randomButton = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(350, 200),
 				Text = "Random",
 			};
