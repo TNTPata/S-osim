@@ -92,27 +92,79 @@ namespace Säosim
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// TODO: use this.Content to load your game content here
-			textureLampLit = Content.Load<Texture2D>("Textures/lampLit");
-			textureLampUnlit = Content.Load<Texture2D>("Textures/lampUnlit");
+			//textureLampLit = Content.Load<Texture2D>("Textures/lampLit");
+			//textureLampUnlit = Content.Load<Texture2D>("Textures/lampUnlit");
 
-			var randomButton = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(350, 200),
-				Text = "Random",
+			var switch1 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(10, 10),
+				Text = "Vx 1",
+			};
+			var switch2 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(60, 10),
+				Text = "Vx 2",
+			};
+			var switch4 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(110, 10),
+				Text = "Vx 4",
+			};
+			var switch5 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(160, 10),
+				Text = "Vx 5",
+			};
+			var switch6 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(210, 10),
+				Text = "Vx 6",
+			};
+			var derail2 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(10, 60),
+				Text = "SpII",
 			};
 
-			randomButton.Click += RandomButton_Click;
+			
+			switch1.Click += Switch1_Click;
+			switch2.Click += Switch2_Click;
+			switch4.Click += Switch4_Click;
+			switch5.Click += Switch5_Click;
+			switch6.Click += Switch6_Click;
+			derail2.Click += Derail2_Click;
 
 			_gameComponents = new List<Component>()
 			{
-				randomButton
+				switch1,
+				switch2,
+				switch4,
+				switch5,
+				switch6,
+				derail2,
 			};
 		}
 
-		private void RandomButton_Click(object sender, EventArgs e) {
-			var random = new Random();
 
-			_backgroundColour = new Color(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255));
+		#region ButtonEvents
+		private void Derail2_Click(object sender, EventArgs e) {
+			
 		}
+
+		private void Switch6_Click(object sender, EventArgs e) {
+			
+		}
+
+		private void Switch5_Click(object sender, EventArgs e) {
+			
+		}
+
+		private void Switch4_Click(object sender, EventArgs e) {
+			
+		}
+
+		private void Switch2_Click(object sender, EventArgs e) {
+			
+		}
+
+		private void Switch1_Click(object sender, EventArgs e) {
+
+		}
+		#endregion
 
 		/// <summary>
 		/// UnloadContent will be called once per game and is the place to unload
@@ -144,12 +196,12 @@ namespace Säosim
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-            GraphicsDevice.Clear(_backgroundColour);
+			GraphicsDevice.Clear(Color.Black);
 
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
-			spriteBatch.Draw(textureLampLit, new Vector2(0, 0), Color.White);
-			spriteBatch.Draw(textureLampUnlit, new Vector2(128, 128), Color.White);
+			//spriteBatch.Draw(textureLampLit, new Vector2(0, 0), Color.White);
+			//spriteBatch.Draw(textureLampUnlit, new Vector2(128, 128), Color.White);
 			
 			foreach (var component in _gameComponents) {
 				component.Draw(gameTime, spriteBatch);
