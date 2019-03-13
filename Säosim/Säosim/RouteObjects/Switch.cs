@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace Säosim {
 				Thread.Sleep(1000);
 				isStraightTrack = true;
 				isMoving = false;
+				Debug.WriteLine(displayName + " i (+)");
 				return true;
 			}
 			else { return false; }
@@ -38,6 +40,7 @@ namespace Säosim {
 				Thread.Sleep(1000);
 				isCurvedTrack = true;
 				isMoving = false;
+				Debug.WriteLine(displayName + " i (-)");
 				return true;
 			}
 			else { return false; }
@@ -46,6 +49,7 @@ namespace Säosim {
 		public bool LockSwitch() {
 			if ((isLocked == false) && (isMoving == false)) {
 				isLocked = true;
+				Debug.WriteLine(displayName + "låst");
 				return true;
 			}
 			else { return false; }
@@ -53,6 +57,7 @@ namespace Säosim {
 
 		public void UnlockSwitch() {
 			if (isOccupied == false) {
+				Debug.WriteLine(displayName + "upplåst");
 				isLocked = false;
 			}
 		}
