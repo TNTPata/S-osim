@@ -53,7 +53,7 @@
     <Compile Include="Interlocking\Route.cs" />
     <Compile Include="RouteObjects\Signals.cs" />
     <Compile Include="RouteObjects\Switch.cs" />
-    <Compile Include="UI\Lamp.cs" />
+    <Compile Include="UI\Indicator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
