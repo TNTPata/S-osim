@@ -8,21 +8,21 @@ using System;
 using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
+using Säosim.UI;
 
 namespace Säosim {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
 	public class Game1 : Game {
-		Texture2D textureLampLit;
-		Texture2D textureLampUnlit;
 
 		GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
 		private Color _backgroundColour = Color.CornflowerBlue;
 
-		private List<Component> _gameComponents;
+		private List<Component> _gameButtons;
+		private List<Component> _gameIndicators;
 
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
@@ -53,7 +53,6 @@ namespace Säosim {
 			
 			interlocking = new Interlocking();
 			Debug.WriteLine("Created interlocking");
-			
 		}
 		
         /// <summary>
@@ -77,9 +76,6 @@ namespace Säosim {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// TODO: use this.Content to load your game content here
-			//textureLampLit = Content.Load<Texture2D>("Textures/lampLit");
-			//textureLampUnlit = Content.Load<Texture2D>("Textures/lampUnlit");
-
 			var switch1Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(10, 10),
 				Text = "Vx 1 (+)",
@@ -128,6 +124,10 @@ namespace Säosim {
 				Position = new Vector2(260, 60),
 				Text = "SpII (-)",
 			};
+			var lampStop = new Indicator(Content.Load<Texture2D>("Textures/lampLit"), Content.Load<Texture2D>("Textures/lampUnlit")) {
+				Position = new Vector2(310, 60)
+			};
+
 
 
 			switch1Straight.Click += Switch1Straight_Click;
@@ -143,8 +143,8 @@ namespace Säosim {
 			derail2Raise.Click += Derail2Raise_Click;
 			derail2Lower.Click += Derail2Lower_Click;
 
-			_gameComponents = new List<Component>()
-			{
+			_gameButtons = new List<Component>() {
+				//Switch buttons
 				switch1Straight,
 				switch1Curved,
 				switch2Straight,
@@ -155,8 +155,14 @@ namespace Säosim {
 				switch5Curved, 
 				switch6Straight,
 				switch6Curved,
+
+				//Derail buttons
 				derail2Raise,
 				derail2Lower,
+			};
+
+			_gameIndicators = new List<Component>() {
+				lampStop,
 			};
 		}
 
@@ -276,6 +282,8 @@ namespace Säosim {
 		/// </summary>
 		protected override void UnloadContent() {
 			// TODO: Unload any non ContentManager content here
+			Content.Dispose();
+			Content.Unload();
 		}
 
         /// <summary>
@@ -284,11 +292,15 @@ namespace Säosim {
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime) {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-			foreach (var component in _gameComponents) {
-				component.Update(gameTime);
+			foreach (var button in _gameButtons) {
+				button.Update(gameTime);
+			}
+
+			foreach (var indicator in _gameIndicators) {
+				indicator.Update(gameTime);
 			}
 
 			// TODO: Add your update logic here
@@ -304,12 +316,15 @@ namespace Säosim {
 
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
-			//spriteBatch.Draw(textureLampLit, new Vector2(0, 0), Color.White);
-			//spriteBatch.Draw(textureLampUnlit, new Vector2(128, 128), Color.White);
-			
-			foreach (var component in _gameComponents) {
-				component.Draw(gameTime, spriteBatch);
+
+			foreach (var button in _gameButtons) {
+				button.Draw(gameTime, spriteBatch);
 			}
+
+			foreach (var indicator in _gameIndicators) {
+				indicator.Draw(gameTime, spriteBatch);
+			}
+
 			spriteBatch.End();
 
             base.Draw(gameTime);

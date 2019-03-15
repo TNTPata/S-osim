@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Säosim {
 	public class Button : Component {
+
 		#region Fields
 		private MouseState _currentMouse;
 		private SpriteFont _font;
