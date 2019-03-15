@@ -277,7 +277,7 @@ namespace Säosim {
 				}
 			}
 			foreach (Switch straightSwitch in straightSwitches) {
-				if (straightSwitch.isStraightTrack) {
+				if (straightSwitch.IsStraightTrack) {
 					if (straightSwitch.LockSwitch()) {
 						//This means that the switch is straight and LockSwitch has been returned successfully
 					} else { Debug.WriteLine(straightSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
@@ -289,7 +289,7 @@ namespace Säosim {
 				}
 			}
 			foreach (Switch curveSwitch in curvedSwitches) {
-				if (curveSwitch.isCurvedTrack) {
+				if (curveSwitch.IsCurvedTrack) {
 					if (curveSwitch.LockSwitch()) {
 						//This means that the switch is curved and LockSwitch has been returned successfully
 					} else { Debug.WriteLine(curveSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
@@ -300,7 +300,7 @@ namespace Säosim {
 				}
 			}
 			foreach (Derail raisedDerail in raisedDerails) {
-				if (raisedDerail.isRaised) {
+				if (raisedDerail.IsRaised) {
 					if (raisedDerail.LockDerail()) {
 						//This means that the derail is raised and LockDerail has been returned successfully
 					} else { Debug.WriteLine(raisedDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
@@ -311,7 +311,7 @@ namespace Säosim {
 				}
 			}
 			foreach (Derail loweredDerail in loweredDerails) {
-				if (loweredDerail.isRaised) {
+				if (loweredDerail.IsRaised) {
 					if (loweredDerail.LockDerail()) {
 						//This means that the derail is lowered and LockDerail has been returned successfully
 					} else { Debug.WriteLine(loweredDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
