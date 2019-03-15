@@ -9,12 +9,11 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace Säosim
-{
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
-    public class Game1 : Game {
+namespace Säosim {
+	/// <summary>
+	/// This is the main type for your game.
+	/// </summary>
+	public class Game1 : Game {
 		Texture2D textureLampLit;
 		Texture2D textureLampUnlit;
 
@@ -95,74 +94,133 @@ namespace Säosim
 			//textureLampLit = Content.Load<Texture2D>("Textures/lampLit");
 			//textureLampUnlit = Content.Load<Texture2D>("Textures/lampUnlit");
 
-			var switch1 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch1Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(10, 10),
-				Text = "Vx 1",
+				Text = "Vx 1 (+)",
 			};
-			var switch2 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(60, 10),
-				Text = "Vx 2",
-			};
-			var switch4 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(110, 10),
-				Text = "Vx 4",
-			};
-			var switch5 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(160, 10),
-				Text = "Vx 5",
-			};
-			var switch6 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(210, 10),
-				Text = "Vx 6",
-			};
-			var derail2 = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch1Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(10, 60),
-				Text = "SpII",
+				Text = "Vx 1 (-)",
+			};
+			var switch2Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(60, 10),
+				Text = "Vx 2 (+)",
+			};
+			var switch2Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(60, 60),
+				Text = "Vx 2 (-)",
+			};
+			var switch4Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(110, 10),
+				Text = "Vx 4 (+)",
+			};
+			var switch4Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(110, 60),
+				Text = "Vx 4 (-)",
+			};
+			var switch5Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(160, 10),
+				Text = "Vx 5 (+)",
+			};
+			var switch5Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(160, 60),
+				Text = "Vx 5 (-)",
+			};
+			var switch6Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(210, 10),
+				Text = "Vx 6 (+)",
+			};
+			var switch6Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(210, 60),
+				Text = "Vx 6 (-)",
+			};
+			var derail2On = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(260, 10),
+				Text = "SpII (+)",
+			};
+			var derail2Off = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(260, 60),
+				Text = "SpII (-)",
 			};
 
-			
-			switch1.Click += Switch1_Click;
-			switch2.Click += Switch2_Click;
-			switch4.Click += Switch4_Click;
-			switch5.Click += Switch5_Click;
-			switch6.Click += Switch6_Click;
-			derail2.Click += Derail2_Click;
+
+			switch1Straight.Click += Switch1Straight_Click;
+			switch1Curved.Click += Switch1Curved_Click;
+			switch2Straight.Click += Switch2Straight_Click;
+			switch2Curved.Click += Switch2Curved_Click;
+			switch4Straight.Click += Switch4Straight_Click;
+			switch4Curved.Click += Switch4Curved_Click;
+			switch5Straight.Click += Switch5Straight_Click;
+			switch5Curved.Click += Switch5Curved_Click;
+			switch6Straight.Click += Switch6Straight_Click;
+			switch6Curved.Click += Switch6Curved_Click;
+			derail2On.Click += Derail2On_Click;
+			derail2Off.Click += Derail2Off_Click;
 
 			_gameComponents = new List<Component>()
 			{
-				switch1,
-				switch2,
-				switch4,
-				switch5,
-				switch6,
-				derail2,
+				switch1Straight,
+				switch1Curved,
+				switch2Straight,
+				switch2Curved,
+				switch4Straight,
+				switch4Curved,
+				switch5Straight,
+				switch5Curved, 
+				switch6Straight,
+				switch5Curved,
+				derail2On,
+				derail2Off,
 			};
 		}
 
-
 		#region ButtonEvents
-		private void Derail2_Click(object sender, EventArgs e) {
-			
+		private void Derail2Off_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
 		}
 
-		private void Switch6_Click(object sender, EventArgs e) {
-			
+		private void Derail2On_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
 		}
 
-		private void Switch5_Click(object sender, EventArgs e) {
-			
+		private void Switch6Curved_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
 		}
 
-		private void Switch4_Click(object sender, EventArgs e) {
-			
+		private void Switch6Straight_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
 		}
 
-		private void Switch2_Click(object sender, EventArgs e) {
-			
+		private void Switch5Curved_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
 		}
 
-		private void Switch1_Click(object sender, EventArgs e) {
+		private void Switch5Straight_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
+		}
 
+		private void Switch4Curved_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		private void Switch4Straight_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		private void Switch2Curved_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		private void Switch2Straight_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		private void Switch1Curved_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
+		}
+
+		private void Switch1Straight_Click(object sender, EventArgs e) {
+			throw new NotImplementedException();
 		}
 		#endregion
 
@@ -196,7 +254,7 @@ namespace Säosim
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.Black);
+			GraphicsDevice.Clear(Color.LightGray);
 
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
