@@ -28,20 +28,6 @@ namespace Säosim {
 		Interlocking interlocking;
 
 		#region buttonCreation
-		//Create buttons here, switch "Växel 3" is not remote controlled, therefore no button for it is created
-		Button switch1Straight;
-		Button switch1Curved;
-		Button switch2Straight;
-		Button switch2Curved;
-		Button switch4Straight;
-		Button switch4Curved;
-		Button switch5Straight;
-		Button switch5Curved;
-		Button switch6Straight;
-		Button switch6Curved;
-		Button raiseDerail2;
-		Button lowerDerail2;
-
 		//Create buttons for locking/unlocking routes to/from a certain signal
 		//Short routes are automaticly used if derails are raised, therefore those buttons will not be used
 		//Knapparna nedan är tågvägslås som ställer respektive signal i kör 
@@ -64,7 +50,7 @@ namespace Säosim {
 		public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+			
 			interlocking = new Interlocking();
 			Debug.WriteLine("Created interlocking");
 			
@@ -134,11 +120,11 @@ namespace Säosim {
 				Position = new Vector2(210, 60),
 				Text = "Vx 6 (-)",
 			};
-			var derail2On = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var derail2Raise = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(260, 10),
 				Text = "SpII (+)",
 			};
-			var derail2Off = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var derail2Lower = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(260, 60),
 				Text = "SpII (-)",
 			};
@@ -154,8 +140,8 @@ namespace Säosim {
 			switch5Curved.Click += Switch5Curved_Click;
 			switch6Straight.Click += Switch6Straight_Click;
 			switch6Curved.Click += Switch6Curved_Click;
-			derail2On.Click += Derail2On_Click;
-			derail2Off.Click += Derail2Off_Click;
+			derail2Raise.Click += Derail2Raise_Click;
+			derail2Lower.Click += Derail2Lower_Click;
 
 			_gameComponents = new List<Component>()
 			{
@@ -168,59 +154,119 @@ namespace Säosim {
 				switch5Straight,
 				switch5Curved, 
 				switch6Straight,
-				switch5Curved,
-				derail2On,
-				derail2Off,
+				switch6Curved,
+				derail2Raise,
+				derail2Lower,
 			};
 		}
 
 		#region ButtonEvents
-		private void Derail2Off_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+		private void Derail2Lower_Click(object sender, EventArgs e) {
+			if (interlocking.derail2.IsLowered) {
+				Debug.WriteLine(interlocking.derail2.displayName + " ligger redan i avlagt läge.");
+			}
+			else if (interlocking.derail2.IsRaised) {
+				interlocking.derail2.Lower();
+			}
 		}
 
-		private void Derail2On_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+		private void Derail2Raise_Click(object sender, EventArgs e) {
+			if (interlocking.derail2.IsRaised) {
+				Debug.WriteLine(interlocking.derail2.displayName + " ligger redan i pålagt läge.");
+			}
+			else if (interlocking.derail2.IsLowered) {
+				interlocking.derail2.Raise();
+			}
 		}
 
 		private void Switch6Curved_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch6.IsCurvedTrack) {
+				Debug.WriteLine(interlocking.switch6.displayName + " ligger redan i (-).");
+			}
+			else if (interlocking.switch6.IsStraightTrack) {
+				interlocking.switch6.CurveSwitch();
+			}
 		}
 
 		private void Switch6Straight_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch6.IsStraightTrack) {
+				Debug.WriteLine(interlocking.switch6.displayName + " ligger redan i (+).");
+			}
+			else if (interlocking.switch6.IsCurvedTrack) {
+				interlocking.switch6.StraightSwitch();
+			}
 		}
 
 		private void Switch5Curved_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch5.IsCurvedTrack) {
+				Debug.WriteLine(interlocking.switch5.displayName + " ligger redan i (-).");
+			}
+			else if (interlocking.switch5.IsStraightTrack) {
+				interlocking.switch5.CurveSwitch();
+			}
 		}
 
 		private void Switch5Straight_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch5.IsStraightTrack) {
+				Debug.WriteLine(interlocking.switch5.displayName + " ligger redan i (+).");
+			}
+			else if (interlocking.switch5.IsCurvedTrack) {
+				interlocking.switch5.StraightSwitch();
+			}
 		}
 
 		private void Switch4Curved_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch4.IsCurvedTrack) {
+				Debug.WriteLine(interlocking.switch4.displayName + " ligger redan i (-).");
+			}
+			else if (interlocking.switch4.IsStraightTrack) {
+				interlocking.switch4.CurveSwitch();
+			}
 		}
 
 		private void Switch4Straight_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch4.IsStraightTrack) {
+				Debug.WriteLine(interlocking.switch4.displayName + " ligger redan i (+).");
+			}
+			else if (interlocking.switch4.IsCurvedTrack) {
+				interlocking.switch4.StraightSwitch();
+			}
 		}
 
 		private void Switch2Curved_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch2.IsCurvedTrack) {
+				Debug.WriteLine(interlocking.switch2.displayName + " ligger redan i (-).");
+			}
+			else if (interlocking.switch2.IsStraightTrack) {
+				interlocking.switch2.CurveSwitch();
+			}
 		}
 
 		private void Switch2Straight_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch2.IsStraightTrack) {
+				Debug.WriteLine(interlocking.switch2.displayName + " ligger redan i (+).");
+			}
+			else if (interlocking.switch2.IsCurvedTrack) {
+				interlocking.switch2.StraightSwitch();
+			}
 		}
 
 		private void Switch1Curved_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch1.IsCurvedTrack) {
+				Debug.WriteLine(interlocking.switch1.displayName + " ligger redan i (-).");
+			}
+			else if (interlocking.switch1.IsStraightTrack) {
+				interlocking.switch1.CurveSwitch();
+			}
 		}
 
 		private void Switch1Straight_Click(object sender, EventArgs e) {
-			throw new NotImplementedException();
+			if (interlocking.switch1.IsStraightTrack) {
+				Debug.WriteLine(interlocking.switch1.displayName + " ligger redan i (+).");
+			}
+			else if (interlocking.switch1.IsCurvedTrack) {
+				interlocking.switch1.StraightSwitch();
+			}
 		}
 		#endregion
 
