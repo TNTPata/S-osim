@@ -292,8 +292,7 @@ namespace Säosim {
 				if (curveSwitch.isCurvedTrack) {
 					if (curveSwitch.LockSwitch()) {
 						//This means that the switch is curved and LockSwitch has been returned successfully
-					}
-					else { Debug.WriteLine(curveSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
+					} else { Debug.WriteLine(curveSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(curveSwitch.displayName + " ligger fel för denna tågväg.");
@@ -304,8 +303,7 @@ namespace Säosim {
 				if (raisedDerail.isRaised) {
 					if (raisedDerail.LockDerail()) {
 						//This means that the derail is raised and LockDerail has been returned successfully
-					}
-					else { Debug.WriteLine(raisedDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
+					} else { Debug.WriteLine(raisedDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(raisedDerail.displayName + " ligger fel för denna tågväg.");
@@ -316,8 +314,7 @@ namespace Säosim {
 				if (loweredDerail.isRaised) {
 					if (loweredDerail.LockDerail()) {
 						//This means that the derail is lowered and LockDerail has been returned successfully
-					}
-					else { Debug.WriteLine(loweredDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
+					} else { Debug.WriteLine(loweredDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(loweredDerail.displayName + " ligger fel för denna tågväg.");
