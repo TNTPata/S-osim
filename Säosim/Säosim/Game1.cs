@@ -76,51 +76,51 @@ namespace Säosim {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			// TODO: use this.Content to load your game content here
-			var switch1Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch1Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(10, 10),
 				Text = "Vx 1 (+)",
 			};
-			var switch1Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch1Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(10, 60),
 				Text = "Vx 1 (-)",
 			};
-			var switch2Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch2Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(60, 10),
 				Text = "Vx 2 (+)",
 			};
-			var switch2Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch2Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(60, 60),
 				Text = "Vx 2 (-)",
 			};
-			var switch4Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch4Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(110, 10),
 				Text = "Vx 4 (+)",
 			};
-			var switch4Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch4Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(110, 60),
 				Text = "Vx 4 (-)",
 			};
-			var switch5Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch5Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(160, 10),
 				Text = "Vx 5 (+)",
 			};
-			var switch5Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch5Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(160, 60),
 				Text = "Vx 5 (-)",
 			};
-			var switch6Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch6Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(210, 10),
 				Text = "Vx 6 (+)",
 			};
-			var switch6Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var switch6Curved = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(210, 60),
 				Text = "Vx 6 (-)",
 			};
-			var derail2Raise = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var derail2Raise = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(260, 10),
 				Text = "SpII (+)",
 			};
-			var derail2Lower = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var derail2Lower = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(260, 60),
 				Text = "SpII (-)",
 			};

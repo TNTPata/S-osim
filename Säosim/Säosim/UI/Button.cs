@@ -19,8 +19,10 @@ namespace Säosim {
 		private MouseState _currentMouse;
 		private SpriteFont _font;
 		private bool _isHovering;
+		private bool _isLocked;
 		private MouseState _previousMouse;
-		private Texture2D _texture;
+		private Texture2D _ReleasedTexture;
+		private Texture2D _PressedTexture;
 		#endregion
 
 		#region Properties
@@ -31,7 +33,7 @@ namespace Säosim {
 
 		public Rectangle Rectangle {
 			get {
-				return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
+				return new Rectangle((int)Position.X, (int)Position.Y, _ReleasedTexture.Width, _ReleasedTexture.Height);
 			}
 		}
 
@@ -39,8 +41,9 @@ namespace Säosim {
 		#endregion
 
 		#region Methods
-		public Button(Texture2D texture, SpriteFont font) {
-			_texture = texture;
+		public Button(Texture2D releasedTexture, Texture2D pressedTexture, SpriteFont font) {
+			_ReleasedTexture = releasedTexture;
+			_PressedTexture = pressedTexture;
 
 			_font = font;
 
@@ -49,11 +52,15 @@ namespace Säosim {
 
 		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch) {
 			var colour = Color.White;
+			var texture = _ReleasedTexture;
 
 			if (_isHovering)
-				colour = Color.Gray;
+				colour = Color.LightGray;
 
-			spriteBatch.Draw(_texture, Rectangle, colour);
+			if (_isLocked)
+				texture = _PressedTexture;
+
+			spriteBatch.Draw(texture, Rectangle, colour);
 
 			if (!string.IsNullOrEmpty(Text)) {
 				var x = (Rectangle.X + (Rectangle.Width / 2)) - (_font.MeasureString(Text).X / 2);
