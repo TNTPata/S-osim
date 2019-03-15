@@ -4,15 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Controls/buttonPressed.png</File>
-    <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Controls/buttonReleased.png</File>
+    <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Controls/buttonPressed48px.png</File>
     <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Controls/buttonReleased48px.png</File>
     <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Fonts/font.spritefont</File>
     <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Textures/lampLit.png</File>
     <File>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Textures/lampUnlit.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
