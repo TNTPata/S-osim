@@ -11,28 +11,31 @@ namespace Säosim {
 		//Takes in a name to display for debugging/user experience purposes
 		public Switch(string displayName) {
 			this.displayName = displayName;
+			IsStraightTrack = true;
+			IsCurvedTrack = false;
+			IsLocked = false;
 		}
 
 		#region Fields(or whatever they're called)
 		public string displayName;
-		private bool isMoving = false;
-		private bool isOccupied = false;
+		private bool _isMoving = false;
+		private bool _isOccupied = false;
 		#endregion
 
 		#region Properties
-		public bool isStraightTrack { get; private set; }
-		public bool isCurvedTrack { get; private set; }
-		public bool isLocked { get; private set; }
+		public bool IsStraightTrack { get; private set; }
+		public bool IsCurvedTrack { get; private set; }
+		public bool IsLocked { get; private set; }
 		#endregion
 
 		#region Methods
 		public bool StraightSwitch() {
-			if ((isLocked || isOccupied) == false) {
-				isMoving = true;
-				isCurvedTrack = false;
+			if ((IsLocked || _isOccupied) == false) {
+				_isMoving = true;
+				IsCurvedTrack = false;
 				Thread.Sleep(1000);
-				isStraightTrack = true;
-				isMoving = false;
+				IsStraightTrack = true;
+				_isMoving = false;
 				Debug.WriteLine(displayName + " i (+)");
 				return true;
 			}
@@ -40,12 +43,12 @@ namespace Säosim {
 		}
 
 		public bool CurveSwitch() {
-			if ((isLocked || isOccupied) == false) {
-				isMoving = true;
-				isStraightTrack = false;
+			if ((IsLocked || _isOccupied) == false) {
+				_isMoving = true;
+				IsStraightTrack = false;
 				Thread.Sleep(1000);
-				isCurvedTrack = true;
-				isMoving = false;
+				IsCurvedTrack = true;
+				_isMoving = false;
 				Debug.WriteLine(displayName + " i (-)");
 				return true;
 			}
@@ -53,8 +56,8 @@ namespace Säosim {
 		}
 
 		public bool LockSwitch() {
-			if ((isLocked == false) && (isMoving == false)) {
-				isLocked = true;
+			if ((IsLocked == false) && (_isMoving == false)) {
+				IsLocked = true;
 				Debug.WriteLine(displayName + "låst");
 				return true;
 			}
@@ -62,9 +65,9 @@ namespace Säosim {
 		}
 
 		public void UnlockSwitch() {
-			if (isOccupied == false) {
+			if (_isOccupied == false) {
 				Debug.WriteLine(displayName + "upplåst");
-				isLocked = false;
+				IsLocked = false;
 			}
 		}
 		#endregion

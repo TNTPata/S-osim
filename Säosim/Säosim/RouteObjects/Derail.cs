@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,48 +12,60 @@ namespace Säosim {
 		//Takes in a name to display for debugging/user experience purposes
 		public Derail(string displayName) {
 			this.displayName = displayName;
+			IsRaised = true;
+			IsLowered = false;
+			IsLocked = false;
 		}
 
+		#region Fields
 		public string displayName;
-		public bool isLowered = true;
-		public bool isRaised = false;
 		private bool isMoving = false;
-		public bool isLocked = false;
+		#endregion
 
+		#region Properties
+		public bool IsLowered { get; private set; }
+		public bool IsRaised { get; private set; }
+		public bool IsLocked { get; private set; }
+		#endregion
+
+		#region Methods
 		public bool Lower() {
-			if (isLocked == false) {
+			if (IsLocked == false) {
 				isMoving = true;
-				isRaised = false;
+				IsRaised = false;
 				Thread.Sleep(2500);
-				isLowered = true;
+				IsLowered = true;
 				isMoving = false;
+				Debug.WriteLine(displayName + " i avlagt läge.");
 				return true;
 			}
 			else { return false; }
 		}
 
 		public bool Raise() {
-			if (isLocked == false) {
+			if (IsLocked == false) {
 				isMoving = true;
-				isLowered = false;
+				IsLowered = false;
 				Thread.Sleep(2500);
-				isRaised = true;
+				IsRaised = true;
 				isMoving = false;
+				Debug.WriteLine(displayName + " i pålagt läge.");
 				return true;
 			}
 			else { return false; }
 		}
 
 		public bool LockDerail() {
-			if ((isLocked == false) && (isMoving == false)) {
-				isLocked = true;
+			if ((IsLocked == false) && (isMoving == false)) {
+				IsLocked = true;
 				return true;
 			}
 			else { return false; }
 		}
 
 		public void UnlockDerail() {
-			isLocked = false;
+			IsLocked = false;
 		}
+		#endregion
 	}
 }
