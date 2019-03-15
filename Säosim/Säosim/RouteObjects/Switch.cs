@@ -13,13 +13,19 @@ namespace Säosim {
 			this.displayName = displayName;
 		}
 
+		#region Fields(or whatever they're called)
 		public string displayName;
-		public bool isStraightTrack = true;
-		public bool isCurvedTrack = false;
-		bool isMoving = false;
-		public bool isLocked = false;
-		bool isOccupied = false;
+		private bool isMoving = false;
+		private bool isOccupied = false;
+		#endregion
 
+		#region Properties
+		public bool isStraightTrack { get; private set; }
+		public bool isCurvedTrack { get; private set; }
+		public bool isLocked { get; private set; }
+		#endregion
+
+		#region Methods
 		public bool StraightSwitch() {
 			if ((isLocked || isOccupied) == false) {
 				isMoving = true;
@@ -61,5 +67,6 @@ namespace Säosim {
 				isLocked = false;
 			}
 		}
+		#endregion
 	}
 }
