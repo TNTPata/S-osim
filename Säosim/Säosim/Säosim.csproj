@@ -42,8 +42,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Button.cs" />
-    <Compile Include="Component.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\Component.cs" />
     <Compile Include="RouteObjects\Derail.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -53,6 +53,7 @@
     <Compile Include="Route.cs" />
     <Compile Include="RouteObjects\Signals.cs" />
     <Compile Include="RouteObjects\Switch.cs" />
+    <Compile Include="UI\Lamp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
