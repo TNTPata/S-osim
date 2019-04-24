@@ -33,8 +33,8 @@ namespace Säosim {
 		#region Constructors
 		public EntrySignal() { }
 
-		public EntrySignal(ExitSignal nextSignal) {
-			switch (nextSignal.signalState) {
+		public EntrySignal(ExitSignal referenceSignal) {
+			switch (referenceSignal.signalState) {
 				case 0: {
 						//Grön blink
 						break;
@@ -87,7 +87,7 @@ namespace Säosim {
 	}
 
 	public class DistSignal : Signal {
-		public DistSignal(EntrySignal nextSignal) {
+		public DistSignal(EntrySignal referenceSignal) {
 			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 		}
 
