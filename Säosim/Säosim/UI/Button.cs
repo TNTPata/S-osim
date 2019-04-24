@@ -19,7 +19,7 @@ namespace Säosim {
 		private MouseState _currentMouse;
 		private SpriteFont _font;
 		private bool _isHovering;
-		private bool _isLocked;
+		private bool _isPressed;
 		private MouseState _previousMouse;
 		private Texture2D _ReleasedTexture;
 		private Texture2D _PressedTexture;
@@ -54,10 +54,10 @@ namespace Säosim {
 			var colour = Color.White;
 			var texture = _ReleasedTexture;
 
-			if (_isHovering)
-				colour = Color.LightGray;
+			//if (_isHovering)
+			//	texture = _PressedTexture;
 
-			if (_isLocked)
+			if (_isPressed)
 				texture = _PressedTexture;
 
 			spriteBatch.Draw(texture, Rectangle, colour);
@@ -76,12 +76,13 @@ namespace Säosim {
 
 			var mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
 
-			_isHovering = false;
+			_isPressed = false;
 
 			if (mouseRectangle.Intersects(Rectangle)) {
 				_isHovering = true;
 
 				if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed) {
+					_isPressed = true;
 					Click?.Invoke(this, new EventArgs());
 				}
 			}
