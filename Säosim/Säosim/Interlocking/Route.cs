@@ -344,61 +344,19 @@ namespace Säosim {
 			}
 			foreach (Signal protectedSignal in protectedSignals) {
 				//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
-				if (protectedSignal.SetProtected()) {
-
-				}
-				else {
-					Debug.WriteLine("Signal som inte står i stopp hindrar tågvägslåsning.");
-					return false;
-				}
+				protectedSignal.SetUnprotected();
 			}
 			foreach (Switch straightSwitch in straightSwitches) {
-				if (straightSwitch.IsStraightTrack) {
-					if (straightSwitch.LockSwitch()) {
-						//This means that the switch is straight and LockSwitch has been returned successfully
-					}
-					else { Debug.WriteLine(straightSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
-				}
-				else {
-					Debug.WriteLine(straightSwitch.displayName + " ligger fel för denna tågväg.");
-					return false;
-				}
+				straightSwitch.UnlockSwitch();
 			}
 			foreach (Switch curveSwitch in curvedSwitches) {
-				if (curveSwitch.IsCurvedTrack) {
-					if (curveSwitch.LockSwitch()) {
-						//This means that the switch is curved and LockSwitch has been returned successfully
-					}
-					else { Debug.WriteLine(curveSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
-				}
-				else {
-					Debug.WriteLine(curveSwitch.displayName + " ligger fel för denna tågväg.");
-					return false;
-				}
+				curveSwitch.UnlockSwitch();
 			}
 			foreach (Derail raisedDerail in raisedDerails) {
-				if (raisedDerail.IsRaised) {
-					if (raisedDerail.LockDerail()) {
-						//This means that the derail is raised and LockDerail has been returned successfully
-					}
-					else { Debug.WriteLine(raisedDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
-				}
-				else {
-					Debug.WriteLine(raisedDerail.displayName + " ligger fel för denna tågväg.");
-					return false;
-				}
+				raisedDerail.UnlockDerail();
 			}
 			foreach (Derail loweredDerail in loweredDerails) {
-				if (loweredDerail.IsRaised) {
-					if (loweredDerail.LockDerail()) {
-						//This means that the derail is lowered and LockDerail has been returned successfully
-					}
-					else { Debug.WriteLine(loweredDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
-				}
-				else {
-					Debug.WriteLine(loweredDerail.displayName + " ligger fel för denna tågväg.");
-					return false;
-				}
+				loweredDerail.UnlockDerail();
 			}
 			//All objects have been unlocked
 			return true;
