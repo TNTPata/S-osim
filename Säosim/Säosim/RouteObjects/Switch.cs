@@ -66,8 +66,8 @@ namespace Säosim {
 
 		public void UnlockSwitch() {
 			if (_isOccupied == false) {
-				Debug.WriteLine(displayName + " upplåst");
 				IsLocked = false;
+				Debug.WriteLine(displayName + " upplåst");
 			}
 		}
 		#endregion

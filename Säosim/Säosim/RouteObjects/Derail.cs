@@ -39,7 +39,7 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " i avlagt läge.");
 				return true;
 			}
-			else { return false; }
+			else { Debug.WriteLine(displayName + " är förreglad i en tågväg"); return false; }
 		}
 
 		public bool Raise() {
@@ -52,12 +52,13 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " i pålagt läge.");
 				return true;
 			}
-			else { return false; }
+			else { Debug.WriteLine(displayName + " är förreglad i en tågväg"); return false; }
 		}
 
 		public bool LockDerail() {
 			if ((IsLocked == false) && (isMoving == false)) {
 				IsLocked = true;
+				Debug.WriteLine(displayName + " låst");
 				return true;
 			}
 			else { return false; }
@@ -65,6 +66,7 @@ namespace Säosim {
 
 		public void UnlockDerail() {
 			IsLocked = false;
+			Debug.WriteLine(displayName + " upplåst");
 		}
 		#endregion
 	}
