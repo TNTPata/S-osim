@@ -124,6 +124,10 @@ namespace Säosim {
 				Position = new Vector2(260, 60),
 				Text = "SpII (-)",
 			};
+			var a1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(10, 120),
+				Text = "a1",
+			};
 			var lampStop = new Indicator(Content.Load<Texture2D>("Textures/lampLit"), Content.Load<Texture2D>("Textures/lampUnlit")) {
 				Position = new Vector2(310, 60)
 			};
@@ -142,6 +146,7 @@ namespace Säosim {
 			switch6Curved.Click += Switch6Curved_Click;
 			derail2Raise.Click += Derail2Raise_Click;
 			derail2Lower.Click += Derail2Lower_Click;
+			a1lock.Click += a1Lock_Click;
 
 			_gameButtons = new List<Component>() {
 				//Switch buttons
@@ -159,14 +164,22 @@ namespace Säosim {
 				//Derail buttons
 				derail2Raise,
 				derail2Lower,
+
+				//Route locking
+				a1lock,
 			};
 
 			_gameIndicators = new List<Component>() {
 				lampStop,
 			};
 		}
-
 		#region ButtonEvents
+		private void a1Lock_Click(object sender, EventArgs e) {
+			if (interlocking.route_a1.LockRoute()) {
+				Debug.WriteLine("Tågväg a1 låst");
+			}
+		}
+
 		private void Derail2Lower_Click(object sender, EventArgs e) {
 			if (interlocking.derail2.IsLowered) {
 				Debug.WriteLine(interlocking.derail2.displayName + " ligger redan i avlagt läge.");
