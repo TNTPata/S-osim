@@ -39,7 +39,7 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " i (+)");
 				return true;
 			}
-			else { return false; }
+			else { Debug.WriteLine(displayName + " är förreglad i en tågväg"); return false; }
 		}
 
 		public bool CurveSwitch() {
@@ -52,13 +52,13 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " i (-)");
 				return true;
 			}
-			else { return false; }
+			else { Debug.WriteLine(displayName + " är förreglad i en tågväg"); return false; }
 		}
 
 		public bool LockSwitch() {
 			if ((IsLocked == false) && (_isMoving == false)) {
 				IsLocked = true;
-				Debug.WriteLine(displayName + "låst");
+				Debug.WriteLine(displayName + " låst");
 				return true;
 			}
 			else { return false; }
@@ -66,7 +66,7 @@ namespace Säosim {
 
 		public void UnlockSwitch() {
 			if (_isOccupied == false) {
-				Debug.WriteLine(displayName + "upplåst");
+				Debug.WriteLine(displayName + " upplåst");
 				IsLocked = false;
 			}
 		}
