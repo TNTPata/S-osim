@@ -361,5 +361,20 @@ namespace Säosim {
 			//All objects have been unlocked
 			return true;
 		}
+
+		#region Saving
+		public string SavePos() {
+			if (isLocked) {
+				return "L";
+			}
+			else {
+				return "U";
+			}
+		}
+
+		public void ReadPos(string locked) {
+			isLocked = locked == "L" ? true : false;
+		}
+		#endregion
 	}
 }

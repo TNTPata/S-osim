@@ -68,6 +68,61 @@ namespace Säosim {
 			IsLocked = false;
 			Debug.WriteLine(displayName + " upplåst");
 		}
+
+		#region Saving
+		public string SavePos() {
+			if (IsLocked) {
+				if (IsRaised) {
+					return "LR";
+				}
+				else {
+					return "LL";
+				}
+			}
+			else {
+				if (IsRaised) {
+					return "UR";
+				}
+				else {
+					return "UL";
+				}
+			}
+		}
+
+		public void ReadPos(string position) {
+			switch (position) {
+				case "LR": {
+						IsLocked = true;
+						IsRaised = true;
+						IsLowered = false;
+						break;
+					}
+				case "LL": {
+						IsLocked = true;
+						IsRaised = false;
+						IsLowered = true;
+						break;
+					}
+				case "UR": {
+						IsLocked = false;
+						IsRaised = true;
+						IsLowered = false;
+						break;
+					}
+				case "UL": {
+						IsLocked = false;
+						IsRaised = false;
+						IsLowered = true;
+						break;
+					}
+				default: {
+						Console.WriteLine("Error in ReadPos() for " + displayName);
+						break;
+					}
+			}
+		}
+		#endregion
+
 		#endregion
 	}
 }

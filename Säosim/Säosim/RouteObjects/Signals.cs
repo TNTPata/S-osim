@@ -26,6 +26,26 @@ namespace Säosim {
 		public void SetUnprotected() {
 			isProtected = false;
 		}
+
+		#region Saving
+		public string SavePos() {
+			if (isProtected) {
+				return "P";
+				}
+			else {
+				return Convert.ToString(signalState);
+			}
+		}
+
+		public void ReadPos(string savedSignalState) { 
+			if (savedSignalState == "P") {
+						isProtected = true;
+						signalState = 0;
+			} else {
+				signalState = Convert.ToInt32(savedSignalState);
+			}
+		}
+		#endregion
 	}
 
 	public class EntrySignal : Signal {

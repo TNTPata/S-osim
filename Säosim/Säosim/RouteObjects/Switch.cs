@@ -70,6 +70,58 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " upplåst");
 			}
 		}
+		#region Saving
+		public string SavePos() {
+			if (IsLocked) {
+				if (IsStraightTrack) {
+					return "LS";
+				} else {
+					return "LC";
+				}
+			} else {
+				if (IsStraightTrack) {
+					return "US";
+				}
+				else {
+					return "UC";
+				}
+			}
+		}
+
+		public void ReadPos(string position) {
+			switch (position) {
+				case "LS": {
+						IsLocked = true;
+						IsStraightTrack = true;
+						IsCurvedTrack = false;
+						break;
+					}
+				case "LC": {
+						IsLocked = true;
+						IsStraightTrack = false;
+						IsCurvedTrack = true;
+						break;
+					}
+				case "US": {
+						IsLocked = false;
+						IsStraightTrack = true;
+						IsCurvedTrack = false;
+						break;
+					}
+				case "UC": {
+						IsLocked = false;
+						IsStraightTrack = false;
+						IsCurvedTrack = true;
+						break;
+					}
+				default: {
+						Console.WriteLine("Error in ReadPos() for " + displayName);
+						break;
+					}
+			}
+		}
+		#endregion
+
 		#endregion
 	}
 }
