@@ -372,8 +372,8 @@ namespace Säosim {
 			}
 		}
 
-		public void ReadPos(string locked) {
-			isLocked = locked == "L" ? true : false;
+		public void ReadPos(string savedLockedState) {
+			isLocked = savedLockedState == "L" ? true : false;
 		}
 		#endregion
 	}
