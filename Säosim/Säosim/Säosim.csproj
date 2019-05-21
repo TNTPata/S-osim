@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="IO.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\Component.cs" />
     <Compile Include="RouteObjects\Derail.cs" />
