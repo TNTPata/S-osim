@@ -139,9 +139,10 @@ namespace Säosim {
 
 			//Init unmonitored route
 			route_o1 = new Route(A, B, D, E, switch1, switch2, switch6, C, F, derail2, V1Fsi, V1);
-			#endregion
 			Debug.WriteLine("Constructed interlocking objects.");
+			#endregion
 
+			#region Fill "saving" lists with objects
 			//Fill "saving" lists with objects
 			allSignals.Add(A);
 			allSignals.Add(B);
@@ -185,6 +186,7 @@ namespace Säosim {
 			allRoutes.Add(route_f1);
 			allRoutes.Add(route_f2);
 			allRoutes.Add(route_o1);
+			#endregion
 
 		}
 	}

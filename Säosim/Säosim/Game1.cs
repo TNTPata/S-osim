@@ -78,6 +78,7 @@ namespace Säosim {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+			#region Create buttons
 			// TODO: use this.Content to load your game content here
 			var switch1Straight = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(10, 10),
@@ -135,7 +136,7 @@ namespace Säosim {
 				Position = new Vector2(310, 60)
 			};
 
-
+			#endregion
 
 			switch1Straight.Click += Switch1Straight_Click;
 			switch1Curved.Click += Switch1Curved_Click;
