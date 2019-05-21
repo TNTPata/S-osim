@@ -27,6 +27,8 @@ namespace Säosim {
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
 
+		IO filehandler;
+
 		#region buttonCreation
 		//Create buttons for locking/unlocking routes to/from a certain signal
 		//Short routes are automaticly used if derails are raised, therefore those buttons will not be used
@@ -50,7 +52,8 @@ namespace Säosim {
 		public Game1() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-			
+
+			filehandler = new IO();
 			interlocking = new Interlocking();
 			Debug.WriteLine("Created interlocking");
 		}
