@@ -89,8 +89,8 @@ namespace Säosim {
 			}
 		}
 
-		public void ReadPos(string position) {
-			switch (position) {
+		public void ReadPos(string savedPosition) {
+			switch (savedPosition) {
 				case "LR": {
 						IsLocked = true;
 						IsRaised = true;
@@ -116,7 +116,7 @@ namespace Säosim {
 						break;
 					}
 				default: {
-						Console.WriteLine("Error in ReadPos() for " + displayName);
+						Console.WriteLine("Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
 						break;
 					}
 			}
