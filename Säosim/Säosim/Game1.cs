@@ -176,7 +176,11 @@ namespace Säosim {
 			_gameIndicators = new List<Component>() {
 				lampStop,
 			};
+
+			filehandler.ReadPositions(ref interlocking, "Positions.txt");
+
 		}
+
 		#region ButtonEvents
 		private void a1Lock_Click(object sender, EventArgs e) {
 			if (interlocking.route_a1.LockRoute()) {
@@ -298,6 +302,9 @@ namespace Säosim {
 		/// game-specific content.
 		/// </summary>
 		protected override void UnloadContent() {
+
+			filehandler.SavePositions(ref interlocking, "Positions.txt");
+
 			// TODO: Unload any non ContentManager content here
 			Content.Dispose();
 			Content.Unload();
