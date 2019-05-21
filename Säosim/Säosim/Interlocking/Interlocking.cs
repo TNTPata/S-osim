@@ -69,6 +69,14 @@ namespace Säosim {
 		public Route route_o1;
 		#endregion
 
+
+		//Lists containing all objects of their type, for saving purposes
+		public List<Switch> allSwitches = new List<Switch>();
+		public List<Derail> allDerails = new List<Derail>();
+		public List<Signal> allSignals = new List<Signal>();
+		public List<Route> allRoutes = new List<Route>();
+
+
 		//Constructor
 		public Interlocking() {
 			#region objectInit
@@ -133,6 +141,51 @@ namespace Säosim {
 			route_o1 = new Route(A, B, D, E, switch1, switch2, switch6, C, F, derail2, V1Fsi, V1);
 			#endregion
 			Debug.WriteLine("Constructed interlocking objects.");
+
+			//Fill "saving" lists with objects
+			allSignals.Add(A);
+			allSignals.Add(B);
+			allSignals.Add(C);
+			allSignals.Add(D);
+			allSignals.Add(E);
+			allSignals.Add(F);
+			allSignals.Add(AFsi);
+			allSignals.Add(V1);
+			allSignals.Add(V1Fsi);
+
+			allSwitches.Add(switch1);
+			allSwitches.Add(switch2);
+			allSwitches.Add(switch3);
+			allSwitches.Add(switch4);
+			allSwitches.Add(switch5);
+			allSwitches.Add(switch6);
+
+			allDerails.Add(derail1);
+			allDerails.Add(derail2);
+
+			allRoutes.Add(route_a1);
+			allRoutes.Add(route_a2);
+			allRoutes.Add(route_a3);
+			allRoutes.Add(route_b1);
+			allRoutes.Add(route_b2);
+			allRoutes.Add(route_b2);
+			allRoutes.Add(route_b3);
+			allRoutes.Add(route_c1);
+			allRoutes.Add(route_c2);
+			allRoutes.Add(route_a2k);
+			allRoutes.Add(route_a3k);
+			allRoutes.Add(route_c1k);
+			allRoutes.Add(route_c1k);
+			allRoutes.Add(route_d1);
+			allRoutes.Add(route_d2);
+			allRoutes.Add(route_d3);
+			allRoutes.Add(route_e1);
+			allRoutes.Add(route_e2);
+			allRoutes.Add(route_e3);
+			allRoutes.Add(route_f1);
+			allRoutes.Add(route_f2);
+			allRoutes.Add(route_o1);
+
 		}
 	}
 }
