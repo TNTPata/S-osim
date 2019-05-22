@@ -241,7 +241,7 @@ namespace Säosim {
 		}
 		#endregion
 
-		bool isLocked = false;
+		public bool isLocked = false;
 		private List<Signal> includedSignals = new List<Signal>(); //Fill with the signals a train will pass in a specific route
 		private List<Signal> protectedSignals = new List<Signal>(); //Fill with the signals that need to be protected/monitored in a specific route, but will not be passed by a train
 		private List<Switch> straightSwitches = new List<Switch>(); //Fill with the switches that need to be locked straight for a route
@@ -281,7 +281,7 @@ namespace Säosim {
 					if (straightSwitch.LockSwitch()) {
 						//This means that the switch is straight and LockSwitch has been returned successfully
 					}
-					else { Debug.WriteLine(straightSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
+					else { Debug.WriteLine(straightSwitch.displayName + " ligger i (+) men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(straightSwitch.displayName + " ligger fel för denna tågväg.");
@@ -293,7 +293,7 @@ namespace Säosim {
 					if (curveSwitch.LockSwitch()) {
 						//This means that the switch is curved and LockSwitch has been returned successfully
 					}
-					else { Debug.WriteLine(curveSwitch.displayName + " ligger rätt men går inte att låsa."); return false; }
+					else { Debug.WriteLine(curveSwitch.displayName + " ligger i (-) men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(curveSwitch.displayName + " ligger fel för denna tågväg.");
@@ -305,7 +305,7 @@ namespace Säosim {
 					if (raisedDerail.LockDerail()) {
 						//This means that the derail is raised and LockDerail has been returned successfully
 					}
-					else { Debug.WriteLine(raisedDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
+					else { Debug.WriteLine(raisedDerail.displayName + " ligger i (+) men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(raisedDerail.displayName + " ligger fel för denna tågväg.");
@@ -317,7 +317,7 @@ namespace Säosim {
 					if (loweredDerail.LockDerail()) {
 						//This means that the derail is lowered and LockDerail has been returned successfully
 					}
-					else { Debug.WriteLine(loweredDerail.displayName + " ligger rätt men går inte att låsa."); return false; }
+					else { Debug.WriteLine(loweredDerail.displayName + " ligger i (-) men går inte att låsa."); return false; }
 				}
 				else {
 					Debug.WriteLine(loweredDerail.displayName + " ligger fel för denna tågväg.");
