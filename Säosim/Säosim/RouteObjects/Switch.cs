@@ -39,7 +39,7 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " i (+)");
 				return true;
 			}
-			else { Debug.WriteLine(displayName + " är förreglad i en tågväg"); return false; }
+			else { Debug.WriteLine(displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
 		}
 
 		public bool CurveSwitch() {
@@ -52,7 +52,7 @@ namespace Säosim {
 				Debug.WriteLine(displayName + " i (-)");
 				return true;
 			}
-			else { Debug.WriteLine(displayName + " är förreglad i en tågväg"); return false; }
+			else { Debug.WriteLine(displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
 		}
 
 		public bool LockSwitch() {
