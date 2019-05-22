@@ -46,7 +46,7 @@
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\Component.cs" />
     <Compile Include="RouteObjects\Derail.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Säosim.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Interlocking\Interlocking.cs" />
     <Compile Include="Program.cs" />
