@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 namespace Säosim {
 	public class IO {
@@ -43,18 +44,26 @@ namespace Säosim {
 
 		public void ReadPositions(ref Interlocking interlocking, string destinationFile) {
 
-			StreamReader sr = new StreamReader(destinationFile);
+
+			StreamReader sr = default(StreamReader);
+
+			try {
+				sr = new StreamReader(destinationFile);
+			}
+			catch (Exception e) {
+				if (e is FileNotFoundException) {
+					Console.WriteLine(e.Message);
+					return;
+				}
+			}
 
 			//Variables
 			string row;
 			string currentSection = "";
-			int objectCount = 1;
+			int objectCount = 0; //Lists start at 0...
 
 			#region Read loop
 			while ((row = sr.ReadLine()) != null) {
-
-				//An empty row doesn't need any processing
-				if (row == "") { continue; }
 
 				//Ex: If row == "Switch" (which is more than 2 chars), the current section is Switches. 
 				//If row contains less than 2 chars = no new section has begun, and thus the old value can be reused
@@ -69,8 +78,8 @@ namespace Säosim {
 				//Count every time an object reads it's value. When all objects have read their value once: reset and *hopefully* move on to the next secttion
 				switch (currentSection) {
 					case "Switches": {
-							if (objectCount > interlocking.allSwitches.Count) {
-								objectCount = 1;
+							if (objectCount >= interlocking.allSwitches.Count) {
+								objectCount = 0;
 								break;
 							}
 							else {
@@ -80,8 +89,8 @@ namespace Säosim {
 							}
 						}
 					case "Derails": {
-							if (objectCount > interlocking.allDerails.Count) {
-								objectCount = 1;
+							if (objectCount >= interlocking.allDerails.Count) {
+								objectCount = 0;
 								break;
 							}
 							else {
@@ -91,8 +100,8 @@ namespace Säosim {
 							}
 						}
 					case "Routes": {
-							if (objectCount > interlocking.allRoutes.Count) {
-								objectCount = 1;
+							if (objectCount >= interlocking.allRoutes.Count) {
+								objectCount = 0;
 								break;
 							}
 							else {
@@ -102,8 +111,8 @@ namespace Säosim {
 							}
 						}
 					case "Signals": {
-							if (objectCount > interlocking.allSignals.Count) {
-								objectCount = 1;
+							if (objectCount >= interlocking.allSignals.Count) {
+								objectCount = 0;
 								break;
 							}
 							else {
