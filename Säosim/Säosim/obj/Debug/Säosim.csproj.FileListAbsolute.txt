@@ -18,7 +18,7 @@ C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.csproj.
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.exe
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\obj\Debug\Säosim.pdb
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Fonts\font.xnb
-C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Textures\lampLit.xnb
-C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Textures\lampUnlit.xnb
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Controls\buttonReleased48px.xnb
 C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Controls\buttonPressed48px.xnb
+C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Textures\lampLit48px.xnb
+C:\Users\BOU_Elev\source\repos\Säosim\Säosim\Säosim\bin\DesktopGL\AnyCPU\Debug\Content\Textures\lampUnlit48px.xnb

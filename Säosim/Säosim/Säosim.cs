@@ -128,7 +128,7 @@ namespace Säosim {
 			};
 			#endregion
 			#region Create indicators
-			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit"), Content.Load<Texture2D>("Textures/lampUnlit"), interlocking.switch1) {
+			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch1) {
 				Position = new Vector2(310, 60)
 			};
 
