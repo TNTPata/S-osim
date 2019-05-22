@@ -87,6 +87,16 @@ namespace Säosim {
 				}
 			}
 		}
+
+		#region Unused Update-methods
+		public override void Update(GameTime gametime, object referenceObject) {
+			
+		}
+		public override object GetReferenceObject() {
+			//Will probably break something, but should never be called
+			throw new NotImplementedException();
+		}
+		#endregion
 		#endregion
 	}
 }

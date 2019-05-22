@@ -12,5 +12,9 @@ namespace Säosim {
 		public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
 		public abstract void Update(GameTime gametime);
+
+		public abstract void Update(GameTime gametime, object referenceObject);
+
+		public abstract object GetReferenceObject();
 	}
 }

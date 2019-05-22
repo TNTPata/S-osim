@@ -5,7 +5,7 @@ using MonoGame.OpenGL;
 using MonoGame.Utilities;
 using MonoGame.Utilities.Png;
 using System;
-using System.IO;
+using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Collections.Generic;
 using Säosim.UI;
@@ -21,8 +21,8 @@ namespace Säosim {
 
 		private Color _backgroundColour = Color.CornflowerBlue;
 
-		private List<Component> _gameButtons;
-		private List<Component> _gameIndicators;
+		private List<Component> gameButtons;
+		private List<Component> gameIndicators;
 
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
@@ -132,7 +132,9 @@ namespace Säosim {
 				Position = new Vector2(10, 120),
 				Text = "a1",
 			};
-			var lampStop = new Indicator(Content.Load<Texture2D>("Textures/lampLit"), Content.Load<Texture2D>("Textures/lampUnlit")) {
+			#endregion
+			#region Create indicators
+			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit"), Content.Load<Texture2D>("Textures/lampUnlit"), interlocking.switch1) {
 				Position = new Vector2(310, 60)
 			};
 
@@ -152,7 +154,7 @@ namespace Säosim {
 			derail2Lower.Click += Derail2Lower_Click;
 			a1lock.Click += a1Lock_Click;
 
-			_gameButtons = new List<Component>() {
+			gameButtons = new List<Component>() {
 				//Switch buttons
 				switch1Straight,
 				switch1Curved,
@@ -173,12 +175,11 @@ namespace Säosim {
 				a1lock,
 			};
 
-			_gameIndicators = new List<Component>() {
-				lampStop,
+			gameIndicators = new List<Component>() {
+				switch1Indicator,
 			};
 
 			filehandler.ReadPositions(ref interlocking, "Positions.txt");
-
 		}
 
 		#region ButtonEvents
@@ -319,12 +320,14 @@ namespace Säosim {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-			foreach (var button in _gameButtons) {
+			foreach (var button in gameButtons) {
 				button.Update(gameTime);
 			}
 
-			foreach (var indicator in _gameIndicators) {
-				indicator.Update(gameTime);
+			foreach (var indicator in gameIndicators) {
+				//Get the signal, switch, derail, route, whatever that determines the state of the indicator. 
+				object refObject = indicator.GetReferenceObject();
+				indicator.Update(gameTime, refObject);
 			}
 
 			// TODO: Add your update logic here
@@ -341,11 +344,11 @@ namespace Säosim {
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
-			foreach (var button in _gameButtons) {
+			foreach (var button in gameButtons) {
 				button.Draw(gameTime, spriteBatch);
 			}
 
-			foreach (var indicator in _gameIndicators) {
+			foreach (var indicator in gameIndicators) {
 				indicator.Draw(gameTime, spriteBatch);
 			}
 
