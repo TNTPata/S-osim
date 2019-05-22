@@ -14,9 +14,10 @@ namespace Säosim {
 	/// <summary>
 	/// This is the main type for your game.
 	/// </summary>
-	public class Game1 : Game {
+	public class Säosim : Game {
 
 		GraphicsDeviceManager graphics;
+
         SpriteBatch spriteBatch;
 
 		private Color _backgroundColour = Color.CornflowerBlue;
@@ -24,47 +25,40 @@ namespace Säosim {
 		private List<Component> gameButtons;
 		private List<Component> gameIndicators;
 
+		IO filehandler;
+
 		//Create interlocking object (The interlocking plant for all intents and purposes)
 		Interlocking interlocking;
 
-		IO filehandler;
 
-		#region buttonCreation
-		//Create buttons for locking/unlocking routes to/from a certain signal
-		//Short routes are automaticly used if derails are raised, therefore those buttons will not be used
-		//Knapparna nedan är tågvägslås som ställer respektive signal i kör 
-		Button routeLock_a1_2_3;
-		Button routeLock_b1_2_3;
-		Button routeLock_c1_2;
-		Button routeLock_d1_2_3;
-		Button routeLock_e1_2_3;
-		Button routeLock_f1_2;
-		Button routeLock_o1;
+		public Säosim() {
+			/*---------FRONT END CONSTRUCTION---------*/
+			Window.Title = "Säosim"; //Doesn't work for some bastard reason
+			Window.AllowUserResizing = true;
 
-		//Create buttons for manuevering road protection
-		Button V1Raise;
-		Button V1Lower;
+			graphics = new GraphicsDeviceManager(this);
 
-		//Emergency Stop all signals
-		Button emergencyStop;
-		#endregion
+			//graphics.IsFullScreen = true;
+			graphics.ApplyChanges();
 
-		public Game1() {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+			/*-----END OF FRONT END CONSTRUCTION-----*/
+
+			/*---------BACK END CONSTRUCTION---------*/
+			Content.RootDirectory = "Content";
 
 			filehandler = new IO();
 			interlocking = new Interlocking();
 			Debug.WriteLine("Created interlocking");
+			/*------END OF BACK END CONSTRUCTION------*/
 		}
-		
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize() {
+
+		/// <summary>
+		/// Allows the game to perform any initialization it needs to before starting to run.
+		/// This is where it can query for any required services and load any non-graphic
+		/// related content.  Calling base.Initialize will enumerate through any components
+		/// and initialize them as well.
+		/// </summary>
+		protected override void Initialize() {
 			IsMouseVisible = true;
 			// TODO: Add your initialization logic here
             base.Initialize();
