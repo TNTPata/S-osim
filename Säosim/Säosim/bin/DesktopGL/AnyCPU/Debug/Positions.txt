@@ -1,5 +1,5 @@
 Switches
-LS
+US
 US
 US
 US
@@ -36,9 +36,9 @@ U
 
 Signals
 0
-P
 0
-P
+0
+0
 0
 0
 0
