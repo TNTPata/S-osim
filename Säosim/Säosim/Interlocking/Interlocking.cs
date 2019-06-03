@@ -92,53 +92,53 @@ namespace Säosim {
 			derail2 = new Derail("Spårspärr II");
 
 			//Init 3 exit signals
-			D = new ExitSignal();
-			E = new ExitSignal();
-			F = new ExitSignal();
+			D = new ExitSignal("D");
+			E = new ExitSignal("E");
+			F = new ExitSignal("F");
 
 			//Init 3 entry signals
-			A = new EntrySignal(E);
-			B = new EntrySignal(D);
-			C = new EntrySignal();
+			A = new EntrySignal(E, "A");
+			B = new EntrySignal(D, "B");
+			C = new EntrySignal("C");
 
 			//Init distant signal
-			AFsi = new DistSignal(A);
+			AFsi = new DistSignal(A, "AFsi");
 
 			//Init road signal
-			V1 = new RoadSignal();
+			V1 = new RoadSignal("V1");
 
 			//Init road distant signal(s. There are actually two, but since they display the same aspect at all times, it is counted as one for simplicity)
-			V1Fsi = new DistroadSignal(V1);
+			V1Fsi = new DistroadSignal(V1, "V1Fsi");
 			#endregion
 			#region routeInit
 			//Init arrival routes
-			route_a1 = new Route(AFsi, A, switch1, switch6, D, B);
-			route_a2 = new Route(2, AFsi, A, switch1, switch6, switch5, switch4, D, B, C, F, derail2);
-			route_a3 = new Route(3, AFsi, A, switch1, switch6, switch5, switch4, D, B, C, F, derail2);
-			route_b1 = new Route(B, switch2, E, derail2, V1Fsi, V1);
-			route_b2 = new Route(2, B, switch2, switch4, switch5, E, C, F, derail2, V1Fsi, V1);
-			route_b3 = new Route(3, B, switch2, switch4, switch5, E, C, F, derail2, V1Fsi, V1);
-			route_c1 = new Route(1, C, switch6, switch5, switch1, switch4, B, F, derail2);
-			route_c2 = new Route(2, C, switch6, switch5, switch1, switch4, B, F, derail2);
+			route_a1 = new Route(AFsi, A, switch1, switch6, D, B, "a1");
+			route_a2 = new Route(2, AFsi, A, switch1, switch6, switch5, switch4, D, B, C, F, derail2, "a2");
+			route_a3 = new Route(3, AFsi, A, switch1, switch6, switch5, switch4, D, B, C, F, derail2, "a3");
+			route_b1 = new Route(B, switch2, E, derail2, V1Fsi, V1, "b1");
+			route_b2 = new Route(2, B, switch2, switch4, switch5, E, C, F, derail2, V1Fsi, V1, "b2");
+			route_b3 = new Route(3, B, switch2, switch4, switch5, E, C, F, derail2, V1Fsi, V1, "b3");
+			route_c1 = new Route(1, C, switch6, switch5, switch1, switch4, B, F, derail2, "c1");
+			route_c2 = new Route(2, C, switch6, switch5, switch1, switch4, B, F, derail2, "c2");
 
 			//Init short arrival routes
-			route_a2k = new Route(2, AFsi, A, switch1, switch6, switch5, D, C, F, derail2);
-			route_a3k = new Route(3, AFsi, A, switch1, switch6, switch5, D, C, F, derail2);
-			route_c1k = new Route(1, C, switch6, switch5, switch6, F, derail2);
-			route_c2k = new Route(2, C, switch6, switch5, switch6, F, derail2);
+			route_a2k = new Route(2, AFsi, A, switch1, switch6, switch5, D, C, F, derail2, "a2k");
+			route_a3k = new Route(3, AFsi, A, switch1, switch6, switch5, D, C, F, derail2, "a3k");
+			route_c1k = new Route(1, C, switch6, switch5, switch6, F, derail2, "c1k");
+			route_c2k = new Route(2, C, switch6, switch5, switch6, F, derail2, "c2k");
 
 			//Init departure routes
-			route_d1 = new Route(D, switch1, switch6, A);
-			route_d2 = new Route(2, D, switch5, switch6, switch1, A, C, F);
-			route_d3 = new Route(3, D, switch5, switch6, switch1, A, C, F);
-			route_e1 = new Route(E, switch2, B, derail2, V1Fsi, V1);
-			route_e2 = new Route(2, E, switch4, switch2, B, derail2, V1Fsi, V1);
-			route_e3 = new Route(3, E, switch4, switch2, B, derail2, V1Fsi, V1);
-			route_f1 = new Route(1, F, switch5, switch6, switch1, C);
-			route_f2 = new Route(2, F, switch5, switch6, switch1, C);
+			route_d1 = new Route(D, switch1, switch6, A, "d1");
+			route_d2 = new Route(2, D, switch5, switch6, switch1, A, C, F, "d2");
+			route_d3 = new Route(3, D, switch5, switch6, switch1, A, C, F, "d3");
+			route_e1 = new Route(E, switch2, B, derail2, V1Fsi, V1, "e1");
+			route_e2 = new Route(2, E, switch4, switch2, B, derail2, V1Fsi, V1, "e2");
+			route_e3 = new Route(3, E, switch4, switch2, B, derail2, V1Fsi, V1, "e3");
+			route_f1 = new Route(1, F, switch5, switch6, switch1, C, "f1");
+			route_f2 = new Route(2, F, switch5, switch6, switch1, C, "f2");
 
 			//Init unmonitored route
-			route_o1 = new Route(A, B, D, E, switch1, switch2, switch6, C, F, derail2, V1Fsi, V1);
+			route_o1 = new Route(A, B, D, E, switch1, switch2, switch6, C, F, derail2, V1Fsi, V1, "o1");
 			Debug.WriteLine("Constructed interlocking objects.");
 			#endregion
 

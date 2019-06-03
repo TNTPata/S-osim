@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Säosim {
 	public abstract class Signal {
 
+		public string displayName;
 		public bool isProtected = false;
 		public int signalState = 0;
 		//0 = Stop, 1 = Clear, 2 = Caution, 3 = Caution - Short route.
@@ -52,8 +53,12 @@ namespace Säosim {
 
 		#region Constructors
 		public EntrySignal() { }
+		public EntrySignal(string displayName) {
+			this.displayName = displayName;
+		}
 
-		public EntrySignal(ExitSignal referenceSignal) {
+		public EntrySignal(ExitSignal referenceSignal, string displayName) {
+			this.displayName = displayName;
 			switch (referenceSignal.signalState) {
 				case 0: {
 						//Grön blink
@@ -99,6 +104,11 @@ namespace Säosim {
 	}
 
 	public class ExitSignal : Signal {
+
+		public ExitSignal(string displayName) {
+			this.displayName = displayName;
+		}
+
 		public void SetClear() {
 			if (isProtected == false) {
 				signalState = 1;
@@ -107,13 +117,18 @@ namespace Säosim {
 	}
 
 	public class DistSignal : Signal {
-		public DistSignal(EntrySignal referenceSignal) {
+		public DistSignal(EntrySignal referenceSignal, string displayName) {
+			this.displayName = displayName;
 			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 		}
 
 	}
 
 	public class RoadSignal : Signal {
+
+		public RoadSignal(string displayName) {
+			this.displayName = displayName;
+		}
 		public void SetClear() {
 			if (/*CrossingIsClear == true*/true) {
 				signalState = 1;
@@ -122,8 +137,8 @@ namespace Säosim {
 	}
 
 	public class DistroadSignal : Signal {
-		public DistroadSignal(RoadSignal referenceSignal) {
-
+		public DistroadSignal(RoadSignal referenceSignal, string displayName) {
+			this.displayName = displayName;
 		}
 		//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 	}

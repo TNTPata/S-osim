@@ -178,8 +178,15 @@ namespace Säosim {
 
 		#region ButtonEvents
 		private void a1Lock_Click(object sender, EventArgs e) {
-			if (interlocking.route_a1.LockRoute()) {
-				Debug.WriteLine("Tågväg a1 låst");
+			//Try to transfer this functionality into interlocking.cs/route.cs
+			if (interlocking.route_a1.isLocked) {
+				if (interlocking.route_a1.UnlockRoute()) {
+					Debug.WriteLine("Tågväg " + interlocking.route_a1.displayName + " upplåst.");
+				}
+			} else {
+				if (interlocking.route_a1.LockRoute()) {
+					Debug.WriteLine("Tågväg " + interlocking.route_a1.displayName + " låst.");
+				}
 			}
 		}
 
