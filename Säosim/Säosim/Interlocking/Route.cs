@@ -271,17 +271,16 @@ namespace Säosim {
 				Debug.WriteLine("[SIM/WARN] Tågväg " + displayName + " är redan låst.");
 				return false;
 			}
-			///First two loops check if all relevant signals and signalstates are correct
-			///Second two loops check if all relevant switches are in correct position
-			///Last two loops checks if all relevant derails are in correct position
-			///
+
+			//TODO: Write comments on locking of signals
+			#region Lock signals
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
 
 				}
 				else {
-					Debug.WriteLine("[SIM/WARN] Signal + " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
+					Debug.WriteLine("[SIM/WARN] Signal " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
 					return false;
 				}
 			}
@@ -291,63 +290,162 @@ namespace Säosim {
 
 				}
 				else {
-					Debug.WriteLine("[SIM/WARN] Signal som inte står i stopp hindrar tågvägslåsning.");
+					Debug.WriteLine("[SIM/WARN] Signal " + protectedSignal.displayName + " som inte står i stopp hindrar tågvägslåsning.");
+					UnlockRoute();
 					return false;
 				}
 			}
+			#endregion
+
+			///Locking of all objects (except signals) is done in two loops.
+			///The first loop makes sure that everything is positioned correctly and that everything is unlocked.
+			///The second loop actually completes the locking.
+			///If the slightest thing doesn't meet a criteria, the process is aborted and things that are locked are unlocked. 
+
+			#region Lock straightSwitches
+			//Check if all switches are in correct position
 			foreach (Switch straightSwitch in straightSwitches) {
 				if (straightSwitch.IsStraightTrack) {
-					if (straightSwitch.LockSwitch()) { //This should only return true if all switches have been unlocked
-						//This means that the switch is straight and LockSwitch has been returned successfully
-						
+                    //Switch is in correct position, the process can continue
+                    if (!straightSwitch.IsLocked)
+                    {
+                        //Switch is unlocked, the process can continue
+                    }
+					else {
+						Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger i (+) men är redan låst.");
+						return false;
 					}
-					else { Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger i (+) men går inte att låsa."); return false; }
-				}
+                }
 				else {
 					Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
+			//Lock switches to positions checked above
+            foreach (Switch straightSwitch in straightSwitches)
+            {
+                if (straightSwitch.LockSwitch())
+                {
+
+                }
+				else {
+					Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
+					return false;
+				}
+            }
+			#endregion
+
+			#region Lock curveSwitches
+			//Check if all switches are in correct position
 			foreach (Switch curveSwitch in curvedSwitches) {
 				if (curveSwitch.IsCurvedTrack) {
-					if (curveSwitch.LockSwitch()) {
-						//This means that the switch is curved and LockSwitch has been returned successfully
+					//Switch is in correct position, the process can continue
+					if (!curveSwitch.IsLocked)
+					{
+						//Switch is unlocked, the process can continue
 					}
-					else { Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger i (-) men går inte att låsa."); return false; }
+					else {
+						Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger i (-) men är redan låst.");
+						return false;
+					}
 				}
 				else {
 					Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
+			//Lock switches to positions checked above
+			foreach (Switch curveSwitch in curvedSwitches)
+			{
+				if (curveSwitch.LockSwitch())
+				{
+
+				}
+				else
+				{
+					Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
+					return false;
+				}
+			}
+			#endregion
+
+			#region Lock raisedDerails
 			foreach (Derail raisedDerail in raisedDerails) {
 				if (raisedDerail.IsRaised) {
-					if (raisedDerail.LockDerail()) {
-						//This means that the derail is raised and LockDerail has been returned successfully
+					//Derail is in correct position, the process can continue
+					if (!raisedDerail.IsLocked)
+					{
+						//Derail is unlocked, the process can continue
 					}
-					else { Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger i (+) men går inte att låsa."); return false; }
+					else {
+						Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger i (+) men är redan låst.");
+						return false;
+					}
 				}
 				else {
 					Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
-			foreach (Derail loweredDerail in loweredDerails) {
-				if (loweredDerail.IsRaised) {
-					if (loweredDerail.LockDerail()) {
-						//This means that the derail is lowered and LockDerail has been returned successfully
-					}
-					else { Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger i (-) men går inte att låsa."); return false; }
+			foreach (Derail raisedDerail in raisedDerails)
+			{
+				if (raisedDerail.LockDerail())
+				{
+
 				}
-				else {
+				else
+				{
+					Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
+					return false;
+				}
+			}
+			#endregion
+
+			#region Lock loweredDerails
+			foreach (Derail loweredDerail in loweredDerails)
+			{
+				if (loweredDerail.IsRaised)
+				{
+					//Derail is in correct position, the process can continue
+					if (!loweredDerail.IsLocked)
+					{
+						//Derail is unlocked, the process can continue
+					}
+					else
+					{
+						Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger i (-) men är redan låst.");
+						return false;
+					}
+				}
+				else
+				{
 					Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
+			foreach (Derail loweredDerail in loweredDerails)
+			{
+				if (loweredDerail.LockDerail())
+				{
+
+				}
+				else
+				{
+					Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
+					return false;
+				}
+			}
+			#endregion
+
 			//All objects are locked in their correct positions
 			isLocked = true;
 			return true;
 		}
+
 		//Call to unlock route
 		public bool UnlockRoute() {
 			///Function similar to LockRoute(), but the only action taken is to unlock the relevant objects
@@ -355,10 +453,10 @@ namespace Säosim {
 			foreach (Signal includedSignal in includedSignals) {
 				//A signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.isProtected == false) && (includedSignal.signalState == 0)) {
-
+					
 				}
 				else {
-					Debug.WriteLine("[SIM/WARN] Signalen " + includedSignal.displayName + " är förreglad i stopp eller står i kör, och hindrar tågvägslåsning");
+					Debug.WriteLine("[SIM/WARN] Signalen " + includedSignal.displayName + " är förreglad i stopp eller står i kör, och hindrar upplåsning av tågvägen.");
 					return false;
 				}
 			}
