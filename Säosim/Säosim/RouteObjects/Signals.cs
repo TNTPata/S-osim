@@ -18,10 +18,12 @@ namespace Säosim {
 		}
 
 		public bool SetProtected() {
-			if (signalState == 0) {
+			if (signalState == 0)
+			{
 				isProtected = true;
 				return true;
-			} else { return false; }
+			}
+			return false;
 		}
 
 		public void SetUnprotected() {
@@ -30,12 +32,11 @@ namespace Säosim {
 
 		#region Saving
 		public string SavePos() {
-			if (isProtected) {
+			if (isProtected)
+			{
 				return "P";
-				}
-			else {
-				return Convert.ToString(signalState);
 			}
+			return Convert.ToString(signalState);
 		}
 
 		public void ReadPos(string savedSignalState) { 
