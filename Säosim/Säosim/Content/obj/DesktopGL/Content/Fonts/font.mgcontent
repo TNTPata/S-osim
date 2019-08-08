@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/Fonts/font.spritefont</SourceFile>
-  <SourceTime>2019-03-11T20:56:44.2430899+01:00</SourceTime>
-  <DestFile>C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/Content/bin/DesktopGL/Content/Fonts/font.xnb</DestFile>
-  <DestTime>2019-03-11T21:36:26.1809693+01:00</DestTime>
+  <SourceFile>/Users/pao/src/S-osim/Säosim/Säosim/Content/Fonts/font.spritefont</SourceFile>
+  <SourceTime>2019-08-06T18:26:49.9191255+02:00</SourceTime>
+  <DestFile>/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Fonts/font.xnb</DestFile>
+  <DestTime>2019-08-08T16:08:53.0633512+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
-  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
+  <ImporterTime>2018-12-08T17:35:14+01:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>
-  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
+  <ProcessorTime>2018-12-08T17:35:14+01:00</ProcessorTime>
   <Parameters>
     <Key>PremultiplyAlpha</Key>
     <Value>True</Value>

@@ -1,1 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"/Users/pao/src/S-osim/Säosim/Säosim/Content/Controls/buttonPressed48px.png","/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Controls/buttonPressed48px.xnb","TextureProcessor","Texture2DContent",14342,8917,0.204986
+"/Users/pao/src/S-osim/Säosim/Säosim/Content/Controls/buttonReleased48px.png","/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Controls/buttonReleased48px.xnb","TextureProcessor","Texture2DContent",15118,8921,0.00365
+"/Users/pao/src/S-osim/Säosim/Säosim/Content/Fonts/font.spritefont","/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Fonts/font.xnb","FontDescriptionProcessor","SpriteFontContent",2004,21521,0.225711
+"/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/lampLit48px.png","/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Textures/lampLit48px.xnb","TextureProcessor","Texture2DContent",4886,9301,0.005916
+"/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/lampUnlit48px.png","/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Textures/lampUnlit48px.xnb","TextureProcessor","Texture2DContent",4518,9301,0.003288
