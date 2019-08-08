@@ -47,8 +47,9 @@ namespace Säosim {
 			Content.RootDirectory = "Content";
 
 			filehandler = new IO();
-			interlocking = new Interlocking();
-			Debug.WriteLine("Created interlocking");
+
+            interlocking = new Interlocking();
+			Debug.WriteLine("[PRG/INFO] Created interlocking");
 			/*------END OF BACK END CONSTRUCTION------*/
 		}
 
@@ -181,19 +182,19 @@ namespace Säosim {
 			//Try to transfer this functionality into interlocking.cs/route.cs
 			if (interlocking.route_a1.isLocked) {
 				if (interlocking.route_a1.UnlockRoute()) {
-					Debug.WriteLine("Tågväg " + interlocking.route_a1.displayName + " upplåst.");
+					Debug.WriteLine("[SIM/INFO] Tågväg " + interlocking.route_a1.displayName + " upplåst.");
 				}
 			} else {
 				if (interlocking.route_a1.LockRoute()) {
-					Debug.WriteLine("Tågväg " + interlocking.route_a1.displayName + " låst.");
-				}
+                    Debug.WriteLine("[SIM/INFO] Tågväg " + interlocking.route_a1.displayName + " låst.");
+                }
 			}
 		}
 
 		private void Derail2Lower_Click(object sender, EventArgs e) {
 			if (interlocking.derail2.IsLowered) {
-				Debug.WriteLine(interlocking.derail2.displayName + " ligger redan i avlagt läge.");
-			}
+                Debug.WriteLine("[SIM/WARN] " + interlocking.derail2.displayName + " ligger redan i avlagt läge.");
+            }
 			else if (interlocking.derail2.IsRaised) {
 				interlocking.derail2.Lower();
 			}
@@ -201,8 +202,8 @@ namespace Säosim {
 
 		private void Derail2Raise_Click(object sender, EventArgs e) {
 			if (interlocking.derail2.IsRaised) {
-				Debug.WriteLine(interlocking.derail2.displayName + " ligger redan i pålagt läge.");
-			}
+                Debug.WriteLine("[SIM/WARN] " + interlocking.derail2.displayName + " ligger redan i pålagt läge.");
+            }
 			else if (interlocking.derail2.IsLowered) {
 				interlocking.derail2.Raise();
 			}
@@ -210,7 +211,7 @@ namespace Säosim {
 
 		private void Switch6Curved_Click(object sender, EventArgs e) {
 			if (interlocking.switch6.IsCurvedTrack) {
-				Debug.WriteLine(interlocking.switch6.displayName + " ligger redan i (-).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch6.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch6.IsStraightTrack) {
 				interlocking.switch6.CurveSwitch();
@@ -219,7 +220,7 @@ namespace Säosim {
 
 		private void Switch6Straight_Click(object sender, EventArgs e) {
 			if (interlocking.switch6.IsStraightTrack) {
-				Debug.WriteLine(interlocking.switch6.displayName + " ligger redan i (+).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch6.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch6.IsCurvedTrack) {
 				interlocking.switch6.StraightSwitch();
@@ -228,7 +229,7 @@ namespace Säosim {
 
 		private void Switch5Curved_Click(object sender, EventArgs e) {
 			if (interlocking.switch5.IsCurvedTrack) {
-				Debug.WriteLine(interlocking.switch5.displayName + " ligger redan i (-).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch5.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch5.IsStraightTrack) {
 				interlocking.switch5.CurveSwitch();
@@ -237,7 +238,7 @@ namespace Säosim {
 
 		private void Switch5Straight_Click(object sender, EventArgs e) {
 			if (interlocking.switch5.IsStraightTrack) {
-				Debug.WriteLine(interlocking.switch5.displayName + " ligger redan i (+).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch5.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch5.IsCurvedTrack) {
 				interlocking.switch5.StraightSwitch();
@@ -246,7 +247,7 @@ namespace Säosim {
 
 		private void Switch4Curved_Click(object sender, EventArgs e) {
 			if (interlocking.switch4.IsCurvedTrack) {
-				Debug.WriteLine(interlocking.switch4.displayName + " ligger redan i (-).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch4.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch4.IsStraightTrack) {
 				interlocking.switch4.CurveSwitch();
@@ -255,7 +256,7 @@ namespace Säosim {
 
 		private void Switch4Straight_Click(object sender, EventArgs e) {
 			if (interlocking.switch4.IsStraightTrack) {
-				Debug.WriteLine(interlocking.switch4.displayName + " ligger redan i (+).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch4.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch4.IsCurvedTrack) {
 				interlocking.switch4.StraightSwitch();
@@ -264,7 +265,7 @@ namespace Säosim {
 
 		private void Switch2Curved_Click(object sender, EventArgs e) {
 			if (interlocking.switch2.IsCurvedTrack) {
-				Debug.WriteLine(interlocking.switch2.displayName + " ligger redan i (-).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch2.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch2.IsStraightTrack) {
 				interlocking.switch2.CurveSwitch();
@@ -273,7 +274,7 @@ namespace Säosim {
 
 		private void Switch2Straight_Click(object sender, EventArgs e) {
 			if (interlocking.switch2.IsStraightTrack) {
-				Debug.WriteLine(interlocking.switch2.displayName + " ligger redan i (+).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch2.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch2.IsCurvedTrack) {
 				interlocking.switch2.StraightSwitch();
@@ -282,7 +283,7 @@ namespace Säosim {
 
 		private void Switch1Curved_Click(object sender, EventArgs e) {
 			if (interlocking.switch1.IsCurvedTrack) {
-				Debug.WriteLine(interlocking.switch1.displayName + " ligger redan i (-).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch1.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch1.IsStraightTrack) {
 				interlocking.switch1.CurveSwitch();
@@ -291,7 +292,7 @@ namespace Säosim {
 
 		private void Switch1Straight_Click(object sender, EventArgs e) {
 			if (interlocking.switch1.IsStraightTrack) {
-				Debug.WriteLine(interlocking.switch1.displayName + " ligger redan i (+).");
+                Debug.WriteLine("[SIM/WARN] " + interlocking.switch1.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch1.IsCurvedTrack) {
 				interlocking.switch1.StraightSwitch();

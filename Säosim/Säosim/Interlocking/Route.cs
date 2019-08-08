@@ -268,7 +268,7 @@ namespace Säosim {
 		public bool LockRoute() {
 
 			if (isLocked) {
-				Debug.WriteLine("Tågväg " + displayName + " är redan låst.");
+				Debug.WriteLine("[SIM/WARN] Tågväg " + displayName + " är redan låst.");
 				return false;
 			}
 			///First two loops check if all relevant signals and signalstates are correct
@@ -281,7 +281,7 @@ namespace Säosim {
 
 				}
 				else {
-					Debug.WriteLine("Signal + " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
+					Debug.WriteLine("[SIM/WARN] Signal + " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
 					return false;
 				}
 			}
@@ -291,7 +291,7 @@ namespace Säosim {
 
 				}
 				else {
-					Debug.WriteLine("Signal som inte står i stopp hindrar tågvägslåsning.");
+					Debug.WriteLine("[SIM/WARN] Signal som inte står i stopp hindrar tågvägslåsning.");
 					return false;
 				}
 			}
@@ -301,10 +301,10 @@ namespace Säosim {
 						//This means that the switch is straight and LockSwitch has been returned successfully
 						
 					}
-					else { Debug.WriteLine(straightSwitch.displayName + " ligger i (+) men går inte att låsa."); return false; }
+					else { Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger i (+) men går inte att låsa."); return false; }
 				}
 				else {
-					Debug.WriteLine(straightSwitch.displayName + " ligger fel för denna tågväg.");
+					Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
@@ -313,10 +313,10 @@ namespace Säosim {
 					if (curveSwitch.LockSwitch()) {
 						//This means that the switch is curved and LockSwitch has been returned successfully
 					}
-					else { Debug.WriteLine(curveSwitch.displayName + " ligger i (-) men går inte att låsa."); return false; }
+					else { Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger i (-) men går inte att låsa."); return false; }
 				}
 				else {
-					Debug.WriteLine(curveSwitch.displayName + " ligger fel för denna tågväg.");
+					Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
@@ -325,10 +325,10 @@ namespace Säosim {
 					if (raisedDerail.LockDerail()) {
 						//This means that the derail is raised and LockDerail has been returned successfully
 					}
-					else { Debug.WriteLine(raisedDerail.displayName + " ligger i (+) men går inte att låsa."); return false; }
+					else { Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger i (+) men går inte att låsa."); return false; }
 				}
 				else {
-					Debug.WriteLine(raisedDerail.displayName + " ligger fel för denna tågväg.");
+					Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
@@ -337,10 +337,10 @@ namespace Säosim {
 					if (loweredDerail.LockDerail()) {
 						//This means that the derail is lowered and LockDerail has been returned successfully
 					}
-					else { Debug.WriteLine(loweredDerail.displayName + " ligger i (-) men går inte att låsa."); return false; }
+					else { Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger i (-) men går inte att låsa."); return false; }
 				}
 				else {
-					Debug.WriteLine(loweredDerail.displayName + " ligger fel för denna tågväg.");
+					Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
@@ -358,7 +358,7 @@ namespace Säosim {
 
 				}
 				else {
-					Debug.WriteLine("Signal som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
+					Debug.WriteLine("[SIM/WARN] Signalen " + includedSignal.displayName + " är förreglad i stopp eller står i kör, och hindrar tågvägslåsning");
 					return false;
 				}
 			}

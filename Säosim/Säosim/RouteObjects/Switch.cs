@@ -16,7 +16,7 @@ namespace Säosim {
 			IsLocked = false;
 		}
 
-		#region Fields(or whatever they're called)
+		#region Fields
 		public string displayName;
 		private bool _isMoving = false;
 		private bool _isOccupied = false;
@@ -36,10 +36,10 @@ namespace Säosim {
 				Thread.Sleep(1000);
 				IsStraightTrack = true;
 				_isMoving = false;
-				Debug.WriteLine(displayName + " i (+)");
+				Debug.WriteLine("[SIM/INFO] " + displayName + " i (+)");
 				return true;
 			}
-			else { Debug.WriteLine(displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
+			else { Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
 		}
 
 		public bool CurveSwitch() {
@@ -49,16 +49,16 @@ namespace Säosim {
 				Thread.Sleep(1000);
 				IsCurvedTrack = true;
 				_isMoving = false;
-				Debug.WriteLine(displayName + " i (-)");
+				Debug.WriteLine("[SIM/INFO] " + displayName + " i (-)");
 				return true;
 			}
-			else { Debug.WriteLine(displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
+			else { Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
 		}
 
 		public bool LockSwitch() {
 			if ((IsLocked == false) && (_isMoving == false)) {
 				IsLocked = true;
-				Debug.WriteLine(displayName + " låst");
+				Debug.WriteLine("[SIM/INFO] " + displayName + " låst");
 				return true;
 			}
 			else { return false; }
@@ -67,7 +67,7 @@ namespace Säosim {
 		public void UnlockSwitch() {
 			if (_isOccupied == false) {
 				IsLocked = false;
-				Debug.WriteLine(displayName + " upplåst");
+				Debug.WriteLine("[SIM/INFO] " + displayName + " upplåst");
 			}
 		}
 		#region Saving
@@ -115,7 +115,7 @@ namespace Säosim {
 						break;
 					}
 				default: {
-						Console.WriteLine("Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
+						Console.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
 						break;
 					}
 			}
