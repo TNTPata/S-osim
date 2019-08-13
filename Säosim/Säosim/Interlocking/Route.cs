@@ -302,8 +302,8 @@ namespace Säosim {
 			///The second loop actually completes the locking.
 			///If the slightest thing doesn't meet a criteria, the process is aborted and things that are locked are unlocked. 
 
-			#region Lock straightSwitches
-			//Check if all switches are in correct position
+			#region Controll objects
+			//Check if all objects are in their correct position
 			foreach (Switch straightSwitch in straightSwitches) {
 				if (straightSwitch.IsStraightTrack) {
                     //Switch is in correct position, the process can continue
@@ -321,23 +321,6 @@ namespace Säosim {
 					return false;
 				}
 			}
-			//Lock switches to positions checked above
-            foreach (Switch straightSwitch in straightSwitches)
-            {
-                if (straightSwitch.LockSwitch())
-                {
-
-                }
-				else {
-					Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " kunde inte låsas (Okänd anledning).");
-					UnlockRoute();
-					return false;
-				}
-            }
-			#endregion
-
-			#region Lock curveSwitches
-			//Check if all switches are in correct position
 			foreach (Switch curveSwitch in curvedSwitches) {
 				if (curveSwitch.IsCurvedTrack) {
 					//Switch is in correct position, the process can continue
@@ -355,23 +338,6 @@ namespace Säosim {
 					return false;
 				}
 			}
-			//Lock switches to positions checked above
-			foreach (Switch curveSwitch in curvedSwitches)
-			{
-				if (curveSwitch.LockSwitch())
-				{
-
-				}
-				else
-				{
-					Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " kunde inte låsas (Okänd anledning).");
-					UnlockRoute();
-					return false;
-				}
-			}
-			#endregion
-
-			#region Lock raisedDerails
 			foreach (Derail raisedDerail in raisedDerails) {
 				if (raisedDerail.IsRaised) {
 					//Derail is in correct position, the process can continue
@@ -389,25 +355,9 @@ namespace Säosim {
 					return false;
 				}
 			}
-			foreach (Derail raisedDerail in raisedDerails)
-			{
-				if (raisedDerail.LockDerail())
-				{
-
-				}
-				else
-				{
-					Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " kunde inte låsas (Okänd anledning).");
-					UnlockRoute();
-					return false;
-				}
-			}
-			#endregion
-
-			#region Lock loweredDerails
 			foreach (Derail loweredDerail in loweredDerails)
 			{
-				if (loweredDerail.IsRaised)
+				if (loweredDerail.IsLowered)
 				{
 					//Derail is in correct position, the process can continue
 					if (!loweredDerail.IsLocked)
@@ -423,6 +373,48 @@ namespace Säosim {
 				else
 				{
 					Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger fel för denna tågväg.");
+					return false;
+				}
+			}
+			#endregion
+			#region Lock Objects
+			//Lock objects to positions checked above
+			foreach (Switch straightSwitch in straightSwitches)
+			{
+				if (straightSwitch.LockSwitch())
+				{
+
+				}
+				else
+				{
+					Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
+					return false;
+				}
+			}
+			foreach (Switch curveSwitch in curvedSwitches)
+			{
+				if (curveSwitch.LockSwitch())
+				{
+
+				}
+				else
+				{
+					Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
+					return false;
+				}
+			}
+			foreach (Derail raisedDerail in raisedDerails)
+			{
+				if (raisedDerail.LockDerail())
+				{
+
+				}
+				else
+				{
+					Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " kunde inte låsas (Okänd anledning).");
+					UnlockRoute();
 					return false;
 				}
 			}
