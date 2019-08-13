@@ -27,9 +27,9 @@ namespace Säosim.UI {
 		#endregion
 
 		#region Methods
-		public Indicator(Texture2D litTexture, Texture2D unlitTexture, object referenceObject) {
-			_onTexture = litTexture;
-			_offTexture = unlitTexture;
+		public Indicator(Texture2D onTexture, Texture2D offTexture, object referenceObject) {
+			_onTexture = onTexture;
+			_offTexture = offTexture;
 			this.referenceObject = referenceObject;
 		}
 
@@ -67,7 +67,8 @@ namespace Säosim.UI {
 						//Check for states in both cases to prevent giving a false positive
 						if (sw.IsStraightTrack == true) {
 							indicatorState = true;
-						} else if (sw.IsCurvedTrack == true) {
+						}
+						else if (sw.IsCurvedTrack == true) {
 							indicatorState = false;
 						}
 						break;
