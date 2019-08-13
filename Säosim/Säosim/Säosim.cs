@@ -40,7 +40,6 @@ namespace Säosim {
 
 			//graphics.IsFullScreen = true;
 			graphics.ApplyChanges();
-
 			/*-----END OF FRONT END CONSTRUCTION-----*/
 
 			/*---------BACK END CONSTRUCTION---------*/

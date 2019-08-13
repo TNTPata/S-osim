@@ -1,17 +1,17 @@
 Switches
+LS
 US
 US
 US
-US
-US
-US
+UC
+LS
 
 Derails
 UR
 UR
 
 Routes
-U
+L
 U
 U
 U
