@@ -189,5 +189,62 @@ namespace Säosim {
 			#endregion
 
 		}
+
+		#region Methods
+		//Lock/Unlock routes
+		public void a1_toggle()
+		{
+			if (route_a1.isLocked)
+			{
+				if (route_a1.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a1.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_a1.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a1.displayName + " låst.");
+				}
+			}
+		}
+
+		public void a2_toggle()
+		{
+			if (route_a2.isLocked)
+			{
+				if (route_a2.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a2.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_a2.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a2.displayName + " låst.");
+				}
+			}
+		}
+
+		public void a3_toggle()
+		{
+			if (route_a3.isLocked)
+			{
+				if (route_a3.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a3.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_a3.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a3.displayName + " låst.");
+				}
+			}
+		}
+		#endregion
 	}
 }
