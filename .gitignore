@@ -1,4 +1,4 @@
 
 Säosim/Säosim/bin/DesktopGL/AnyCPU/Debug/Positions.txt
-Säosim/Säosim/obj/Debug/*
-Säosim/.vs/*
+Säosim/Säosim/obj/Debug/
+Säosim/.vs/
