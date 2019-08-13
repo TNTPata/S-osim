@@ -28,8 +28,8 @@ namespace Säosim {
 		public bool IsLocked { get; private set; }
 		#endregion
 
-		#region Methods
-		public bool Lower() {
+		#region Methods/Tasks
+		public async Task<bool> Lower() {
 			if (IsLocked == false)
 			{
 				isMoving = true;
@@ -43,7 +43,7 @@ namespace Säosim {
 			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false;
 		}
 			
-		public bool Raise() {
+		public async Task<bool> Raise() {
 			if (IsLocked == false)
 			{
 				isMoving = true;

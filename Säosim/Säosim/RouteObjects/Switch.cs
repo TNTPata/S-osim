@@ -29,7 +29,7 @@ namespace Säosim {
 		#endregion
 
 		#region Methods
-		public bool StraightSwitch() {
+		public async Task<bool> StraightSwitch() {
 			if ((IsLocked || isOccupied) == false)
 			{
 				isMoving = true;
@@ -43,7 +43,7 @@ namespace Säosim {
 			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false;
 		}
 
-		public bool CurveSwitch() {
+		public async Task<bool> CurveSwitch() {
 			if ((IsLocked || isOccupied) == false)
 			{
 				isMoving = true;

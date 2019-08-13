@@ -128,7 +128,7 @@ namespace Säosim {
 			};
 			#endregion
 			#region Create indicators
-			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch1) {
+			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampRed48px"), interlocking.switch1) {
 				Position = new Vector2(310, 60)
 			};
 
@@ -195,7 +195,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.derail2.displayName + " ligger redan i avlagt läge.");
             }
 			else if (interlocking.derail2.IsRaised) {
-				interlocking.derail2.Lower();
+				Task.Run(async () => await interlocking.derail2.Lower());
 			}
 		}
 
@@ -204,7 +204,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.derail2.displayName + " ligger redan i pålagt läge.");
             }
 			else if (interlocking.derail2.IsLowered) {
-				interlocking.derail2.Raise();
+				Task.Run(async () => await interlocking.derail2.Raise());
 			}
 		}
 
@@ -213,7 +213,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch6.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch6.IsStraightTrack) {
-				interlocking.switch6.CurveSwitch();
+				Task.Run(async () => await interlocking.switch6.CurveSwitch());
 			}
 		}
 
@@ -222,7 +222,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch6.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch6.IsCurvedTrack) {
-				interlocking.switch6.StraightSwitch();
+				Task.Run(async () => await interlocking.switch6.StraightSwitch());
 			}
 		}
 
@@ -231,7 +231,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch5.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch5.IsStraightTrack) {
-				interlocking.switch5.CurveSwitch();
+				Task.Run(async () => await interlocking.switch5.CurveSwitch());
 			}
 		}
 
@@ -240,7 +240,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch5.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch5.IsCurvedTrack) {
-				interlocking.switch5.StraightSwitch();
+				Task.Run(async () => await interlocking.switch5.StraightSwitch());
 			}
 		}
 
@@ -249,7 +249,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch4.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch4.IsStraightTrack) {
-				interlocking.switch4.CurveSwitch();
+				Task.Run(async () => await interlocking.switch4.CurveSwitch());
 			}
 		}
 
@@ -258,7 +258,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch4.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch4.IsCurvedTrack) {
-				interlocking.switch4.StraightSwitch();
+				Task.Run(async () => await interlocking.switch4.StraightSwitch());
 			}
 		}
 
@@ -267,7 +267,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch2.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch2.IsStraightTrack) {
-				interlocking.switch2.CurveSwitch();
+				Task.Run(async () => await interlocking.switch2.CurveSwitch());
 			}
 		}
 
@@ -276,7 +276,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch2.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch2.IsCurvedTrack) {
-				interlocking.switch2.StraightSwitch();
+				Task.Run(async () => await interlocking.switch2.StraightSwitch());
 			}
 		}
 
@@ -285,7 +285,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch1.displayName + " ligger redan i (-).");
 			}
 			else if (interlocking.switch1.IsStraightTrack) {
-				interlocking.switch1.CurveSwitch();
+				Task.Run(async () => await interlocking.switch1.CurveSwitch());
 			}
 		}
 
@@ -294,7 +294,7 @@ namespace Säosim {
                 Debug.WriteLine("[SIM/WARN] " + interlocking.switch1.displayName + " ligger redan i (+).");
 			}
 			else if (interlocking.switch1.IsCurvedTrack) {
-				interlocking.switch1.StraightSwitch();
+				Task.Run(async () => await interlocking.switch1.StraightSwitch());
 			}
 		}
 		#endregion

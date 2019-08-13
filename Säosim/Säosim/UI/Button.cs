@@ -19,7 +19,7 @@ namespace Säosim {
 		private MouseState _currentMouse;
 		private SpriteFont _font;
 		private bool _isHovering;
-		private bool _isPressed;
+		private bool _isPressed = false;
 		private MouseState _previousMouse;
 		private Texture2D _ReleasedTexture;
 		private Texture2D _PressedTexture;
@@ -54,9 +54,6 @@ namespace Säosim {
 			var colour = Color.White;
 			var texture = _ReleasedTexture;
 
-			//if (_isHovering)
-			//	texture = _PressedTexture;
-
 			if (_isPressed)
 				texture = _PressedTexture;
 
@@ -76,16 +73,19 @@ namespace Säosim {
 
 			var mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
 
-			_isPressed = false;
+			//_isPressed = false;
 
 			if (mouseRectangle.Intersects(Rectangle)) {
 				_isHovering = true;
 
-				if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed) {
+				if (_currentMouse.LeftButton == ButtonState.Pressed && _previousMouse.LeftButton == ButtonState.Released) {
 					_isPressed = true;
 					Click?.Invoke(this, new EventArgs());
+				} else if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
+				{
+					_isPressed = false;
 				}
-			}
+			} else { _isPressed = false;  }
 		}
 
 		#region Unused Update-methods
