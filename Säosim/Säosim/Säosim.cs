@@ -123,13 +123,34 @@ namespace Säosim {
 				Text = "SpII-",
 			};
 			var a1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(10, 120),
+				Position = new Vector2(34, 120),
 				Text = "a1",
 			};
+			var a2lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font"))
+			{
+				Position = new Vector2(134, 120),
+				Text = "a2",
+			};
+			var a3lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font"))
+			{
+				Position = new Vector2(234, 120),
+				Text = "a3",
+			};
 			#endregion
+
 			#region Create indicators
 			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampRed48px"), interlocking.switch1) {
 				Position = new Vector2(310, 60)
+			};
+
+			var routea1Indicator = new Indicator(Content.Load<Texture2D>("Textures/fieldWhite30x90px"), Content.Load<Texture2D>("Textures/fieldRed30x90px"), interlocking.route_a1) {
+				Position = new Vector2(10, 180)
+			};
+			var routea2Indicator = new Indicator(Content.Load<Texture2D>("Textures/fieldWhite30x90px"), Content.Load<Texture2D>("Textures/fieldRed30x90px"), interlocking.route_a2)	{
+				Position = new Vector2(110, 180)
+			};
+			var routea3Indicator = new Indicator(Content.Load<Texture2D>("Textures/fieldWhite30x90px"), Content.Load<Texture2D>("Textures/fieldRed30x90px"), interlocking.route_a3)	{
+				Position = new Vector2(210, 180)
 			};
 
 			#endregion
@@ -147,6 +168,8 @@ namespace Säosim {
 			derail2Raise.Click += Derail2Raise_Click;
 			derail2Lower.Click += Derail2Lower_Click;
 			a1lock.Click += a1Lock_Click;
+			a2lock.Click += a2Lock_Click;
+			a3lock.Click += a3Lock_Click;
 
 			gameButtons = new List<Component>() {
 				//Switch buttons
@@ -167,27 +190,30 @@ namespace Säosim {
 
 				//Route locking
 				a1lock,
+				a2lock,
+				a3lock,
 			};
 
 			gameIndicators = new List<Component>() {
 				switch1Indicator,
+				routea1Indicator,
+				routea2Indicator,
+				routea3Indicator,
 			};
 
 			filehandler.ReadPositions(ref interlocking, "Positions.txt");
 		}
-
 		#region ButtonEvents
+		private void a3Lock_Click(object sender, EventArgs e) {
+			interlocking.a3_toggle();
+		}
+
+		private void a2Lock_Click(object sender, EventArgs e) {
+			interlocking.a2_toggle();
+		}
+
 		private void a1Lock_Click(object sender, EventArgs e) {
-			//Try to transfer this functionality into interlocking.cs/route.cs
-			if (interlocking.route_a1.isLocked) {
-				if (interlocking.route_a1.UnlockRoute()) {
-					Debug.WriteLine("[SIM/INFO] Tågväg " + interlocking.route_a1.displayName + " upplåst.");
-				}
-			} else {
-				if (interlocking.route_a1.LockRoute()) {
-                    Debug.WriteLine("[SIM/INFO] Tågväg " + interlocking.route_a1.displayName + " låst.");
-                }
-			}
+			interlocking.a1_toggle();
 		}
 
 		private void Derail2Lower_Click(object sender, EventArgs e) {
