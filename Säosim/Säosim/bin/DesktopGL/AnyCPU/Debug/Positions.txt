@@ -1,6 +1,6 @@
 Switches
 LS
-US
+UC
 US
 US
 UC
