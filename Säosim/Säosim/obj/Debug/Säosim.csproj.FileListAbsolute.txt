@@ -70,3 +70,5 @@ C:/Users/BOU_Elev/source/repos/Säosim/Säosim/Säosim/bin/DesktopGL/AnyCPU/Debu
 /Users/pao/src/S-osim/Säosim/Säosim/obj/Debug/Säosim.csproj.CoreCompileInputs.cache
 /Users/pao/src/S-osim/Säosim/Säosim/obj/Debug/Säosim.exe
 /Users/pao/src/S-osim/Säosim/Säosim/obj/Debug/Säosim.pdb
+/Users/pao/src/S-osim/Säosim/Säosim/bin/DesktopGL/AnyCPU/Debug/Content/Textures/fieldRed30x90px.xnb
+/Users/pao/src/S-osim/Säosim/Säosim/bin/DesktopGL/AnyCPU/Debug/Content/Textures/fieldWhite30x90px.xnb

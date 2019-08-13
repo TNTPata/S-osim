@@ -6,12 +6,16 @@
   <SourceFiles>
     <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Controls/buttonPressed48px.png</File>
     <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Controls/buttonReleased48px.png</File>
+    <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/fieldRed30x90px.png</File>
+    <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/fieldWhite30x90px.png</File>
     <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Fonts/font.spritefont</File>
     <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/lampLit48px.png</File>
     <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/lampRed48px.png</File>
     <File>/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/lampUnlit48px.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
