@@ -18,8 +18,8 @@ namespace Säosim {
 
 		#region Fields
 		public string displayName;
-		private bool _isMoving = false;
-		private bool _isOccupied = false;
+		private bool isMoving = false;
+		private bool isOccupied = false;
 		#endregion
 
 		#region Properties
@@ -30,46 +30,50 @@ namespace Säosim {
 
 		#region Methods
 		public bool StraightSwitch() {
-			if ((IsLocked || _isOccupied) == false) {
-				_isMoving = true;
+			if ((IsLocked || isOccupied) == false)
+			{
+				isMoving = true;
 				IsCurvedTrack = false;
 				Thread.Sleep(1000);
 				IsStraightTrack = true;
-				_isMoving = false;
+				isMoving = false;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i (+)");
 				return true;
 			}
-			else { Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
+			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false;
 		}
 
 		public bool CurveSwitch() {
-			if ((IsLocked || _isOccupied) == false) {
-				_isMoving = true;
+			if ((IsLocked || isOccupied) == false)
+			{
+				isMoving = true;
 				IsStraightTrack = false;
 				Thread.Sleep(1000);
 				IsCurvedTrack = true;
-				_isMoving = false;
+				isMoving = false;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i (-)");
 				return true;
 			}
-			else { Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false; }
+			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av den är förreglad i en tågväg."); return false;
 		}
 
 		public bool LockSwitch() {
-			if ((IsLocked == false) && (_isMoving == false)) {
+			if ((IsLocked == false) && (isMoving == false))
+			{
 				IsLocked = true;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " låst");
 				return true;
 			}
-			else { return false; }
+			return false;
 		}
 
 		public void UnlockSwitch() {
-			if (_isOccupied == false) {
+			if (isOccupied == false) {
 				IsLocked = false;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " upplåst");
 			}
 		}
+
 		#region Saving
 		public string SavePos() {
 			if (IsLocked) {
@@ -115,7 +119,7 @@ namespace Säosim {
 						break;
 					}
 				default: {
-						Console.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
+						Debug.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
 						break;
 					}
 			}

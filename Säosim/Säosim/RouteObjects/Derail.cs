@@ -30,7 +30,8 @@ namespace Säosim {
 
 		#region Methods
 		public bool Lower() {
-			if (IsLocked == false) {
+			if (IsLocked == false)
+			{
 				isMoving = true;
 				IsRaised = false;
 				Thread.Sleep(2500);
@@ -39,11 +40,12 @@ namespace Säosim {
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i avlagt läge.");
 				return true;
 			}
-			else { Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false; }
+			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false;
 		}
-
+			
 		public bool Raise() {
-			if (IsLocked == false) {
+			if (IsLocked == false)
+			{
 				isMoving = true;
 				IsLowered = false;
 				Thread.Sleep(2500);
@@ -52,16 +54,17 @@ namespace Säosim {
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i pålagt läge.");
 				return true;
 			}
-			else { Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false; }
+			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false;
 		}
 
 		public bool LockDerail() {
-			if ((IsLocked == false) && (isMoving == false)) {
+			if ((IsLocked == false) && (isMoving == false))
+			{
 				IsLocked = true;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " låst");
 				return true;
 			}
-			else { return false; }
+			return false;
 		}
 
 		public void UnlockDerail() {
@@ -116,7 +119,7 @@ namespace Säosim {
 						break;
 					}
 				default: {
-						Console.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
+						Debug.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
 						break;
 					}
 			}
