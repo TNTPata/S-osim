@@ -1,17 +1,17 @@
 Switches
-LS
 UC
 US
 US
 UC
-LS
+UC
+UC
 
 Derails
 UR
-UR
+UL
 
 Routes
-L
+U
 U
 U
 U
@@ -37,10 +37,10 @@ U
 Signals
 0
 P
-0
+P
 P
 0
-0
+P
 0
 0
 0
