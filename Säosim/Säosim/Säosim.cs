@@ -139,9 +139,43 @@ namespace Säosim {
 			#endregion
 
 			#region Create indicators
-			var switch1Indicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampRed48px"), interlocking.switch1) {
+			var switch1StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch1) {
+				Position = new Vector2(310, 10)
+			};
+			var switch1CurveIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampUnlit48px"), Content.Load<Texture2D>("Textures/lampLit48px"), interlocking.switch1) {
 				Position = new Vector2(310, 60)
 			};
+			var switch2StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch2) {
+				Position = new Vector2(360, 10)
+			};
+			var switch2CurveIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampUnlit48px"), Content.Load<Texture2D>("Textures/lampLit48px"), interlocking.switch2)	{
+				Position = new Vector2(360, 60)
+			};
+			var switch4StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch4) {
+				Position = new Vector2(410, 10)
+			};
+			var switch4CurveIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampUnlit48px"), Content.Load<Texture2D>("Textures/lampLit48px"), interlocking.switch4)	{
+				Position = new Vector2(410, 60)
+			};
+			var switch5StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch5) {
+				Position = new Vector2(460, 10)
+			};
+			var switch5CurveIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampUnlit48px"), Content.Load<Texture2D>("Textures/lampLit48px"), interlocking.switch5)	{
+				Position = new Vector2(460, 60)
+			};
+			var switch6StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.switch6) {
+				Position = new Vector2(510, 10)
+			};
+			var switch6CurveIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampUnlit48px"), Content.Load<Texture2D>("Textures/lampLit48px"), interlocking.switch6)	{
+				Position = new Vector2(510, 60)
+			};
+			var derail2RaisedIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampLit48px"), Content.Load<Texture2D>("Textures/lampUnlit48px"), interlocking.derail2) {
+				Position = new Vector2(560, 10)
+			};
+			var derail2LoweredIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampUnlit48px"), Content.Load<Texture2D>("Textures/lampLit48px"), interlocking.derail2)	{
+				Position = new Vector2(560, 60)
+			};
+
 
 			var routea1Indicator = new Indicator(Content.Load<Texture2D>("Textures/fieldWhite30x90px"), Content.Load<Texture2D>("Textures/fieldRed30x90px"), interlocking.route_a1) {
 				Position = new Vector2(10, 180)
@@ -195,7 +229,19 @@ namespace Säosim {
 			};
 
 			gameIndicators = new List<Component>() {
-				switch1Indicator,
+				switch1StraightIndicator,
+				switch1CurveIndicator,
+				switch2StraightIndicator,
+				switch2CurveIndicator,
+				switch4StraightIndicator,
+				switch4CurveIndicator,
+				switch5StraightIndicator,
+				switch5CurveIndicator,
+				switch6StraightIndicator,
+				switch6CurveIndicator,
+				derail2RaisedIndicator,
+				derail2LoweredIndicator,
+
 				routea1Indicator,
 				routea2Indicator,
 				routea3Indicator,
