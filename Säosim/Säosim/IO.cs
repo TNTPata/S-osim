@@ -52,7 +52,7 @@ namespace Säosim {
 			}
 			catch (Exception e) {
 				if (e is FileNotFoundException) {
-					Console.WriteLine(e.Message);
+					Debug.WriteLine(e.Message);
 					return;
 				}
 			}
