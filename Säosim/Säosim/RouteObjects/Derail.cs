@@ -14,7 +14,7 @@ namespace Säosim {
 			this.displayName = displayName;
 			IsRaised = true;
 			IsLowered = false;
-			IsLocked = false;
+			lockFactor = 0;
 		}
 
 		#region Fields
@@ -25,12 +25,12 @@ namespace Säosim {
 		#region Properties
 		public bool IsLowered { get; private set; }
 		public bool IsRaised { get; private set; }
-		public bool IsLocked { get; private set; }
+		public int lockFactor { get; private set; }
 		#endregion
 
 		#region Methods/Tasks
 		public async Task<bool> Lower() {
-			if (IsLocked == false)
+			if (lockFactor == 0)
 			{
 				isMoving = true;
 				IsRaised = false;
@@ -44,7 +44,7 @@ namespace Säosim {
 		}
 			
 		public async Task<bool> Raise() {
-			if (IsLocked == false)
+			if (lockFactor == 0)
 			{
 				isMoving = true;
 				IsLowered = false;
@@ -58,9 +58,9 @@ namespace Säosim {
 		}
 
 		public bool LockDerail() {
-			if ((IsLocked == false) && (isMoving == false))
+			if (isMoving == false)
 			{
-				IsLocked = true;
+				lockFactor++;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " låst");
 				return true;
 			}
@@ -68,64 +68,31 @@ namespace Säosim {
 		}
 
 		public void UnlockDerail() {
-			IsLocked = false;
+			lockFactor--;
 			Debug.WriteLine("[SIM/INFO] " + displayName + " upplåst");
 		}
 
 		#region Saving
 		public string SavePos() {
-			if (IsLocked) {
-				if (IsRaised) {
-					return "LR";
-				}
-				else {
-					return "LL";
-				}
-			}
-			else {
-				if (IsRaised) {
-					return "UR";
-				}
-				else {
-					return "UL";
-				}
+			if (IsRaised) {
+				return Convert.ToString(lockFactor) + "R";
+			} else {
+				return Convert.ToString(lockFactor) + "L";
 			}
 		}
 
 		public void ReadPos(string savedPosition) {
-			switch (savedPosition) {
-				case "LR": {
-						IsLocked = true;
-						IsRaised = true;
-						IsLowered = false;
-						break;
-					}
-				case "LL": {
-						IsLocked = true;
-						IsRaised = false;
-						IsLowered = true;
-						break;
-					}
-				case "UR": {
-						IsLocked = false;
-						IsRaised = true;
-						IsLowered = false;
-						break;
-					}
-				case "UL": {
-						IsLocked = false;
-						IsRaised = false;
-						IsLowered = true;
-						break;
-					}
-				default: {
-						Debug.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
-						break;
-					}
+			if (savedPosition[1] is 'R') {
+				lockFactor = Convert.ToInt32(Char.GetNumericValue(savedPosition[0]));
+				IsRaised = true;
+				IsLowered = false;
+			} else if (savedPosition[1] is 'L') {
+				lockFactor = Convert.ToInt32(Char.GetNumericValue(savedPosition[0]));
+				IsRaised = false;
+				IsLowered = true;
 			}
 		}
 		#endregion
-
 		#endregion
 	}
 }

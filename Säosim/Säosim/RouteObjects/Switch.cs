@@ -13,7 +13,7 @@ namespace Säosim {
 			this.displayName = displayName;
 			IsStraightTrack = true;
 			IsCurvedTrack = false;
-			IsLocked = false;
+			lockFactor = 0;
 		}
 
 		#region Fields
@@ -25,12 +25,12 @@ namespace Säosim {
 		#region Properties
 		public bool IsStraightTrack { get; private set; }
 		public bool IsCurvedTrack { get; private set; }
-		public bool IsLocked { get; private set; }
+		public int lockFactor { get; private set; }
 		#endregion
 
 		#region Methods
 		public async Task<bool> StraightSwitch() {
-			if ((IsLocked || isOccupied) == false)
+			if ((lockFactor == 0) && !isOccupied) //Is not locked nor occupied
 			{
 				IsCurvedTrack = false;
 				isMoving = true;
@@ -44,7 +44,7 @@ namespace Säosim {
 		}
 
 		public async Task<bool> CurveSwitch() {
-			if ((IsLocked || isOccupied) == false)
+			if ((lockFactor == 0) && !isOccupied) //Is not locked nor occupied
 			{
 				IsStraightTrack = false;
 				isMoving = true;
@@ -58,9 +58,9 @@ namespace Säosim {
 		}
 
 		public bool LockSwitch() {
-			if ((IsLocked == false) && (isMoving == false))
+			if (isMoving == false)
 			{
-				IsLocked = true;
+				lockFactor++;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " låst");
 				return true;
 			}
@@ -69,59 +69,29 @@ namespace Säosim {
 
 		public void UnlockSwitch() {
 			if (isOccupied == false) {
-				IsLocked = false;
+				lockFactor--;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " upplåst");
 			}
 		}
 
 		#region Saving
 		public string SavePos() {
-			if (IsLocked) {
-				if (IsStraightTrack) {
-					return "LS";
-				} else {
-					return "LC";
-				}
+			if (IsStraightTrack) {
+				return Convert.ToString(lockFactor) + "S";
 			} else {
-				if (IsStraightTrack) {
-					return "US";
-				}
-				else {
-					return "UC";
-				}
+				return Convert.ToString(lockFactor) + "C";
 			}
 		}
 
 		public void ReadPos(string savedPosition) {
-			switch (savedPosition) {
-				case "LS": {
-						IsLocked = true;
-						IsStraightTrack = true;
-						IsCurvedTrack = false;
-						break;
-					}
-				case "LC": {
-						IsLocked = true;
-						IsStraightTrack = false;
-						IsCurvedTrack = true;
-						break;
-					}
-				case "US": {
-						IsLocked = false;
-						IsStraightTrack = true;
-						IsCurvedTrack = false;
-						break;
-					}
-				case "UC": {
-						IsLocked = false;
-						IsStraightTrack = false;
-						IsCurvedTrack = true;
-						break;
-					}
-				default: {
-						Debug.WriteLine("[PRG/ERROR] " + "Error for " + displayName + ". Tried to inject " + savedPosition + " in ReadPos().");
-						break;
-					}
+			if (savedPosition[1] is 'S') {
+				lockFactor = Convert.ToInt32(Char.GetNumericValue(savedPosition[0]));
+				IsStraightTrack = true;
+				IsCurvedTrack = false;
+			} else if (savedPosition[1] is 'C') {
+				lockFactor = Convert.ToInt32(Char.GetNumericValue(savedPosition[0]));
+				IsStraightTrack = false;
+				IsCurvedTrack = true;
 			}
 		}
 		#endregion

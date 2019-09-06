@@ -200,7 +200,6 @@ namespace Säosim {
 				}
 				else {
 					Debug.WriteLine("[SIM/WARN] Signal " + protectedSignal.displayName + " som inte står i stopp hindrar tågvägslåsning.");
-					UnlockRoute();
 					return false;
 				}
 			}
@@ -220,14 +219,6 @@ namespace Säosim {
 			foreach (Switch straightSwitch in straightSwitches) {
 				if (straightSwitch.IsStraightTrack) {
                     //Switch is in correct position, the process can continue
-                    if (!straightSwitch.IsLocked)
-                    {
-                        //Switch is unlocked, the process can continue
-                    }
-					else {
-						Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger i (+) men är redan låst.");
-						return false;
-					}
                 }
 				else {
 					Debug.WriteLine("[SIM/WARN] " + straightSwitch.displayName + " ligger fel för denna tågväg.");
@@ -237,14 +228,6 @@ namespace Säosim {
 			foreach (Switch curveSwitch in curvedSwitches) {
 				if (curveSwitch.IsCurvedTrack) {
 					//Switch is in correct position, the process can continue
-					if (!curveSwitch.IsLocked)
-					{
-						//Switch is unlocked, the process can continue
-					}
-					else {
-						Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger i (-) men är redan låst.");
-						return false;
-					}
 				}
 				else {
 					Debug.WriteLine("[SIM/WARN] " + curveSwitch.displayName + " ligger fel för denna tågväg.");
@@ -254,37 +237,17 @@ namespace Säosim {
 			foreach (Derail raisedDerail in raisedDerails) {
 				if (raisedDerail.IsRaised) {
 					//Derail is in correct position, the process can continue
-					if (!raisedDerail.IsLocked)
-					{
-						//Derail is unlocked, the process can continue
-					}
-					else {
-						Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger i (+) men är redan låst.");
-						return false;
-					}
 				}
 				else {
 					Debug.WriteLine("[SIM/WARN] " + raisedDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
 			}
-			foreach (Derail loweredDerail in loweredDerails)
-			{
-				if (loweredDerail.IsLowered)
-				{
+			foreach (Derail loweredDerail in loweredDerails) {
+				if (loweredDerail.IsLowered) {
 					//Derail is in correct position, the process can continue
-					if (!loweredDerail.IsLocked)
-					{
-						//Derail is unlocked, the process can continue
-					}
-					else
-					{
-						Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger i (-) men är redan låst.");
-						return false;
-					}
 				}
-				else
-				{
+				else {
 					Debug.WriteLine("[SIM/WARN] " + loweredDerail.displayName + " ligger fel för denna tågväg.");
 					return false;
 				}
