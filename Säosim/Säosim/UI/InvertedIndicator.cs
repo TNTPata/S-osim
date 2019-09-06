@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Säosim.UI {
-	public class Indicator : Component {
+namespace Säosim.UI
+{
+	public class InvertedIndicator : Component
+	{
+		//This class is only used where the negative state of an object needs to be shown, i.e. for a reversed switch.
+		//Works exactly as the normal indicator class, but the "setting" of indicatorState is inverted. 
 
 		#region Fields
 		private Texture2D _onTexture;
@@ -27,7 +31,7 @@ namespace Säosim.UI {
 		#endregion
 
 		#region Methods
-		public Indicator(Texture2D onTexture, Texture2D offTexture, object referenceObject) {
+		public InvertedIndicator(Texture2D onTexture, Texture2D offTexture, object referenceObject) {
 			_onTexture = onTexture;
 			_offTexture = offTexture;
 			this.referenceObject = referenceObject;
@@ -52,19 +56,9 @@ namespace Säosim.UI {
 
 		public override void Update(GameTime gametime, object referenceObject) {
 			switch (referenceObject) {
-				//Light is on if signal is showing any aspect that isn't red
-				//Light is off is signal is showing a red aspect
-				case Signal si: {
-						if (si.signalState > 0) {
-							indicatorState = true;
-						} else {
-							indicatorState = false;
-						}
-						break;
-					}
 				case Switch sw: {
-						//Lights up indicator when switch is straight and not moving
-						if (sw.IsStraightTrack == true && !sw.isMoving) {
+						//Lights up the indicator when the switch is curved and not moving
+						if (sw.IsCurvedTrack == true && !sw.isMoving) {
 							indicatorState = true;
 						} else {
 							indicatorState = false;
@@ -72,20 +66,10 @@ namespace Säosim.UI {
 						break;
 					}
 				case Derail de: {
-						//Lights up indicator when derail is raised and not moving
-						if (de.IsRaised == true && !de.isMoving) {
+						//Lights up the indicator if the derail is lowered and not moving
+						if (de.IsLowered == true) {
 							indicatorState = true;
 						} else {
-							indicatorState = false;
-						}
-						break;
-					}
-				case Route ro: {
-						//Light is on for a locked route
-						//Light if off for an unlocked route
-						if (ro.isLocked == true) {
-							indicatorState = true;
-						} else  {
 							indicatorState = false;
 						}
 						break;
