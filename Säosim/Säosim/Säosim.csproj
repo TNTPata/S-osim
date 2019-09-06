@@ -55,7 +55,7 @@
     <Compile Include="RouteObjects\Signals.cs" />
     <Compile Include="RouteObjects\Switch.cs" />
     <Compile Include="UI\Indicator.cs" />
-    <Compile Include="UI\InvertedIndicator.cs" />
+    <Compile Include="UI\InvertedSwitchIndicator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

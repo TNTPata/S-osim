@@ -188,37 +188,37 @@ namespace Säosim {
 			var switch1StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch1) {
 				Position = new Vector2(255, 160)
 			};
-			var switch1CurveIndicator = new InvertedIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch1) {
+			var switch1CurveIndicator = new InvertedSwitchIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch1) {
 				Position = new Vector2(255, 210)
 			};
 			var switch2StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch2) {
 				Position = new Vector2(800, 110)
 			};
-			var switch2CurveIndicator = new InvertedIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch2)	{
+			var switch2CurveIndicator = new InvertedSwitchIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch2)	{
 				Position = new Vector2(800, 160)
 			};
 			var switch3StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch3) {
 				Position = new Vector2(375, 160)
 			};
-			var switch3CurveIndicator = new InvertedIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch3)	{
+			var switch3CurveIndicator = new InvertedSwitchIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch3)	{
 				Position = new Vector2(375, 210)
 			};
 			var switch4StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch4) {
 				Position = new Vector2(750, 110)
 			};
-			var switch4CurveIndicator = new InvertedIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch4)	{
+			var switch4CurveIndicator = new InvertedSwitchIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch4)	{
 				Position = new Vector2(750, 160)
 			};
 			var switch8StraightIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch8) {
 				Position = new Vector2(315, 160)
 			};
-			var switch8CurveIndicator = new InvertedIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch8)	{
+			var switch8CurveIndicator = new InvertedSwitchIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.switch8)	{
 				Position = new Vector2(315, 210)
 			};
 			var derail2RaisedIndicator = new Indicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.derail2) {
 				Position = new Vector2(840, 455)
 			};
-			var derail2LoweredIndicator = new InvertedIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.derail2)	{
+			var derail2LoweredIndicator = new InvertedSwitchIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.derail2)	{
 				Position = new Vector2(840, 505)
 			};
 
