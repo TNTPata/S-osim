@@ -4,47 +4,70 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Säosim {
 	public abstract class Signal {
 
 		public string displayName;
-		public bool isProtected = false;
-		public int signalState = 0;
-		//0 = Stop, 1 = Clear, 2 = Caution, 3 = Caution - Short route.
+		public int protectionFactor = 0; //How many times the signal has been set to protected by different routes
+		public int signalState = 0; //0 = Stop, 1 = Clear, 2 = Caution, 3 = Caution - Short route.
 
 		public void SetStop() {
 			signalState = 0;
 		}
 
 		public bool SetProtected() {
-			if (signalState == 0)
-			{
-				isProtected = true;
+			if (signalState == 0) {
+				protectionFactor++;
 				return true;
 			}
 			return false;
 		}
 
 		public void SetUnprotected() {
-			isProtected = false;
+			protectionFactor--;
 		}
 
 		#region Saving
 		public string SavePos() {
-			if (isProtected)
-			{
-				return "P";
+			if (protectionFactor <= 0) {
+				return Convert.ToString(signalState);
 			}
-			return Convert.ToString(signalState);
+			return "P" + Convert.ToString(protectionFactor);
 		}
 
-		public void ReadPos(string savedSignalState) { 
-			if (savedSignalState == "P") {
-						isProtected = true;
-						signalState = 0;
-			} else {
+		public void ReadPos(string savedSignalState) {
+			if (!savedSignalState.Contains("P"))
+			{
 				signalState = Convert.ToInt32(savedSignalState);
+				protectionFactor = 0;
+			} else {
+				switch (savedSignalState) {
+					case "P1":
+						{
+							signalState = 0;
+							protectionFactor = 1;
+							break;
+						}
+					case "P2":
+						{
+							signalState = 0;
+							protectionFactor = 2;
+							break;
+						}
+					case "P3":
+						{
+							signalState = 0;
+							protectionFactor = 3;
+							break;
+						}
+					default:
+						{
+							throw new ArgumentOutOfRangeException();
+							break;
+						}
+				}
 			}
 		}
 		#endregion
@@ -86,19 +109,19 @@ namespace Säosim {
 		#endregion
 
 		public void SetClear() {
-			if (isProtected == false) {
+			if (protectionFactor == 0) {
 				signalState = 1;
 			}
 		}
 
 		public void SetCaution() {
-			if (isProtected == false) {
+			if (protectionFactor == 0) {
 				signalState = 2;
 			}
 		}
 
 		public void SetCautionShort() {
-			if (isProtected == false) {
+			if (protectionFactor == 0) {
 				signalState = 3;
 			}
 		}
@@ -111,7 +134,7 @@ namespace Säosim {
 		}
 
 		public void SetClear() {
-			if (isProtected == false) {
+			if (protectionFactor == 0) {
 				signalState = 1;
 			}
 		}
@@ -120,9 +143,8 @@ namespace Säosim {
 	public class DistSignal : Signal {
 		public DistSignal(EntrySignal referenceSignal, string displayName) {
 			this.displayName = displayName;
-			//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 		}
-
+		//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal
 	}
 
 	public class RoadSignal : Signal {
