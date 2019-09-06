@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Säosim.UI
 {
-	public class InvertedIndicator : Component
+	public class InvertedSwitchIndicator : Component
 	{
 		//This class is only used where the negative state of an object needs to be shown, i.e. for a reversed switch.
 		//Works exactly as the normal indicator class, but the "setting" of indicatorState is inverted. 
@@ -31,7 +31,7 @@ namespace Säosim.UI
 		#endregion
 
 		#region Methods
-		public InvertedIndicator(Texture2D onTexture, Texture2D offTexture, object referenceObject) {
+		public InvertedSwitchIndicator(Texture2D onTexture, Texture2D offTexture, object referenceObject) {
 			_onTexture = onTexture;
 			_offTexture = offTexture;
 			this.referenceObject = referenceObject;
