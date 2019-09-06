@@ -14,7 +14,7 @@ namespace Säosim {
 		public Switch switch3;
 		public Switch switch4;
 		public Switch switch5;
-		public Switch switch6;
+		public Switch switch8;
 
 		public Derail derail1;
 		public Derail derail2;
@@ -24,9 +24,8 @@ namespace Säosim {
 		public EntrySignal B;
 		public EntrySignal C;
 
-		//Create 3 exit signals
+		//Create 2 exit signals
 		public ExitSignal D;
-		public ExitSignal E;
 		public ExitSignal F;
 
 		//Create distant signal
@@ -45,25 +44,16 @@ namespace Säosim {
 		public Route route_a3;
 		public Route route_b1;
 		public Route route_b2;
-		public Route route_b3;
 		public Route route_c1;
 		public Route route_c2;
-
-		//Create short arrival routes
-		public Route route_a2k;
-		public Route route_a3k;
-		public Route route_c1k;
-		public Route route_c2k;
+		public Route route_c3;
 
 		//Create departure routes
 		public Route route_d1;
-		public Route route_d2;
-		public Route route_d3;
+		public Route route_d2_3;
 		public Route route_e1;
 		public Route route_e2;
-		public Route route_e3;
-		public Route route_f1;
-		public Route route_f2;
+		public Route route_F;
 
 		//Create unmonitored route
 		public Route route_o1;
@@ -86,20 +76,19 @@ namespace Säosim {
 			switch3 = new Switch("Växel 3");
 			switch4 = new Switch("Växel 4");
 			switch5 = new Switch("Växel 5");
-			switch6 = new Switch("Växel 6");
+			switch8 = new Switch("Växel 8");
 
 			derail1 = new Derail("Spårspärr I");
 			derail2 = new Derail("Spårspärr II");
 
-			//Init 3 exit signals
+			//Init 2 exit signals
 			D = new ExitSignal("D");
-			E = new ExitSignal("E");
 			F = new ExitSignal("F");
 
 			//Init 3 entry signals
-			A = new EntrySignal(E, "A");
-			B = new EntrySignal(D, "B");
-			C = new EntrySignal("C");
+			A = new EntrySignal(D, "A");
+			B = new EntrySignal("B");
+			C = new EntrySignal(F, "C");
 
 			//Init distant signal
 			AFsi = new DistSignal(A, "AFsi");
@@ -112,34 +101,24 @@ namespace Säosim {
 			#endregion
 			#region routeInit
 			//Init arrival routes
-			route_a1 = new Route(AFsi, A, switch1, switch6, D, B, "a1");
-			route_a2 = new Route(2, AFsi, A, switch1, switch6, switch5, switch4, D, B, C, F, derail2, "a2");
-			route_a3 = new Route(3, AFsi, A, switch1, switch6, switch5, switch4, D, B, C, F, derail2, "a3");
-			route_b1 = new Route(B, switch2, E, derail2, V1Fsi, V1, "b1");
-			route_b2 = new Route(2, B, switch2, switch4, switch5, E, C, F, derail2, V1Fsi, V1, "b2");
-			route_b3 = new Route(3, B, switch2, switch4, switch5, E, C, F, derail2, V1Fsi, V1, "b3");
-			route_c1 = new Route(1, C, switch6, switch5, switch1, switch4, B, F, derail2, "c1");
-			route_c2 = new Route(2, C, switch6, switch5, switch1, switch4, B, F, derail2, "c2");
-
-			//Init short arrival routes
-			route_a2k = new Route(2, AFsi, A, switch1, switch6, switch5, D, C, F, derail2, "a2k");
-			route_a3k = new Route(3, AFsi, A, switch1, switch6, switch5, D, C, F, derail2, "a3k");
-			route_c1k = new Route(1, C, switch6, switch5, switch6, F, derail2, "c1k");
-			route_c2k = new Route(2, C, switch6, switch5, switch6, F, derail2, "c2k");
+			route_a1 = new Route(A, F, switch1, switch8, "a1");
+			route_a2 = new Route(2, A, B, F, switch1, switch3, switch8, "a2");
+			route_a3 = new Route(3, A, B, F, switch1, switch3, switch8, "a3");
+			route_b1 = new Route(1, B, switch1, switch3, switch8, "b1");
+			route_b2 = new Route(2, B, switch1, switch3, switch8, "b2");
+			route_c1 = new Route(C, D, switch2, derail2, V1, "c1");
+			route_c2 = new Route(2, C, D, switch2, switch4, derail2, V1, "c2");
+			route_c3 = new Route(3, C, D, switch2, switch4, derail2, V1, "c3");
 
 			//Init departure routes
-			route_d1 = new Route(D, switch1, switch6, A, "d1");
-			route_d2 = new Route(2, D, switch5, switch6, switch1, A, C, F, "d2");
-			route_d3 = new Route(3, D, switch5, switch6, switch1, A, C, F, "d3");
-			route_e1 = new Route(E, switch2, B, derail2, V1Fsi, V1, "e1");
-			route_e2 = new Route(2, E, switch4, switch2, B, derail2, V1Fsi, V1, "e2");
-			route_e3 = new Route(3, E, switch4, switch2, B, derail2, V1Fsi, V1, "e3");
-			route_f1 = new Route(1, F, switch5, switch6, switch1, C, "f1");
-			route_f2 = new Route(2, F, switch5, switch6, switch1, C, "f2");
+			route_d1 = new Route(1, D, C, switch1, derail2, V1, "d1");
+			route_d2_3 = new Route(2, D, C, switch2, derail2, V1, "d2/3");
+			route_e1 = new Route(B, switch1, switch8, "e1");
+			route_e2 = new Route(F, A, B, switch1, switch8, "e2");
+			route_F = new Route(F, A, "f2");
 
 			//Init unmonitored route
-			route_o1 = new Route(A, B, D, E, switch1, switch2, switch6, C, F, derail2, V1Fsi, V1, "o1");
-			Debug.WriteLine("[PRG/INFO] Constructed interlocking objects.");
+			route_o1 = new Route(A, C, D, F, B, switch1, switch2, switch8, derail2, V1, "o1");
 			#endregion
 
 			#region Fill "saving" lists with objects
@@ -148,7 +127,6 @@ namespace Säosim {
 			allSignals.Add(B);
 			allSignals.Add(C);
 			allSignals.Add(D);
-			allSignals.Add(E);
 			allSignals.Add(F);
 			allSignals.Add(AFsi);
 			allSignals.Add(V1);
@@ -159,7 +137,7 @@ namespace Säosim {
 			allSwitches.Add(switch3);
 			allSwitches.Add(switch4);
 			allSwitches.Add(switch5);
-			allSwitches.Add(switch6);
+			allSwitches.Add(switch8);
 
 			allDerails.Add(derail1);
 			allDerails.Add(derail2);
@@ -170,22 +148,43 @@ namespace Säosim {
 			allRoutes.Add(route_b1);
 			allRoutes.Add(route_b2);
 			allRoutes.Add(route_b2);
-			allRoutes.Add(route_b3);
 			allRoutes.Add(route_c1);
 			allRoutes.Add(route_c2);
-			allRoutes.Add(route_a2k);
-			allRoutes.Add(route_a3k);
-			allRoutes.Add(route_c1k);
-			allRoutes.Add(route_c1k);
+			allRoutes.Add(route_c3);
+
 			allRoutes.Add(route_d1);
-			allRoutes.Add(route_d2);
-			allRoutes.Add(route_d3);
+			allRoutes.Add(route_d2_3);
 			allRoutes.Add(route_e1);
 			allRoutes.Add(route_e2);
-			allRoutes.Add(route_e3);
-			allRoutes.Add(route_f1);
-			allRoutes.Add(route_f2);
+			allRoutes.Add(route_F);
 			allRoutes.Add(route_o1);
+			#endregion
+
+			#region Set forbidden routes
+			//Add forbidden routes for some routes. 
+			route_a1.forbiddenRoutes.Add(route_c1);
+			route_a1.forbiddenRoutes.Add(route_F);
+			route_a2.forbiddenRoutes.Add(route_c2);
+			route_a2.forbiddenRoutes.Add(route_F);
+			route_a3.forbiddenRoutes.Add(route_c3);
+			route_a3.forbiddenRoutes.Add(route_F);
+
+			route_b1.forbiddenRoutes.Add(route_c2);
+			route_b1.forbiddenRoutes.Add(route_e1);
+			route_b1.forbiddenRoutes.Add(route_e2);
+			route_b2.forbiddenRoutes.Add(route_c3);
+			route_b2.forbiddenRoutes.Add(route_e1);
+			route_b2.forbiddenRoutes.Add(route_e2);
+
+			route_c1.forbiddenRoutes.Add(route_a1);
+			route_c2.forbiddenRoutes.Add(route_a2);
+			route_c2.forbiddenRoutes.Add(route_b1);
+			route_c3.forbiddenRoutes.Add(route_a3);
+			route_c3.forbiddenRoutes.Add(route_b2);
+
+			route_e2.forbiddenRoutes.Add(route_a2);
+			route_e2.forbiddenRoutes.Add(route_a3);
+			Debug.WriteLine("[PRG/INFO] Constructed interlocking.");
 			#endregion
 
 		}
@@ -245,6 +244,187 @@ namespace Säosim {
 				}
 			}
 		}
+
+		public void b1_toggle()
+		{
+			if (route_b1.isLocked)
+			{
+				if (route_b1.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b1.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_b1.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b1.displayName + " låst.");
+				}
+			}
+		}
+
+		public void b2_toggle()
+		{
+			if (route_b2.isLocked)
+			{
+				if (route_b2.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b2.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_b2.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b2.displayName + " låst.");
+				}
+			}
+		}
+
+		public void c1_toggle()
+		{
+			if (route_c1.isLocked)
+			{
+				if (route_c1.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c1.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_c1.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c1.displayName + " låst.");
+				}
+			}
+		}
+
+		public void c2_toggle()
+		{
+			if (route_c2.isLocked)
+			{
+				if (route_c2.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c2.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_c2.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c2.displayName + " låst.");
+				}
+			}
+		}
+
+		public void c3_toggle()
+		{
+			if (route_c3.isLocked)
+			{
+				if (route_c3.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c3.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_c3.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c3.displayName + " låst.");
+				}
+			}
+		}
+
+		public void d1_toggle()
+		{
+			if (route_d1.isLocked)
+			{
+				if (route_d1.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d1.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_d1.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d1.displayName + " låst.");
+				}
+			}
+		}
+
+		public void d2_3_toggle()
+		{
+			if (route_d2_3.isLocked)
+			{
+				if (route_d2_3.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d2_3.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_d2_3.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d2_3.displayName + " låst.");
+				}
+			}
+		}
+
+		public void e1_toggle()
+		{
+			if (route_e1.isLocked)
+			{
+				if (route_e1.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e1.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_e1.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e1.displayName + " låst.");
+				}
+			}
+		}
+
+		public void e2_toggle()
+		{
+			if (route_e2.isLocked)
+			{
+				if (route_e2.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e2.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_e2.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e2.displayName + " låst.");
+				}
+			}
+		}
+
+		public void F_toggle()
+		{
+			if (route_F.isLocked)
+			{
+				if (route_F.UnlockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_F.displayName + " upplåst.");
+				}
+			}
+			else
+			{
+				if (route_F.LockRoute())
+				{
+					Debug.WriteLine("[SIM/INFO] Tågväg " + route_F.displayName + " låst.");
+				}
+			}
+		}
+
 		#endregion
 	}
 }
