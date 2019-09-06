@@ -18,7 +18,7 @@ namespace Säosim {
 
 		#region Fields
 		public string displayName;
-		private bool isMoving = false;
+		public bool isMoving = false;
 		private bool isOccupied = false;
 		#endregion
 
@@ -32,11 +32,11 @@ namespace Säosim {
 		public async Task<bool> StraightSwitch() {
 			if ((IsLocked || isOccupied) == false)
 			{
-				isMoving = true;
 				IsCurvedTrack = false;
+				isMoving = true;
 				Thread.Sleep(1000);
-				IsStraightTrack = true;
 				isMoving = false;
+				IsStraightTrack = true;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i (+)");
 				return true;
 			}
@@ -46,11 +46,11 @@ namespace Säosim {
 		public async Task<bool> CurveSwitch() {
 			if ((IsLocked || isOccupied) == false)
 			{
-				isMoving = true;
 				IsStraightTrack = false;
+				isMoving = true;
 				Thread.Sleep(1000);
-				IsCurvedTrack = true;
 				isMoving = false;
+				IsCurvedTrack = true;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i (-)");
 				return true;
 			}

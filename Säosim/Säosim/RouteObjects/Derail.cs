@@ -19,7 +19,7 @@ namespace Säosim {
 
 		#region Fields
 		public string displayName;
-		private bool isMoving = false;
+		public bool isMoving = false;
 		#endregion
 
 		#region Properties
@@ -40,7 +40,7 @@ namespace Säosim {
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i avlagt läge.");
 				return true;
 			}
-			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false;
+			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av att den är förreglad i en tågväg."); return false;
 		}
 			
 		public async Task<bool> Raise() {
@@ -54,7 +54,7 @@ namespace Säosim {
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i pålagt läge.");
 				return true;
 			}
-			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om för att den är förreglad i en tågväg"); return false;
+			Debug.WriteLine("[SIM/WARN] " + displayName + " kan inte läggas om på grund av att den är förreglad i en tågväg."); return false;
 		}
 
 		public bool LockDerail() {
