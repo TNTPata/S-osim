@@ -111,7 +111,7 @@ namespace Säosim {
 			route_c3 = new Route(3, C, D, switch2, switch4, derail2, V1, "c3");
 
 			//Init departure routes
-			route_d1 = new Route(1, D, C, switch1, derail2, V1, "d1");
+			route_d1 = new Route(1, D, C, switch2, derail2, V1, "d1");
 			route_d2_3 = new Route(2, D, C, switch2, derail2, V1, "d2/3");
 			route_e1 = new Route(B, switch1, switch8, "e1");
 			route_e2 = new Route(F, A, B, switch1, switch8, "e2");
