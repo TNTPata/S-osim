@@ -34,7 +34,7 @@ namespace Säosim {
 			{
 				isMoving = true;
 				IsRaised = false;
-				Thread.Sleep(2500);
+				Thread.Sleep(2250);
 				IsLowered = true;
 				isMoving = false;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i avlagt läge.");
@@ -48,7 +48,7 @@ namespace Säosim {
 			{
 				isMoving = true;
 				IsLowered = false;
-				Thread.Sleep(2500);
+				Thread.Sleep(2250);
 				IsRaised = true;
 				isMoving = false;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i pålagt läge.");

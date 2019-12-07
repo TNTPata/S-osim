@@ -34,7 +34,7 @@ namespace Säosim {
 			{
 				IsCurvedTrack = false;
 				isMoving = true;
-				Thread.Sleep(1000);
+				Thread.Sleep(2250);
 				isMoving = false;
 				IsStraightTrack = true;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i (+)");
@@ -48,7 +48,7 @@ namespace Säosim {
 			{
 				IsStraightTrack = false;
 				isMoving = true;
-				Thread.Sleep(1000);
+				Thread.Sleep(2250);
 				isMoving = false;
 				IsCurvedTrack = true;
 				Debug.WriteLine("[SIM/INFO] " + displayName + " i (-)");

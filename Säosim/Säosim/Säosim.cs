@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Collections.Generic;
 using Säosim.UI;
+using Säosim.RouteObjects;
 
 namespace Säosim {
 	/// <summary>
@@ -26,6 +27,8 @@ namespace Säosim {
 
 		private List<Component> gameButtons;
 		private List<Component> gameIndicators;
+		private List<CrossingIndicator> crossingIndicators;
+		private List<Crossing> crossings;
 
 		IO filehandler;
 
@@ -129,57 +132,39 @@ namespace Säosim {
 				Position = new Vector2(840, 405),
 				Text = "SpII-",
 			};
-			var a1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+
+			var alock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(397, 330),
-				Text = "a1",
+				Text = "a1/2/3",
 			};
-			var a2lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(397, 430),
-				Text = "a2",
-			};
-			var a3lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(397, 530),
-				Text = "a3",
-			};
-			var b1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var block = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(277, 330),
-				Text = "b1",
+				Text = "b1/2",
 			};
-			var b2lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(277, 430),
-				Text = "b2",
-			};
-			var c1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var clock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(1065, 355),
-				Text = "c1",
+				Text = "c1/2/3",
 			};
-			var c2lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(1065, 455),
-				Text = "c2",
-			};
-			var c3lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(1065, 555),
-				Text = "c3",
-			};
-			var d1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var dlock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(945, 355),
-				Text = "d1",
+				Text = "d1/2/3",
 			};
-			var d2_3lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(945, 455),
-				Text = "d2/3",
-			};
-			var e1lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+			var elock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(157, 430),
-				Text = "e1",
-			};
-			var e2lock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
-				Position = new Vector2(157, 530),
-				Text = "e2",
+				Text = "e1/2",
 			};
 			var Flock = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
 				Position = new Vector2(277, 530),
 				Text = "F",
+			};
+
+			var V1Down = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(940, 60),
+				Text = "Ned",
+			};
+			var V1Up = new Button(Content.Load<Texture2D>("Controls/buttonReleased48px"), Content.Load<Texture2D>("Controls/buttonPressed48px"), Content.Load<SpriteFont>("Fonts/Font")) {
+				Position = new Vector2(940, 10),
+				Text = "Upp",
 			};
 			#endregion
 
@@ -261,6 +246,17 @@ namespace Säosim {
 			var routeFIndicator = new Indicator(Content.Load<Texture2D>("Textures/fieldWhite30x90px"), Content.Load<Texture2D>("Textures/fieldRed30x90px"), interlocking.route_F)	{
 				Position = new Vector2(255, 585)
 			};
+
+			var V1DownIndicator = new CrossingIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.crossing_V1, "down") {
+				Position = new Vector2(990, 60)
+			};
+			var V1UpIndicator = new CrossingIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.crossing_V1, "up")	{
+				Position = new Vector2(990, 10)
+			};
+			var V1SignalTowardRoadIndicator = new CrossingIndicator(Content.Load<Texture2D>("Textures/lampYellowLit48px"), Content.Load<Texture2D>("Textures/lampYellowUnlit48px"), interlocking.crossing_V1, "signal")	{
+				Position = new Vector2(990, 110)
+			};
+
 			#endregion
 
 			switch1Straight.Click += Switch1Straight_Click;
@@ -277,19 +273,15 @@ namespace Säosim {
 			derail2Raise.Click += Derail2Raise_Click;
 			derail2Lower.Click += Derail2Lower_Click;
 
-			a1lock.Click += a1Lock_Click;
-			a2lock.Click += a2Lock_Click;
-			a3lock.Click += a3Lock_Click;
-			b1lock.Click += b1Lock_Click;
-			b2lock.Click += b2Lock_Click;
-			c1lock.Click += c1lock_Click;
-			c2lock.Click += c2lock_Click;
-			c3lock.Click += c3lock_Click;
-			d1lock.Click += d1lock_Click;
-			d2_3lock.Click += d2_3lock_Click;
-			e1lock.Click += e1Lock_Click;
-			e2lock.Click += e2Lock_Click;
+			alock.Click += aLock_Click;
+			block.Click += bLock_Click;
+			clock.Click += clock_Click;
+			dlock.Click += dlock_Click;
+			elock.Click += eLock_Click;
 			Flock.Click += FLock_Click;
+
+			V1Down.Click += V1Down_Click;
+			V1Up.Click += V1Up_Click;
 
 			gameButtons = new List<Component>() {
 				//Switch buttons
@@ -309,19 +301,16 @@ namespace Säosim {
 				derail2Lower,
 
 				//Route locking
-				a1lock,
-				a2lock,
-				a3lock,
-				b1lock,
-				b2lock,
-				c1lock,
-				c2lock,
-				c3lock,
-				d1lock,
-				d2_3lock,
-				e1lock,
-				e2lock,
+				alock,
+				block,
+				clock,
+				dlock,
+				elock,
 				Flock,
+
+				//Road crossing
+				V1Down,
+				V1Up,
 			};
 
 			gameIndicators = new List<Component>() {
@@ -351,62 +340,54 @@ namespace Säosim {
 				routee1Indicator,
 				routee2Indicator,
 				routeFIndicator,
+				
+			};
+
+			crossingIndicators = new List<CrossingIndicator>() {
+				V1DownIndicator,
+				V1UpIndicator,
+				V1SignalTowardRoadIndicator,
+			};
+
+			crossings = new List<Crossing>() {
+				interlocking.crossing_V1
 			};
 
 			filehandler.ReadPositions(ref interlocking, "Positions.txt");
+			interlocking.storeLockedRoutes();
+		}
+		
+		#region ButtonEvents
+		private void V1Up_Click(object sender, EventArgs e) {
+			Task.Run(async () => await interlocking.crossing_V1.Up());
+		}
+
+		private void V1Down_Click(object sender, EventArgs e) {
+			Task.Run(async () => await interlocking.crossing_V1.Down());
 		}
 
 		private void FLock_Click(object sender, EventArgs e) {
 			interlocking.F_toggle();
 		}
 
-		#region ButtonEvents
-		private void e2Lock_Click(object sender, EventArgs e) {
-			interlocking.e2_toggle();
+		private void eLock_Click(object sender, EventArgs e) {
+			interlocking.e_toggle();
 		}
 
-		private void e1Lock_Click(object sender, EventArgs e) {
-			interlocking.e1_toggle();
+		private void dlock_Click(object sender, EventArgs e){
+			interlocking.d_toggle();
 		}
 
-		private void d2_3lock_Click(object sender, EventArgs e)	{
-			interlocking.d2_3_toggle();
+		private void clock_Click(object sender, EventArgs e) {
+			interlocking.c_toggle();
 		}
 
-		private void d1lock_Click(object sender, EventArgs e){
-			interlocking.d1_toggle();
+		private void bLock_Click(object sender, EventArgs e) {
+			interlocking.b_toggle();
 		}
 
-		private void c3lock_Click(object sender, EventArgs e) {
-			interlocking.c3_toggle();
-		}
-
-		private void c2lock_Click(object sender, EventArgs e) {
-			interlocking.c2_toggle();
-		}
-
-		private void c1lock_Click(object sender, EventArgs e) {
-			interlocking.c1_toggle();
-		}
-
-		private void b2Lock_Click(object sender, EventArgs e) {
-			interlocking.b2_toggle();
-		}
-
-		private void b1Lock_Click(object sender, EventArgs e) {
-			interlocking.b1_toggle();
-		}
-
-		private void a3Lock_Click(object sender, EventArgs e) {
-			interlocking.a3_toggle();
-		}
-
-		private void a2Lock_Click(object sender, EventArgs e) {
-			interlocking.a2_toggle();
-		}
-
-		private void a1Lock_Click(object sender, EventArgs e) {
-			interlocking.a1_toggle();
+		private void aLock_Click(object sender, EventArgs e) {
+			interlocking.a_toggle();
 		}
 
 		private void Derail2Lower_Click(object sender, EventArgs e) {
@@ -550,6 +531,22 @@ namespace Säosim {
 				indicator.Update(gameTime, refObject);
 			}
 
+			foreach (var indicator in crossingIndicators) {
+				Crossing refCrossing = indicator.GetReferenceCrossing();
+				string target = indicator.GetTarget();
+				indicator.Update(gameTime, refCrossing, target);
+			}
+
+			foreach (var crossing in crossings) {
+				crossing.Update(gameTime);
+			}
+
+			/*foreach (var route in interlocking.allRoutes) {
+				if (route.isLocked) {
+					//Update to check for lowered barriers etc. 
+				}
+			}*/
+
 			// TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -564,13 +561,17 @@ namespace Säosim {
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
-			spriteBatch.Draw(backgroundImage, Vector2.Zero);
+			spriteBatch.Draw(backgroundImage, Vector2.Zero, Color.White);
 
 			foreach (var button in gameButtons) {
 				button.Draw(gameTime, spriteBatch);
 			}
 
 			foreach (var indicator in gameIndicators) {
+				indicator.Draw(gameTime, spriteBatch);
+			}
+
+			foreach (var indicator in crossingIndicators) {
 				indicator.Draw(gameTime, spriteBatch);
 			}
 

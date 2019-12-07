@@ -56,6 +56,9 @@
     <Compile Include="RouteObjects\Switch.cs" />
     <Compile Include="UI\Indicator.cs" />
     <Compile Include="UI\InvertedSwitchIndicator.cs" />
+    <Compile Include="UI\SignalIndicator.cs" />
+    <Compile Include="RouteObjects\Crossing.cs" />
+    <Compile Include="UI\CrossingIndicator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -117,6 +120,9 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interlocking2\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

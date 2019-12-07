@@ -108,22 +108,28 @@ namespace Säosim {
 		}
 		#endregion
 
-		public void SetClear() {
+		public bool SetClear() {
 			if (protectionFactor == 0) {
 				signalState = 1;
+				return true;
 			}
+			return false;
 		}
 
-		public void SetCaution() {
+		public bool SetCaution() {
 			if (protectionFactor == 0) {
 				signalState = 2;
+				return true;
 			}
+			return false;
 		}
 
-		public void SetCautionShort() {
+		public bool SetCautionShort() {
 			if (protectionFactor == 0) {
 				signalState = 3;
+				return true;
 			}
+			return false;
 		}
 	}
 
@@ -133,10 +139,12 @@ namespace Säosim {
 			this.displayName = displayName;
 		}
 
-		public void SetClear() {
+		public bool SetClear() {
 			if (protectionFactor == 0) {
 				signalState = 1;
+				return true;
 			}
+			return false;
 		}
 	}
 
@@ -153,14 +161,13 @@ namespace Säosim {
 			this.displayName = displayName;
 		}
 		public void SetClear() {
-			if (/*CrossingIsClear == true*/true) {
-				signalState = 1;
-			}
+			signalState = 1;
 		}
 	}
 
 	public class DistroadSignal : Signal {
 		public DistroadSignal(RoadSignal referenceSignal, string displayName) {
+			signalState = referenceSignal.signalState;
 			this.displayName = displayName;
 		}
 		//nextSignal = ??? Fill with the signal that this signal will refer to when it acts as a distant signal

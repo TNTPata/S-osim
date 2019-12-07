@@ -3,11 +3,11 @@
   <SourceFile>/Users/pao/src/S-osim/Säosim/Säosim/Content/Textures/Background.png</SourceFile>
   <SourceTime>2019-08-24T16:00:17.8049138+02:00</SourceTime>
   <DestFile>/Users/pao/src/S-osim/Säosim/Säosim/Content/bin/DesktopGL/Content/Textures/Background.xnb</DestFile>
-  <DestTime>2019-08-24T16:41:00.2647223+02:00</DestTime>
+  <DestTime>2019-11-27T15:01:08.2017486+01:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2018-12-08T17:35:14+01:00</ImporterTime>
+  <ImporterTime>2019-10-15T21:32:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2018-12-08T17:35:14+01:00</ProcessorTime>
+  <ProcessorTime>2019-10-15T21:32:54+02:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

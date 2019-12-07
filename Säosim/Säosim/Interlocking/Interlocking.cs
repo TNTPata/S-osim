@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Säosim.RouteObjects;
 
 namespace Säosim {
 	public class Interlocking {
@@ -36,6 +37,9 @@ namespace Säosim {
 
 		//Create road distant signal
 		public DistroadSignal V1Fsi;
+
+		//Create road crossing
+		public Crossing crossing_V1;
 		#endregion
 		#region routeCreation
 		//Create arrival routes
@@ -66,6 +70,13 @@ namespace Säosim {
 		public List<Signal> allSignals = new List<Signal>();
 		public List<Route> allRoutes = new List<Route>();
 
+		//Also for saving/UI/UX reasons, explained at the bottom. 
+		private Route lockedAroute;
+		private Route lockedBroute;
+		private Route lockedCroute;
+		private Route lockedDroute;
+		private Route lockedEroute;
+		private Route lockedFroute;
 
 		//Constructor
 		public Interlocking() {
@@ -98,6 +109,9 @@ namespace Säosim {
 
 			//Init road distant signal(s. There are actually two, but since they display the same aspect at all times, it is counted as one for simplicity)
 			V1Fsi = new DistroadSignal(V1, "V1Fsi");
+
+			//Init road crossing
+			crossing_V1 = new Crossing(V1, "Sundbyvägen");
 			#endregion
 			#region routeInit
 			//Init arrival routes
@@ -115,7 +129,7 @@ namespace Säosim {
 			route_d2_3 = new Route(2, D, C, switch2, derail2, V1, "d2/3");
 			route_e1 = new Route(B, switch1, switch8, "e1");
 			route_e2 = new Route(F, A, B, switch1, switch8, "e2");
-			route_F = new Route(F, A, "f2");
+			route_F = new Route(F, A, "F");
 
 			//Init unmonitored route
 			route_o1 = new Route(A, C, D, F, B, switch1, switch2, switch8, derail2, V1, "o1");
@@ -186,241 +200,208 @@ namespace Säosim {
 			route_e2.forbiddenRoutes.Add(route_a3);
 			Debug.WriteLine("[PRG/INFO] Constructed interlocking.");
 			#endregion
-
 		}
 
 		#region Methods
 		//Lock/Unlock routes
-		public void a1_toggle()
-		{
-			if (route_a1.isLocked)
-			{
-				if (route_a1.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a1.displayName + " upplåst.");
+		//The currently locked route is saved in variable lockedXroute. If a route is stored in that variable, it is unlocked.
+		//If there isn't a route stored in it, the program decides which of the applicable routes the user is trying to lock, and locks it
+		public void a_toggle() {
+			if (lockedAroute is null) {
+				if (route_a1.ControlRoute()) {
+					if (route_a1.LockRoute()) {
+						lockedAroute = route_a1;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_a1.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_a1.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_a1.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a1.displayName + " låst.");
+				if (route_a2.ControlRoute()) {
+					if (route_a2.LockRoute()) {
+						lockedAroute = route_a2;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_a2.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_a2.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-		}
-
-		public void a2_toggle()
-		{
-			if (route_a2.isLocked)
-			{
-				if (route_a2.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a2.displayName + " upplåst.");
+				if (route_a3.ControlRoute()) {
+					if (route_a3.LockRoute()) {
+						lockedAroute = route_a3;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_a3.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_a3.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_a2.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a2.displayName + " låst.");
-				}
-			}
-		}
-
-		public void a3_toggle()
-		{
-			if (route_a3.isLocked)
-			{
-				if (route_a3.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a3.displayName + " upplåst.");
-				}
-			}
-			else
-			{
-				if (route_a3.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_a3.displayName + " låst.");
-				}
+			} else {
+				lockedAroute.UnlockRoute();
+				Debug.WriteLine("[SIM/INFO] Tågväg " + lockedAroute.displayName + " upplåst.");
+				lockedAroute = null;
 			}
 		}
 
-		public void b1_toggle()
+		public void b_toggle()
 		{
-			if (route_b1.isLocked)
-			{
-				if (route_b1.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b1.displayName + " upplåst.");
+			if (lockedBroute is null) {
+				if (route_b1.ControlRoute()) {
+					if (route_b1.LockRoute()) {
+						lockedBroute = route_b1;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_b1.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_b1.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_b1.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b1.displayName + " låst.");
+				if (route_b2.ControlRoute()) {
+					if (route_b2.LockRoute()) {
+						lockedBroute = route_b2;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_b2.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_b2.displayName + " kunde inte låsas.");
+					}
 				}
+			} else {
+				lockedBroute.UnlockRoute();
+				Debug.WriteLine("[SIM/INFO] Tågväg " + lockedBroute.displayName + " upplåst.");
+				lockedBroute = null;
 			}
 		}
 
-		public void b2_toggle()
-		{
-			if (route_b2.isLocked)
-			{
-				if (route_b2.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b2.displayName + " upplåst.");
+		public void c_toggle() {
+			if (lockedCroute is null) {
+				if (route_c1.ControlRoute()) {
+					if (route_c1.LockRoute()) {
+						lockedCroute = route_c1;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_c1.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_c1.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_b2.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_b2.displayName + " låst.");
+				if (route_c2.ControlRoute()) {
+					if (route_c2.LockRoute()) {
+						lockedCroute = route_c2;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_c2.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_c2.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-		}
-
-		public void c1_toggle()
-		{
-			if (route_c1.isLocked)
-			{
-				if (route_c1.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c1.displayName + " upplåst.");
+				if (route_c3.ControlRoute()) {
+					if (route_c3.LockRoute()) {
+						lockedCroute = route_c3;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_c3.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_c3.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_c1.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c1.displayName + " låst.");
-				}
+			} else {
+				lockedCroute.UnlockRoute();
+				Debug.WriteLine("[SIM/INFO] Tågväg " + lockedCroute.displayName + " upplåst.");
+				lockedCroute = null;
 			}
 		}
 
-		public void c2_toggle()
-		{
-			if (route_c2.isLocked)
-			{
-				if (route_c2.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c2.displayName + " upplåst.");
+		public void d_toggle() {
+			if (lockedDroute is null) {
+				if (route_d1.ControlRoute()) {
+					if (route_d1.LockRoute()) {
+						lockedDroute = route_d1;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_d1.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_d1.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_c2.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c2.displayName + " låst.");
+				if (route_d2_3.ControlRoute()) {
+					if (route_d2_3.LockRoute()) {
+						lockedDroute = route_d2_3;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_d2_3.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_d2_3.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-		}
-
-		public void c3_toggle()
-		{
-			if (route_c3.isLocked)
-			{
-				if (route_c3.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c3.displayName + " upplåst.");
-				}
-			}
-			else
-			{
-				if (route_c3.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_c3.displayName + " låst.");
-				}
+			} else {
+				lockedDroute.UnlockRoute();
+				Debug.WriteLine("[SIM/INFO] Tågväg " + lockedDroute.displayName + " upplåst.");
+				lockedDroute = null;
 			}
 		}
 
-		public void d1_toggle()
-		{
-			if (route_d1.isLocked)
-			{
-				if (route_d1.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d1.displayName + " upplåst.");
-				}
-			}
-			else
-			{
-				if (route_d1.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d1.displayName + " låst.");
-				}
-			}
-		}
 
-		public void d2_3_toggle()
+		public void e_toggle()
 		{
-			if (route_d2_3.isLocked)
-			{
-				if (route_d2_3.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d2_3.displayName + " upplåst.");
+			if (lockedEroute is null) {
+				if (route_e1.ControlRoute()) {
+					if (route_e1.LockRoute()) {
+						lockedEroute = route_e1;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_e1.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_e1.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-			else
-			{
-				if (route_d2_3.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_d2_3.displayName + " låst.");
+				if (route_e2.ControlRoute()) {
+					if (route_e2.LockRoute()) {
+						lockedEroute = route_e2;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_e2.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_e2.displayName + " kunde inte låsas.");
+					}
 				}
-			}
-		}
-
-		public void e1_toggle()
-		{
-			if (route_e1.isLocked)
-			{
-				if (route_e1.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e1.displayName + " upplåst.");
-				}
-			}
-			else
-			{
-				if (route_e1.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e1.displayName + " låst.");
-				}
-			}
-		}
-
-		public void e2_toggle()
-		{
-			if (route_e2.isLocked)
-			{
-				if (route_e2.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e2.displayName + " upplåst.");
-				}
-			}
-			else
-			{
-				if (route_e2.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_e2.displayName + " låst.");
-				}
+			} else {
+				lockedEroute.UnlockRoute();
+				Debug.WriteLine("[SIM/INFO] Tågväg " + lockedEroute.displayName + " upplåst.");
+				lockedEroute = null;
 			}
 		}
 
 		public void F_toggle()
 		{
-			if (route_F.isLocked)
-			{
-				if (route_F.UnlockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_F.displayName + " upplåst.");
+			if (lockedFroute is null) {
+				if (route_F.ControlRoute()) {
+					if (route_F.LockRoute()) {
+						lockedFroute = route_F;
+						Debug.WriteLine("[SIM/INFO] Tågväg " + route_F.displayName + " låst.");
+					} else {
+						Debug.WriteLine("[SIM/WARN] Tågväg " + route_F.displayName + " kunde inte låsas.");
+					}
 				}
+			} else {
+				lockedFroute.UnlockRoute();
+				Debug.WriteLine("[SIM/INFO] Tågväg " + lockedFroute.displayName + " upplåst.");
+				lockedFroute = null;
 			}
-			else
-			{
-				if (route_F.LockRoute())
-				{
-					Debug.WriteLine("[SIM/INFO] Tågväg " + route_F.displayName + " låst.");
+		}
+
+		//This methods makes sure that a route can be unlocked if is was loaded as locked.
+		//Otherwise, lockedXroute would be null, and thus it would try to lock a route that wasn't able to be locked. 
+		public void storeLockedRoutes() {
+			foreach (Route route in allRoutes) {
+				if (route.isLocked) {
+					switch (route.displayName[0]) { //Arrays start at 0...
+						case 'a': {
+								lockedAroute = route;
+								break;
+							}
+						case 'b': {
+								lockedBroute = route;
+								break;
+							}
+						case 'c': {
+								lockedCroute = route;
+								break;
+							}
+						case 'd': {
+								lockedDroute = route;
+								break;
+							}
+						case 'e': {
+								lockedEroute = route;
+								break;
+							}
+						case 'F': {
+								lockedFroute = route;
+								break;
+							}
+						default: {
+								break;
+							}
+					}
 				}
 			}
 		}

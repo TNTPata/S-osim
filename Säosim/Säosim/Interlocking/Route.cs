@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Säosim {
@@ -168,10 +169,102 @@ namespace Säosim {
 
 		public List<Route> forbiddenRoutes = new List<Route>(); //Fill with the routes that are forbidden for a specific route
 
+		//Is used to silently check if a certain route is set
+		public bool ControlRoute() {
+			#region Control locking status and forbidden routes
+			if (isLocked) {
+				//Route is locked
+				return false;
+			}
+
+			foreach (Route forbiddenRoute in forbiddenRoutes) {
+				if (forbiddenRoute.isLocked) {
+					//Forbidden route is locked
+					return false;
+				}
+			}
+			#endregion
+			#region Control signals
+			foreach (Signal protectedSignal in protectedSignals) {
+				//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
+				if (protectedSignal.signalState == 0) {
+
+				}
+				else {
+					//Signal to protect is showing a "proceed" aspect
+					return false;
+				}
+			}
+			foreach (Signal includedSignal in includedSignals.OfType<EntrySignal>()) {
+				//An entry signal which is to be passed must not be protected and must be set to stop
+				if ((includedSignal.protectionFactor == 0) && (includedSignal.signalState == 0)) {
+
+				}
+				else {
+					//Signal is protected or is already showing a "proceed" aspect
+					return false;
+				}
+			}
+			foreach (Signal includedSignal in includedSignals.OfType<ExitSignal>()) {
+				//An exit signal which is to be passed must not be protected and must be set to stop
+				if ((includedSignal.protectionFactor == 0) && (includedSignal.signalState == 0)) {
+
+				}
+				else {
+					//Signal is protected or is already showing a "proceed" aspect
+					return false;
+				}
+			}
+			#endregion
+			#region Control switches
+			//Check if all objects are in their correct position
+			foreach (Switch straightSwitch in straightSwitches) {
+				if (straightSwitch.IsStraightTrack) {
+                    //Switch is in correct position, the process can continue
+                }
+				else {
+					//Switch is in the wrong position
+					return false;
+				}
+			}
+			foreach (Switch curveSwitch in curvedSwitches) {
+				if (curveSwitch.IsCurvedTrack) {
+					//Switch is in correct position, the process can continue
+				}
+				else {
+					//Switch is in the wrong position
+					return false;
+				}
+			}
+			#endregion
+			#region Control derails
+			foreach (Derail raisedDerail in raisedDerails) {
+				if (raisedDerail.IsRaised) {
+					//Derail is in correct position, the process can continue
+				}
+				else {
+					//Derail is in the wrong position
+					return false;
+				}
+			}
+			foreach (Derail loweredDerail in loweredDerails) {
+				if (loweredDerail.IsLowered) {
+					//Derail is in correct position, the process can continue
+				}
+				else {
+					//Derail is in the wrong position
+					return false;
+				}
+			}
+			#endregion
+			return true;
+		}
+
 		//Call to lock route
 		//REMINDER: THIS METHOD IS ONLY FOR LOCKING OBJECTS, NO "MOVE" METHODS ARE TO BE CALLED FROM HERE
 		public bool LockRoute() {
 
+			#region Control locking status and forbidden routes
 			if (isLocked) {
 				Debug.WriteLine("[SIM/WARN] Tågväg " + displayName + " är redan låst.");
 				return false;
@@ -179,16 +272,15 @@ namespace Säosim {
 
 			foreach (Route forbiddenRoute in forbiddenRoutes) {
 				if (forbiddenRoute.isLocked) {
-					Debug.WriteLine("[SIM/WARN] Tågväg " + forbiddenRoute.displayName + " är redan låst och tillåter inte att tågväg " + displayName + " är låst samtidigt");
+					Debug.WriteLine("[SIM/WARN] Tågväg " + forbiddenRoute.displayName + " är redan låst och tillåter inte att tågväg " + displayName + " är låst samtidigt.");
 					return false;
 				}
 			}
+			#endregion
 
-			
-
-			///Locking of all objects is done in two loops.
-			///The first loop makes sure that everything is positioned correctly and that everything is unlocked.
-			///The second loop actually completes the locking.
+			///Locking of all objects is done in two steps.
+			///The first step makes sure that everything is positioned correctly and that everything is unlocked.
+			///The second step actually completes the locking.
 			///If the slightest thing doesn't meet a criteria, the process is aborted and things that are locked are unlocked. 
 
 			//TODO: Write comments on locking of signals
@@ -203,18 +295,30 @@ namespace Säosim {
 					return false;
 				}
 			}
-			foreach (Signal includedSignal in includedSignals) {
-				//A signal which is to be passed must not be protected and must be set to stop
+			foreach (Signal includedSignal in includedSignals.OfType<EntrySignal>()) {
+				//An entry signal which is to be passed must not be protected and must be set to stop
 				if ((includedSignal.protectionFactor == 0) && (includedSignal.signalState == 0)) {
 
 				}
 				else {
-					Debug.WriteLine("[SIM/WARN] Signal " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
+					//Signal is protected or is already showing a "proceed" aspect
+					Debug.WriteLine("[SIM/WARN] Infartssignal " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
+					return false;
+				}
+			}
+			foreach (Signal includedSignal in includedSignals.OfType<ExitSignal>()) {
+				//An exit signal which is to be passed must not be protected and must be set to stop
+				if ((includedSignal.protectionFactor == 0) && (includedSignal.signalState == 0)) {
+
+				}
+				else {
+					//Signal is protected or is already showing a "proceed" aspect
+					Debug.WriteLine("[SIM/WARN] Utfartssignal " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
 					return false;
 				}
 			}
 			#endregion
-			#region Control objects
+			#region Control switches
 			//Check if all objects are in their correct position
 			foreach (Switch straightSwitch in straightSwitches) {
 				if (straightSwitch.IsStraightTrack) {
@@ -234,6 +338,8 @@ namespace Säosim {
 					return false;
 				}
 			}
+			#endregion
+			#region Control derails
 			foreach (Derail raisedDerail in raisedDerails) {
 				if (raisedDerail.IsRaised) {
 					//Derail is in correct position, the process can continue
@@ -254,30 +360,7 @@ namespace Säosim {
 			}
 			#endregion
 			
-			#region Lock Signals
-			foreach (Signal protectedSignal in protectedSignals) {
-				//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
-				if (protectedSignal.SetProtected()) {
-
-				}
-				else {
-					Debug.WriteLine("[SIM/WARN] Signal " + protectedSignal.displayName + " kunde inte förreglas");
-					UnlockRoute();
-					return false;
-				}
-			}
-			foreach (Signal includedSignal in includedSignals) {
-				//A signal which is to be passed must not be protected and must be set to stop
-				if ((includedSignal.protectionFactor == 0) && (includedSignal.signalState == 0)) {
-
-				}
-				else {
-					Debug.WriteLine("[SIM/WARN] Signal " + includedSignal.displayName + " som är förreglad i stopp eller står i kör hindrar tågvägslåsning");
-					return false;
-				}
-			}
-			#endregion
-			#region Lock Objects
+			#region Lock switches
 			//Lock objects to positions checked above
 			foreach (Switch straightSwitch in straightSwitches)
 			{
@@ -305,6 +388,8 @@ namespace Säosim {
 					return false;
 				}
 			}
+			#endregion
+			#region Lock derails
 			foreach (Derail raisedDerail in raisedDerails)
 			{
 				if (raisedDerail.LockDerail())
@@ -331,9 +416,83 @@ namespace Säosim {
 					return false;
 				}
 			}
+			#endregion
+			#region Lock signals
+			foreach (Signal protectedSignal in protectedSignals) {
+				//If a signal is showing a green aspect of any kind, it cannot be set to protected, and thus the route cannot be locked
+				if (protectedSignal.SetProtected()) {
 
+				}
+				else {
+					Debug.WriteLine("[SIM/WARN] Signal " + protectedSignal.displayName + " kunde inte förreglas.");
+					UnlockRoute();
+					return false;
+				}
+			}
+			foreach (EntrySignal includedSignal in includedSignals.OfType<EntrySignal>()) {
+				//A signal which is to be passed must not be protected and must be set to stop
+				if ((includedSignal.protectionFactor == 0) && (includedSignal.signalState == 0)) {
+					switch (Char.ToString(displayName[1])) {
+						case "1": {
+							if (includedSignal.SetClear()) {
+								break;
+							} 
+							Debug.WriteLine("[SIM/WARN] Infartssignal " + includedSignal.displayName + " kunde inte ställas i kör.");
+							UnlockRoute();
+							return false;
+						}
+						case "2": {
+							if (includedSignal.SetCaution()) {
+								break;
+							} 
+							Debug.WriteLine("[SIM/WARN] Infartssignal " + includedSignal.displayName + " kunde inte ställas i kör.");
+							UnlockRoute();
+							return false;
+						}
+						case "3": {
+							if (includedSignal.SetCautionShort()) {
+								break;
+							} 
+							Debug.WriteLine("[SIM/WARN] Infartssignal " + includedSignal.displayName + " kunde inte ställas i kör.");
+							UnlockRoute();
+							return false;
+						}
+						default: {
+							Debug.WriteLine("[PRG/WARN] Error when trying to clear signal " + includedSignal.displayName + ". Invalid route.");
+							UnlockRoute();
+							return false;
+						}
+					}
+				}
+				else {
+					Debug.WriteLine("[SIM/WARN] Infartssignal " + includedSignal.displayName + " kunde inte ställas i kör.");
+					UnlockRoute();
+					return false;
+				}
+			}
+			foreach (ExitSignal includedSignal in includedSignals.OfType<ExitSignal>()) {
+				if (includedSignal.SetClear()) {
+
+				}
+				else {
+					Debug.WriteLine("[SIM/WARN] Utfartssignal " + includedSignal.displayName + " kunde inte ställas i kör.");
+					return false;
+				}
+			}
 			#endregion
 
+			#region Control road signal
+			foreach (Signal roadSignal in includedSignals.OfType<RoadSignal>()) {
+				if (roadSignal.signalState == 1) {
+
+				}
+				else {
+					Debug.WriteLine("[SIM/WARN] V-Signal " + roadSignal.displayName + " står inte i kör och hindrar tågvägslåsning.");
+					UnlockRoute();
+					return false;
+				}
+			}
+			#endregion
 			//All objects are locked in their correct positions
 			isLocked = true;
 			return true;
@@ -342,6 +501,9 @@ namespace Säosim {
 		//Call to unlock route
 		public bool UnlockRoute() {
 			///Function similar to LockRoute(), but the only action taken is to unlock the relevant objects
+			foreach (Signal includedSignal in includedSignals) {
+				includedSignal.SetStop();
+			}
 			foreach (Signal protectedSignal in protectedSignals) {
 				protectedSignal.SetUnprotected();
 			}
@@ -360,6 +522,10 @@ namespace Säosim {
 			//All objects have been unlocked
 			isLocked = false;
 			return true;
+		}
+
+		public void Update() {
+
 		}
 
 		#region Saving

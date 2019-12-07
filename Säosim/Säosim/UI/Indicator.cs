@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Säosim.RouteObjects;
 
 namespace Säosim.UI {
 	public class Indicator : Component {
@@ -42,8 +43,6 @@ namespace Säosim.UI {
 			}
 
 			spriteBatch.Draw(texture, Rectangle, color);
-			//spriteBatch.Draw(texture, position: Position.X, null, Color.White, 0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
-			//spriteBatch.Draw()
 		}
 
 		public override object GetReferenceObject() {
@@ -100,6 +99,7 @@ namespace Säosim.UI {
 		public override void Update(GameTime gametime) {
 
 		}
+
 		#endregion
 		#endregion
 	}
